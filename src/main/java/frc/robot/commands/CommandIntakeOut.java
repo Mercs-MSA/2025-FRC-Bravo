@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeFlywheels;
 import frc.robot.subsystems.IntakeBeambreak;
-import frc.robot.Constants.IntakeFlywheelsConstants;
 public class CommandIntakeOut extends Command {
     private final IntakeFlywheels m_intakeFlywheels;
     private final IntakeBeambreak m_breambreak;

@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator1;
 import frc.robot.subsystems.Elevator2;
-import frc.robot.Constants;
 import frc.robot.Constants.*;
 
 public class CommandElevatorToPos extends Command {
