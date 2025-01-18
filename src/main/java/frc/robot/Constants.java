@@ -95,7 +95,28 @@ public class Constants {
         public static final double speed = 300;
         public static final double jerk = 0;
     }
+    
+    public static final class IntakeFlywheelsConstants{
+        public static final int id = 26;
 
+        public static final boolean attached = true;
+
+        public static final double kP = 5; 
+        public static final double kS = 0; 
+        public static final double kV = 0; 
+
+
+        public static final double voltageOut = 2;
+        public static final double position = 0;
+    }
+
+
+    public static final class IntakeBeambreakConstants {
+        public static final boolean breakAttached = true;
+        public static final String beamBreakName = "intake_beambreak";
+        public static final int beamBreakChannel = 1;
+
+    }
 
     public static boolean isWithinTol(double targetPose, double currentPose, double tolerance) {
         return (Math.abs(targetPose - currentPose) <= tolerance);
