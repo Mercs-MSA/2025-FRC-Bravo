@@ -1,0 +1,55 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "QP-preloadScore"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "QP-humanPickup1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "QP-pickupScore1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "QP-humanPickup2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "QP-pickupScore2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "QQ-humanPickup3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "QP-finalScore"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

@@ -6,12 +6,22 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.*;
@@ -56,7 +66,28 @@ public class RobotContainer {
 
     public final FunnelPivot m_FunnelPivot = new FunnelPivot(false);
 
+    private final SendableChooser<Command> autoChooser;
+
+       Map<String, Command> autonomousCommands = new HashMap<String, Command>() {
+        {
+            
+            // put("Enter Command Name", new Command(m_));
+
+             put("Enter Command Name", new SequentialCommandGroup(
+
+            ));
+    
+            
+            put("Reset All", new ParallelCommandGroup(
+            
+            ));
+    
+        }
+        
+    };
     public RobotContainer() {
+        autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
+        SmartDashboard.putData("Auto Mode", autoChooser);
         configureBindings();
         driverControls();
         operatorControls();
@@ -131,7 +162,9 @@ public class RobotContainer {
 
             // operator.rightTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
 
-            // operator.leftTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posDown));
+            operator.y().whileTrue(new CommandToPos(drivetrain, new Pose2d(1.4, 6.8, new Rotation2d(2.23))));
+
+
 
             operator.b().onTrue(new CommandFunnelPivotToggle());
 
@@ -141,6 +174,8 @@ public class RobotContainer {
 
 
     public Command getAutonomousCommand() {
-        return Commands.print("No autonomous command configured");
+        // return Commands.print("No autonomous command configured");
+        return autoChooser.getSelected(); 
     }
+
 }

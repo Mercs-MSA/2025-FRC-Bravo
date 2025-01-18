@@ -1,5 +1,35 @@
 package frc.robot;
 
+import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.None;
+
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.Vector;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.Measure;
+import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import static edu.wpi.first.units.Units.Meters;
+import static edu.wpi.first.units.Units.Rotations;
+
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class Constants {
 
@@ -148,6 +178,19 @@ public class Constants {
         public static final String beamBreakName = "intake_beambreak";
         public static final int beamBreakChannel = 0;
 
+    }
+
+    public static final class VisionConstants {
+        public static final String limelightFrontName = "limelight-front";
+        public static final String limelightBackName = "limelight-back";
+        public static final Vector<N3> visionStdDevs = VecBuilder.fill(.7,.7,9999999);
+    }
+
+    public static final class DriveToPoseConstants {
+        public static final double angularDegreesTolerance = 0.5;
+        public static final double linearMetersTolerance = 0.05;
+        public static final double linearMetersMaxVel = 2.0;
+        public static final double linearMetersMaxAccel = 4.0;
     }
 
     public static boolean isWithinTol(double targetPose, double currentPose, double tolerance) {
