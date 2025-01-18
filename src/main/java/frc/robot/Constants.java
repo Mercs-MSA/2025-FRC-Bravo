@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators.None;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
@@ -177,6 +178,19 @@ public class Constants {
         public static final String beamBreakName = "intake_beambreak";
         public static final int beamBreakChannel = 1;
 
+    }
+
+    public static final class VisionConstants {
+        public static final String limelightFrontName = "limelight-front";
+        public static final String limelightBackName = "limelight-back";
+        public static final Vector<N3> visionStdDevs = VecBuilder.fill(.7,.7,9999999);
+    }
+
+    public static final class DriveToPoseConstants {
+        public static final double angularDegreesTolerance = 0.5;
+        public static final double linearMetersTolerance = 0.05;
+        public static final double linearMetersMaxVel = 2.0;
+        public static final double linearMetersMaxAccel = 4.0;
     }
 
     public static boolean isWithinTol(double targetPose, double currentPose, double tolerance) {
