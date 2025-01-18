@@ -90,10 +90,13 @@ public class Constants {
         public static final double jerk = 0;
     }
 
-    public static final class climberMMConstants{
-        public static final double acceleration = 10;
-        public static final double speed = 300;
-        public static final double jerk = 0;
+
+
+    public static final class elevatorBeambreakConstants {
+        public static boolean breakAttached = false;
+        public static final String beamBreakName = "elevatorBeambreak";
+        public static final int beamBreakChannel = 0;
+
     }
 
 

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.Elevator1Constants;
 import frc.robot.Constants.elevatorMMConstants;
+import frc.robot.Constants;
 
 
 public class Elevator1 extends SubsystemLib {
@@ -35,6 +36,9 @@ public class Elevator1 extends SubsystemLib {
 
     public TestSubsystemConfig config;
 
+    private boolean hasTared = false;
+
+
     // public boolean isPressed;
 
     public Elevator1(boolean attached){
@@ -48,18 +52,9 @@ public class Elevator1 extends SubsystemLib {
         setMMPosition(pos);
     }
 
-    // public void testMotorGoToPosition(double pos) {
-    //     SetPositionVoltage(pos); // doesnt actually go anywhere
-    // }
-
     public double elev1MotorGetPosition() {
         return GetPosition();
     }
-
-    // public Command runPosition(double pos) {
-    //     return run(() -> (pos)).withName("PivotGoUp");
-    // }
-
    
 
     @Override
@@ -72,15 +67,15 @@ public class Elevator1 extends SubsystemLib {
     @Override 
     public void periodic(){
 
-        // if (LimitSwitch.checkSwitch() && motor != null && !hasTared && Constants.isWithinTol(0, getPivotMotorPosition(), 0.3)) {
-        //     tareMotor(); 
-        //     hasTared = true; 
-        // }
+        if (Constants.elevatorBeambreakConstants.breakAttached = true && ElevatorBeambreak.checkBreak() && motor != null && !hasTared && Constants.isWithinTol(0, elev1MotorGetPosition(), 0.3)) {
+            tareMotor(); 
+            hasTared = true; 
+        }
 
-        // // If the limit switch is released, reset the taring flag
-        // if (!LimitSwitch.checkSwitch()) {
-        //     hasTared = false; 
-        // }
+        // If the limit switch is released, reset the taring flag
+        if (Constants.elevatorBeambreakConstants.breakAttached = true && !ElevatorBeambreak.checkBreak()) {
+            hasTared = false; 
+        }
 
         // // Update motor position on the SmartDashboard
         SmartDashboard.putNumber("Elevator 1 Pos", elev1MotorGetPosition());

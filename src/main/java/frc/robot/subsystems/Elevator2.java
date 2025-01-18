@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.Constants;
 import frc.robot.Constants.Elevator2Constants;
 
 import frc.robot.Constants.elevatorMMConstants;
@@ -33,6 +33,7 @@ public class Elevator2 extends SubsystemLib {
     }
 
     public TestSubsystemConfig config;
+    public boolean hasTared = false;
 
 
     public Elevator2(boolean attached){
@@ -70,6 +71,16 @@ public class Elevator2 extends SubsystemLib {
     
     @Override 
     public void periodic(){
+
+         if (ElevatorBeambreak.checkBreak() && motor != null && !hasTared && Constants.isWithinTol(0, elev2MotorGetPosition(), 2)) {
+            tareMotor(); 
+            hasTared = true; 
+        }
+
+        // If the limit switch is released, reset the taring flag
+        if (!ElevatorBeambreak.checkBreak()) {
+            hasTared = false; 
+        }
 
        
         SmartDashboard.putNumber("Elevator 2 Pos", elev2MotorGetPosition());
