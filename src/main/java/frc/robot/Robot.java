@@ -22,7 +22,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     System.out.println(Constants.ScoringConstants.ScoringStage + " " + Constants.ScoringConstants.ScoringStage.getElevatorRotations());
-    
     CommandScheduler.getInstance().run(); 
   }
 
