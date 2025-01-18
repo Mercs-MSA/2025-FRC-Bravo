@@ -29,6 +29,7 @@ import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 
 /**
@@ -158,6 +159,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         if (Utils.isSimulation()) {
             startSimThread();
         }
+        configurePathPlanner();
     }
     private void configurePathPlanner() {
         // AutoBuilder.configureHolonomic(
@@ -205,6 +207,10 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         // Handle exception as needed
         e.printStackTrace();
         }
+    }
+
+    public Command getAutoPath(String pathName) {
+        return new PathPlannerAuto(pathName);
     }
 
     /**
