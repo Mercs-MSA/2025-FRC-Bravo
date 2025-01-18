@@ -90,10 +90,24 @@ public class Constants {
         public static final double jerk = 0;
     }
 
-    public static final class climberMMConstants{
-        public static final double acceleration = 10;
-        public static final double speed = 300;
-        public static final double jerk = 0;
+
+
+    public static final class elevatorBeambreakConstants {
+        public static boolean breakAttached = false;
+        public static final String beamBreakName = "elevatorBeambreak";
+        public static final int beamBreakChannel = 0;
+
+    }
+
+    public static final class FunnelPivotConstants {
+        public static final double raisedRoations = 0; //needs to be tested
+        public static final double loweredRoations = 0; //needs to be tested
+        
+        public static FunnelState currentFunnelState = FunnelState.RAISED;
+        public enum FunnelState {
+            RAISED,
+            LOWERED,
+        }
     }
     
     public static final class IntakeFlywheelsConstants{

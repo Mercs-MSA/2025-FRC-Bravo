@@ -1,12 +1,18 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.Constants.Elevator1Constants;
 import frc.robot.Constants.elevatorMMConstants;
-import frc.robot.Constants;
 
+// import frc.robot.subsystems.SubsystemLib;
 
-public class Elevator1 extends SubsystemLib {
+// import com.ctre.phoenix6.CANBus;
+
+// import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class FunnelPivot extends SubsystemLib {
     public class TestSubsystemConfig extends Config {
 
         /* MAKE SURE TO CHANGE THESE VALUES! THE PID IS NOT CONFIGURED */
@@ -14,18 +20,18 @@ public class Elevator1 extends SubsystemLib {
         /* These values will later be added into a constants file that has not yet been created. 
          */
 
-        public final double velocityKp = Elevator1Constants.kP;
+        public final double velocityKp = 0;
         public final double velocityKs = 0;
         public final double velocityKv = 0;
-        public final double rotations = Elevator1Constants.positionUp;
+        public final double rotations = 0;
 
         public TestSubsystemConfig() {
-            super("ELevatorMotor1", Elevator1Constants.id, "canivore");  //It is on rio, but make sure that you change the id
+            super("FunnelPivot", Elevator1Constants.id, "canivore");  //It is on rio, but make sure that you change the id
             configPIDGains(velocityKp, 0, 0);
             configForwardGains(velocityKs, velocityKv, 0, 0);
             configGearRatio(1);
             configNeutralBrakeMode(true);
-            isClockwise(false); //true if you want it to spin clockwise
+            isClockwise(true); //true if you want it to spin clockwise
             // configStatorCurrentLimit(10, true);
             configMotionMagic(elevatorMMConstants.speed, elevatorMMConstants.acceleration, elevatorMMConstants.jerk);
             // SetPositionVoltage(rotations);
@@ -33,15 +39,13 @@ public class Elevator1 extends SubsystemLib {
     }
 
 
+    private boolean hasTared = false;
 
     public TestSubsystemConfig config;
 
-    private boolean hasTared = false;
-
-
     // public boolean isPressed;
 
-    public Elevator1(boolean attached){
+    public FunnelPivot(boolean attached){
         super(attached);
         if(attached){
             motor = TalonFXFactory.createConfigTalon(config.id, config.talonConfig); 
@@ -52,7 +56,11 @@ public class Elevator1 extends SubsystemLib {
         setMMPosition(pos);
     }
 
-    public double elev1MotorGetPosition() {
+    public void testMotorGoToPosition(double pos) {
+        SetPositionVoltage(pos); // doesnt actually go anywhere
+    }
+
+    public double testMotorGetPosition() {
         return GetPosition();
     }
    
@@ -64,22 +72,22 @@ public class Elevator1 extends SubsystemLib {
     }
 
 
-    @Override 
-    public void periodic(){
+    // @Override 
+    // public void periodic(){
 
-        if (Constants.elevatorBeambreakConstants.breakAttached = true && ElevatorBeambreak.checkBreak() && motor != null && !hasTared && Constants.isWithinTol(0, elev1MotorGetPosition(), 0.3)) {
-            tareMotor(); 
-            hasTared = true; 
-        }
+    //     if (LimitSwitch.checkSwitch() && motor != null && !hasTared && Constants.isWithinTol(0, getPivotMotorPosition(), 0.3)) {
+    //         tareMotor(); 
+    //         hasTared = true; 
+    //     }
 
-        // If the limit switch is released, reset the taring flag
-        if (Constants.elevatorBeambreakConstants.breakAttached = true && !ElevatorBeambreak.checkBreak()) {
-            hasTared = false; 
-        }
+    //     // If the limit switch is released, reset the taring flag
+    //     if (!LimitSwitch.checkSwitch()) {
+    //         hasTared = false; 
+    //     }
 
-        // // Update motor position on the SmartDashboard
-        SmartDashboard.putNumber("Elevator 1 Pos", elev1MotorGetPosition());
-    }
+    //     // Update motor position on the SmartDashboard
+    //     SmartDashboard.putNumber("FunnelPivot Pos", testMotorGetPosition());
+    // }
 
     
 

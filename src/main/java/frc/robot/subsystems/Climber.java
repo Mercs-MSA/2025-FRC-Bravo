@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ClimberConstants;
-import frc.robot.Constants.climberMMConstants;
 
 public class Climber extends SubsystemLib {
     public class TestSubsystemConfig extends Config {
@@ -25,7 +24,6 @@ public class Climber extends SubsystemLib {
             configNeutralBrakeMode(true);
             isClockwise(true); //true if you want it to spin clockwise
             // configStatorCurrentLimit(10, true);
-            configMotionMagic(climberMMConstants.speed, climberMMConstants.acceleration, climberMMConstants.jerk);
             // SetPositionVoltage(rotations);
         }
     }
