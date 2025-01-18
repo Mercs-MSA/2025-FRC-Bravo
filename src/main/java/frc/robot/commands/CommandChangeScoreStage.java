@@ -6,7 +6,7 @@ import frc.robot.Constants;
 public class CommandChangeScoreStage extends Command {
     public CommandChangeScoreStage(Constants.ScoringStageVal stage)
     {
-        Constants.ScoringConstants.scoringStage = stage;
+        Constants.ScoringConstants.ScoringStage = stage;
     }
     
     @Override 
