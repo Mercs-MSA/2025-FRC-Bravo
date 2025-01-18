@@ -32,6 +32,49 @@ import java.util.function.Supplier;
 
 public class Constants {
 
+    public enum ScoringStageVal {
+        INTAKEREADY(0, true, false, true),
+        INTAKING(0, false, false, false),
+        L2(1, true, false, false),
+        L3(2, true, false, false),
+        L4(90, true, false, false),
+        CLIMBING(0, false, true, false);
+
+        private int elevatorRotations;
+        private boolean canElev;
+        private boolean canClimb;
+        private boolean canPivot;
+
+
+        private ScoringStageVal(int elevRotation, boolean moveElev, boolean moveClimb, boolean movePivot)
+        {
+            this.elevatorRotations = elevRotation;
+            this.canElev = moveElev;
+            this.canClimb = moveClimb;
+            this.canPivot = movePivot;
+        }
+
+        public int getElevatorRotations()
+        {
+            return this.elevatorRotations;
+        }
+
+        public boolean canElev()
+        {
+            return this.canElev;
+        }
+
+        public boolean canClimb()
+        {
+            return this.canClimb;
+        }
+
+        public boolean canPivot()
+        {
+            return this.canPivot;
+        }
+    }
+
     public static final class Elevator1Constants{
         public static final int id = 20;
 
@@ -134,6 +177,10 @@ public class Constants {
 
     public static boolean isWithinTol(double targetPose, double currentPose, double tolerance) {
         return (Math.abs(targetPose - currentPose) <= tolerance);
+    }
+    public class ScoringConstants
+    {
+        public static ScoringStageVal ScoringStage = ScoringStageVal.INTAKEREADY;
     }
     
 }
