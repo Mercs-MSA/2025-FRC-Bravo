@@ -41,12 +41,12 @@ public class IntakeBeambreak extends SubsystemBase{
         return (m_intakeBeamBreak.get());
     }
 
-@Override
-public void periodic(){
-    detectsCoral = m_intakeBeamBreak.get();
-    SmartDashboard.putBoolean("Intake Beambreak broken", checkBreak());
+    @Override
+    public void periodic(){
+        detectsCoral = m_intakeBeamBreak.get();
+        SmartDashboard.putBoolean("Intake Beambreak broken", checkBreak());
 
-    // SmartDashboard.putBoolean("Detects coral", detectsCoral);
+        // SmartDashboard.putBoolean("Detects coral", detectsCoral);
 
-}
+    }
 }

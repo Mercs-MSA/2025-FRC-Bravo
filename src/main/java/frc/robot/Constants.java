@@ -1,52 +1,23 @@
 package frc.robot;
 
-import com.ctre.phoenix6.signals.InvertedValue;
-import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.ctre.phoenix6.signals.SensorDirectionValue;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.None;
-
-import edu.wpi.first.math.Matrix;
-import edu.wpi.first.math.VecBuilder;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.math.geometry.Transform3d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.numbers.N1;
-import edu.wpi.first.math.numbers.N3;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import static edu.wpi.first.units.Units.Meters;
-import static edu.wpi.first.units.Units.Rotations;
-
-import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
 public class Constants {
 
     public enum ScoringStageVal {
         INTAKEREADY(0, true, false, true),
         INTAKING(0, false, false, false),
-        L2(10, true, false, false),
-        L3(20, true, false, false),
-        L4(30, true, false, false),
+        L2(27.5, true, false, false),
+        L3(53, true, false, false),
+        L4(100, true, false, false),
         CLIMBING(0, false, true, false);
 
-        private int elevatorRotations;
+        private double elevatorRotations;
         private boolean canElev;
         private boolean canClimb;
         private boolean canPivot;
 
 
-        private ScoringStageVal(int elevRotation, boolean moveElev, boolean moveClimb, boolean movePivot)
+        private ScoringStageVal(double elevRotation, boolean moveElev, boolean moveClimb, boolean movePivot)
         {
             this.elevatorRotations = elevRotation;
             this.canElev = moveElev;
@@ -54,7 +25,7 @@ public class Constants {
             this.canPivot = movePivot;
         }
 
-        public int getElevatorRotations()
+        public double getElevatorRotations()
         {
             return this.elevatorRotations;
         }
@@ -131,7 +102,7 @@ public class Constants {
         public static final double acceleration = 50;
         public static final double speed = 100;
         public static final double jerk = 0;
-        
+
     }
 
 
@@ -139,7 +110,7 @@ public class Constants {
     public static final class elevatorBeambreakConstants {
         public static boolean breakAttached = false;
         public static final String beamBreakName = "elevatorBeambreak";
-        public static final int beamBreakChannel = 0;
+        public static final int beamBreakChannel = 2;
 
     }
 
@@ -152,7 +123,7 @@ public class Constants {
         public static final double kS = 0; 
         public static final double kV = 0; 
 
-        public static final double posUp = 5; //needs to be tested
+        public static final double posUp = 55; //needs to be tested
         public static final double posDown = 0; //needs to be tested
         
     }
@@ -175,7 +146,7 @@ public class Constants {
     public static final class IntakeBeambreakConstants {
         public static final boolean breakAttached = true;
         public static final String beamBreakName = "intake_beambreak";
-        public static final int beamBreakChannel = 1;
+        public static final int beamBreakChannel = 0;
 
     }
 

@@ -101,9 +101,9 @@ public class RobotContainer {
 
             driver.rightBumper().onTrue(new CommandElevatorToStage());
 
-            // driver.rightBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 5));
+            driver.rightTrigger(0.1).onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 5));
 
-            // driver.leftBumper().onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
+            driver.leftTrigger(0.1).onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
 
 
 
@@ -129,11 +129,11 @@ public class RobotContainer {
             operator.leftBumper().onTrue(new CommandClimb(Constants.ClimberConstants.positionDown));
 
 
-            operator.rightTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
+            // operator.rightTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
 
-            operator.leftTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posDown));
+            // operator.leftTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posDown));
 
-
+            operator.b().onTrue(new CommandFunnelPivotToggle());
 
         }
 
