@@ -99,6 +99,17 @@ public class Constants {
 
     }
 
+    public static final class FunnelPivotConstants {
+        public static final double raisedRoations = 0; //needs to be tested
+        public static final double loweredRoations = 0; //needs to be tested
+        
+        public static FunnelState currentFunnelState = FunnelState.RAISED;
+        public enum FunnelState {
+            RAISED,
+            LOWERED,
+        }
+    }
+
 
     public static boolean isWithinTol(double targetPose, double currentPose, double tolerance) {
         return (Math.abs(targetPose - currentPose) <= tolerance);
