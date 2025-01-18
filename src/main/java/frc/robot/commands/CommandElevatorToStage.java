@@ -13,9 +13,9 @@ public class CommandElevatorToStage extends Command {
     private double pos;
 
     public CommandElevatorToStage() {
-        if (Constants.ScoringConstants.scoringStage.canElev())
+        if (Constants.ScoringConstants.ScoringStage.canElev())
         {
-            this.pos = Constants.ScoringConstants.scoringStage.getElevatorRotations();
+            this.pos = Constants.ScoringConstants.ScoringStage.getElevatorRotations();
             addRequirements(m_Elevator1, m_Elevator2);
         }
     }
