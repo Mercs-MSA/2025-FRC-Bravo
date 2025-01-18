@@ -100,6 +100,7 @@ public class Constants {
     }
 
     public static final class FunnelPivotConstants {
+        public static final boolean attached = false;
         public static final double raisedRoations = 0; //needs to be tested
         public static final double loweredRoations = 0; //needs to be tested
         

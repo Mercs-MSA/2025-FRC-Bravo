@@ -35,11 +35,8 @@ public class FunnelPivot extends SubsystemLib {
     }
 
 
-    private boolean hasTared = false;
-
     public TestSubsystemConfig config;
 
-    // public boolean isPressed;
 
     public FunnelPivot(boolean attached){
         super(attached);
@@ -66,24 +63,6 @@ public class FunnelPivot extends SubsystemLib {
         config = new TestSubsystemConfig();
         return config;
     }
-
-
-    // @Override 
-    // public void periodic(){
-
-    //     if (LimitSwitch.checkSwitch() && motor != null && !hasTared && Constants.isWithinTol(0, getPivotMotorPosition(), 0.3)) {
-    //         tareMotor(); 
-    //         hasTared = true; 
-    //     }
-
-    //     // If the limit switch is released, reset the taring flag
-    //     if (!LimitSwitch.checkSwitch()) {
-    //         hasTared = false; 
-    //     }
-
-    //     // Update motor position on the SmartDashboard
-    //     SmartDashboard.putNumber("FunnelPivot Pos", testMotorGetPosition());
-    // }
 
     
 
