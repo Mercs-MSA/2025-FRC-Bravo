@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.*;
 import frc.robot.commands.CommandElevatorToPos;
 import frc.robot.commands.CommandClimb;
+import frc.robot.Constants.ScoringStageVal;
+import frc.robot.commands.CommandChangeScoreStage;
 import frc.robot.subsystems.Elevator1;
 import frc.robot.subsystems.Elevator2;
 import frc.robot.generated.TunerConstants;
