@@ -26,13 +26,14 @@ public class Elevator1 extends SubsystemLib {
             configGearRatio(1);
             configNeutralBrakeMode(true);
             isClockwise(false); //true if you want it to spin clockwise
-            // configStatorCurrentLimit(10, true);
             configMotionMagic(elevatorMMConstants.speed, elevatorMMConstants.acceleration, elevatorMMConstants.jerk);
-            // SetPositionVoltage(rotations);
+     
         }
     }
 
 
+    public static boolean isPositioning = false;
+    public static double positionTo = 0;
 
     public TestSubsystemConfig config;
 
@@ -49,6 +50,8 @@ public class Elevator1 extends SubsystemLib {
     }
 
     public void motorToPosMM(double pos) {
+        isPositioning = true;
+        positionTo = pos;
         setMMPosition(pos);
     }
 
@@ -77,8 +80,15 @@ public class Elevator1 extends SubsystemLib {
             hasTared = false; 
         }
 
+        if (isPositioning)
+        {
+            if (Constants.isWithinTol(positionTo, elev1MotorGetPosition(), 0.5)) {isPositioning = false;}
+        }
+
         // // Update motor position on the SmartDashboard
         SmartDashboard.putNumber("Elevator 1 Pos", elev1MotorGetPosition());
+        SmartDashboard.putBoolean("Elevator reached", isPositioning);
+        SmartDashboard.putNumber("Elevator Required Pos:", positionTo);
     }
 
     

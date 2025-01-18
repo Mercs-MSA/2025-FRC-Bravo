@@ -1,16 +1,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
+import frc.robot.Constants.ScoringConstants;
+import frc.robot.Constants.ScoringStageVal;
 
 public class CommandChangeScoreStage extends Command {
-    public CommandChangeScoreStage(Constants.ScoringStageVal stage)
+
+    private final ScoringStageVal target;
+
+    public CommandChangeScoreStage(ScoringStageVal t)
     {
-        Constants.ScoringConstants.ScoringStage = stage;
+       this.target = t;
     }
     
     @Override 
     public void initialize() {
+        ScoringConstants.ScoringStage = target;
         // This is where you put stuff that happens right at the start of the command
     }
 

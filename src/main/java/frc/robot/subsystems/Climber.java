@@ -6,10 +6,7 @@ import frc.robot.Constants.ClimberConstants;
 public class Climber extends SubsystemLib {
     public class TestSubsystemConfig extends Config {
 
-        /* MAKE SURE TO CHANGE THESE VALUES! THE PID IS NOT CONFIGURED */
-
-        /* These values will later be added into a constants file that has not yet been created. 
-         */
+   
 
         public final double velocityKp = ClimberConstants.kP;
         public final double velocityKs = 0;
@@ -23,8 +20,7 @@ public class Climber extends SubsystemLib {
             configGearRatio(1);
             configNeutralBrakeMode(true);
             isClockwise(true); //true if you want it to spin clockwise
-            // configStatorCurrentLimit(10, true);
-            // SetPositionVoltage(rotations);
+     
         }
     }
 
@@ -42,16 +38,14 @@ public class Climber extends SubsystemLib {
     }
 
     public void climberGoToPosition(double pos) {
-        SetPositionVoltage(pos); // doesnt actually go anywhere
+        SetPositionVoltage(pos); 
     }
 
     public double getClimberMotorPosition() {
         return GetPosition();
     }
 
-    // public Command runPosition(double pos) {
-    //     return run(() -> (pos)).withName("PivotGoUp");
-    // }
+    
 
    
 

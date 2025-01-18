@@ -35,9 +35,9 @@ public class Constants {
     public enum ScoringStageVal {
         INTAKEREADY(0, true, false, true),
         INTAKING(0, false, false, false),
-        L2(1, true, false, false),
-        L3(2, true, false, false),
-        L4(90, true, false, false),
+        L2(10, true, false, false),
+        L3(20, true, false, false),
+        L4(30, true, false, false),
         CLIMBING(0, false, true, false);
 
         private int elevatorRotations;
@@ -110,7 +110,7 @@ public class Constants {
     public static final class ClimberConstants{
         public static final int id = 16;
 
-        public static final boolean attached = false;
+        public static final boolean attached = true;
 
         public static final double kP = 1.9; 
         public static final double kS = 0; 
@@ -131,6 +131,7 @@ public class Constants {
         public static final double acceleration = 50;
         public static final double speed = 100;
         public static final double jerk = 0;
+        
     }
 
 
@@ -159,7 +160,7 @@ public class Constants {
     public static final class IntakeFlywheelsConstants{
         public static final int id = 7;
 
-        public static final boolean attached = false;
+        public static final boolean attached = true;
 
         public static final double kP = 5; 
         public static final double kS = 0; 

@@ -55,10 +55,6 @@ public class Elevator2 extends SubsystemLib {
         return GetPosition();
     }
 
-    // public Command runPosition(double pos) {
-    //     return run(() -> (pos)).withName("PivotGoUp");
-    // }
-
    
 
     @Override

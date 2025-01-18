@@ -13,21 +13,22 @@ public class CommandElevatorToStage extends Command {
     private double pos;
 
     public CommandElevatorToStage() {
-        if (Constants.ScoringConstants.ScoringStage.canElev())
-        {
-            this.pos = Constants.ScoringConstants.ScoringStage.getElevatorRotations();
+        // if (Constants.ScoringConstants.ScoringStage.canElev())
+        // {
             addRequirements(m_Elevator1, m_Elevator2);
-        }
+        // }
     }
 
     @Override 
     public void initialize() {
         // This is where you put stuff that happens right at the start of the command
 
-        if (Constants.ScoringConstants.ScoringStage.canElev()){
-            m_Elevator1.motorToPosMM(pos);
-            m_Elevator2.motorToPosMM(pos);
-        }
+        // if (Constants.ScoringConstants.ScoringStage.canElev()){
+        this.pos = Constants.ScoringConstants.ScoringStage.getElevatorRotations();
+        System.out.println(pos);
+        m_Elevator1.motorToPosMM(pos);
+        m_Elevator2.motorToPosMM(pos);
+        // }
     }
 
     @Override 

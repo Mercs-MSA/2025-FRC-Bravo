@@ -99,11 +99,11 @@ public class RobotContainer {
             // driver.x().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionUp));
             // driver.y().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionDown));
 
-            driver.rightTrigger().onTrue(new CommandElevatorToStage());
+            driver.rightBumper().onTrue(new CommandElevatorToStage());
 
-            driver.rightBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 5));
+            // driver.rightBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 5));
 
-            driver.leftBumper().onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
+            // driver.leftBumper().onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
 
 
 
@@ -121,7 +121,7 @@ public class RobotContainer {
 
             operator.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
 
-            operator.rightStick().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
+            // operator.rightStick().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
 
 
             operator.rightBumper().onTrue(new CommandClimb(Constants.ClimberConstants.positionUp));
