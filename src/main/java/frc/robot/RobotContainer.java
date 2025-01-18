@@ -15,12 +15,12 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.*;
-import frc.robot.commands.CommandElevatorToPos;
-import frc.robot.commands.CommandClimb;
 import frc.robot.Constants.ScoringStageVal;
-import frc.robot.commands.CommandChangeScoreStage;
 import frc.robot.subsystems.Elevator1;
 import frc.robot.subsystems.Elevator2;
+import frc.robot.subsystems.FunnelPivot;
+import frc.robot.subsystems.IntakeBeambreak;
+import frc.robot.subsystems.IntakeFlywheels;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -38,7 +38,9 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
-    private final CommandXboxController joystick = new CommandXboxController(0);
+    private final CommandXboxController driver = new CommandXboxController(0);
+    private final CommandXboxController operator = new CommandXboxController(1);
+
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
@@ -48,9 +50,16 @@ public class RobotContainer {
 
     public final Climber m_Climber = new Climber(false);
 
+    public final IntakeFlywheels m_IntakeFlywheels = new IntakeFlywheels(false);
+
+    public final IntakeBeambreak m_intakeBeamBreak = new IntakeBeambreak();
+
+    public final FunnelPivot m_FunnelPivot = new FunnelPivot(false);
 
     public RobotContainer() {
         configureBindings();
+        driverControls();
+        operatorControls();
     }
 
     private void configureBindings() {
@@ -59,51 +68,77 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+                drive.withVelocityX(-driver.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
+                    .withVelocityY(-driver.getLeftX() * MaxSpeed) // Drive left with negative X (left)
+                    .withRotationalRate(-driver.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
             )
         );
 
-        joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
-        joystick.b().whileTrue(drivetrain.applyRequest(() ->
-            point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))
+        driver.a().whileTrue(drivetrain.applyRequest(() -> brake));
+        driver.b().whileTrue(drivetrain.applyRequest(() ->
+            point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX()))
         ));
 
         // Run SysId routines when holding back/start and X/Y.
         // Note that each routine should be run exactly once in a single log.
-        joystick.back().and(joystick.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
-        joystick.back().and(joystick.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));   
+        driver.back().and(driver.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
+        driver.back().and(driver.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));   
 
-        joystick.start().and(joystick.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
-        joystick.start().and(joystick.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
-
-        // reset the field-centric heading on left bumper press
-        joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
-
-
-        joystick.x().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionUp));
-        joystick.y().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionDown));
-
-
-        joystick.rightBumper().onTrue(new CommandClimb(Constants.ClimberConstants.positionUp));
-
-        joystick.leftBumper().onTrue(new CommandClimb(Constants.ClimberConstants.positionDown));
-
-        joystick.rightTrigger().onTrue(new CommandClimb(Constants.ClimberConstants.positionHold));
-
-
-        joystick.pov(0).onTrue(new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY));
-        joystick.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L2));
-        joystick.pov(180).onTrue(new CommandChangeScoreStage(ScoringStageVal.L3));
-        joystick.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
-        joystick.rightStick().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
-
-
-
+        driver.start().and(driver.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
+        driver.start().and(driver.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         drivetrain.registerTelemetry(logger::telemeterize);
+
+        // reset the field-centric heading on left bumper press
+        // driver.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+
     }
+
+        public void driverControls() {
+
+            // driver.x().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionUp));
+            // driver.y().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionDown));
+
+            driver.rightTrigger().onTrue(new CommandElevatorToStage());
+
+            driver.rightBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 5));
+
+            driver.leftBumper().onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
+
+
+
+          
+        }
+
+        public void operatorControls(){
+
+
+            operator.pov(0).onTrue(new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY));
+
+            operator.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L2));
+
+            operator.pov(180).onTrue(new CommandChangeScoreStage(ScoringStageVal.L3));
+
+            operator.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
+
+            operator.rightStick().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
+
+
+            operator.rightBumper().onTrue(new CommandClimb(Constants.ClimberConstants.positionUp));
+
+            operator.leftBumper().onTrue(new CommandClimb(Constants.ClimberConstants.positionDown));
+
+
+            operator.rightTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
+
+            operator.leftTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posDown));
+
+
+
+        }
+
+
+
 
     public Command getAutonomousCommand() {
         return Commands.print("No autonomous command configured");

@@ -46,7 +46,7 @@ public class IntakeBeambreak extends SubsystemBase{
 @Override
 public void periodic(){
     detectsCoral = m_intakeBeamBreak.get();
-    SmartDashboard.putBoolean("Beambreak broken", checkBreak());
+    SmartDashboard.putBoolean("Intake Beambreak broken", checkBreak());
 
     // SmartDashboard.putBoolean("Detects coral", detectsCoral);
 

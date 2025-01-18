@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Constants.Elevator1Constants;
+import frc.robot.Constants.FunnelPivotConstants;
 import frc.robot.Constants.elevatorMMConstants;
 
 
@@ -16,13 +17,13 @@ public class FunnelPivot extends SubsystemLib {
         /* These values will later be added into a constants file that has not yet been created. 
          */
 
-        public final double velocityKp = 0;
+        public final double velocityKp = FunnelPivotConstants.kP;
         public final double velocityKs = 0;
         public final double velocityKv = 0;
         public final double rotations = 0;
 
         public TestSubsystemConfig() {
-            super("FunnelPivot", Elevator1Constants.id, "canivore");  //It is on rio, but make sure that you change the id
+            super("FunnelPivot", FunnelPivotConstants.id, "rio");  //It is on rio, but make sure that you change the id
             configPIDGains(velocityKp, 0, 0);
             configForwardGains(velocityKs, velocityKv, 0, 0);
             configGearRatio(1);

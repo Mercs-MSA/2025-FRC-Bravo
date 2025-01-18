@@ -143,19 +143,21 @@ public class Constants {
     }
 
     public static final class FunnelPivotConstants {
+        public static final int id = 30;
         public static final boolean attached = false;
-        public static final double raisedRoations = 0; //needs to be tested
-        public static final double loweredRoations = 0; //needs to be tested
+
+
+        public static final double kP = 1.9; 
+        public static final double kS = 0; 
+        public static final double kV = 0; 
+
+        public static final double posUp = 5; //needs to be tested
+        public static final double posDown = 0; //needs to be tested
         
-        public static FunnelState currentFunnelState = FunnelState.RAISED;
-        public enum FunnelState {
-            RAISED,
-            LOWERED,
-        }
     }
     
     public static final class IntakeFlywheelsConstants{
-        public static final int id = 26;
+        public static final int id = 7;
 
         public static final boolean attached = false;
 
@@ -164,8 +166,8 @@ public class Constants {
         public static final double kV = 0; 
 
 
-        public static final double voltageOut = 2;
-        public static final double position = 0;
+        // public static final double voltageOut = 2;
+        // public static final double position = 0;
     }
 
 

@@ -12,26 +12,14 @@ public class CommandFunnelPivot extends Command {
 
     private double pos;
 
-    public CommandFunnelPivot() {
-        // this.pos = ScoringConstants.currentScoringMode.getRotations();
+    public CommandFunnelPivot(double pos) {
+        this.pos = pos;
         addRequirements(m_FunnelPivot);
     }
 
     @Override 
     public void initialize() {
         // This is where you put stuff that happens right at the start of the command
-
-        switch (FunnelPivotConstants.currentFunnelState) {
-            case RAISED:
-              pos = FunnelPivotConstants.raisedRoations;
-              break;
-            case LOWERED:
-                pos = FunnelPivotConstants.loweredRoations;
-                break;
-            default:
-                break;
-        }
-        // pos = ScoringConstants.currentScoringMode.getRotations();
 
         m_FunnelPivot.motorToPosMM(pos);
     }

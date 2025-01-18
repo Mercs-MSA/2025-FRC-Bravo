@@ -15,9 +15,7 @@ public class IntakeFlywheels extends SubsystemLib {
 
         /* MAKE SURE TO CHANGE THESE VALUES! THE PID IS NOT CONFIGURED */
 
-        /* These values will later be added into a constants file that has not yet been created. 
-         */
-        public final double rotations = IntakeFlywheelsConstants.position;
+  
         public final double velocityKp = IntakeFlywheelsConstants.kP;
         public final double velocityKs = 0;
         public final double velocityKv = 0;
