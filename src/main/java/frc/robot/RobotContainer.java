@@ -90,7 +90,11 @@ public class RobotContainer {
         joystick.rightTrigger().onTrue(new CommandClimb(Constants.ClimberConstants.positionHold));
 
 
-
+        joystick.pov(0).onTrue(new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY));
+        joystick.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L2));
+        joystick.pov(180).onTrue(new CommandChangeScoreStage(ScoringStageVal.L3));
+        joystick.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
+        joystick.rightStick().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
 
 
 
