@@ -113,7 +113,7 @@ public class Constants {
     public static final class IntakeFlywheelsConstants{
         public static final int id = 26;
 
-        public static final boolean attached = true;
+        public static final boolean attached = false;
 
         public static final double kP = 5; 
         public static final double kS = 0; 

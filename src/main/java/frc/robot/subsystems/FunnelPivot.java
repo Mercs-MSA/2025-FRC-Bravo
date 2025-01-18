@@ -6,11 +6,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.Elevator1Constants;
 import frc.robot.Constants.elevatorMMConstants;
 
-// import frc.robot.subsystems.SubsystemLib;
 
-// import com.ctre.phoenix6.CANBus;
-
-// import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class FunnelPivot extends SubsystemLib {
     public class TestSubsystemConfig extends Config {
