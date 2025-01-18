@@ -138,7 +138,6 @@ public class Robot extends TimedRobot {
     } else {
       SmartDashboard.putString("LimelightInUse", "None");
     }
-    SmartDashboard.putString("mt_inUse", mt_inUse.toString());
     SmartDashboard.putNumber("angularVel", m_robotContainer.drivetrain.getPigeon2().getAngularVelocityZWorld().getValueAsDouble());
 
     if (mt_inUse != null) {

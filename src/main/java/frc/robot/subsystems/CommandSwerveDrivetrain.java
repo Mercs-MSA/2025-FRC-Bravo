@@ -132,6 +132,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         SwerveModuleConstants<?, ?, ?>... modules
     ) {
         super(drivetrainConstants, modules);
+        configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
         }
@@ -156,10 +157,10 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         SwerveModuleConstants<?, ?, ?>... modules
     ) {
         super(drivetrainConstants, odometryUpdateFrequency, modules);
+        configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
         }
-        configurePathPlanner();
     }
     private void configurePathPlanner() {
         // AutoBuilder.configureHolonomic(
@@ -174,6 +175,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         RobotConfig config;
         try{
         config = RobotConfig.fromGUISettings();
+        System.out.println(config);
 
         AutoBuilder.configure(
             ()->this.getState().Pose, // Robot pose supplier
@@ -206,6 +208,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         } catch (Exception e) {
         // Handle exception as needed
         e.printStackTrace();
+        System.err.println("error00");
         }
     }
 
