@@ -197,9 +197,10 @@ public class Constants {
         public static final double angularDegreesTolerance = 0.3;
         public static final double linearMetersTolerance = 0.025;
         public static final double linearMetersMaxVel = 2.0;
-        public static final double linearMetersMaxAccel = 4.0;
+        public static final double linearMetersMaxAccel = 5.0;
         public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{
-            put("Source", new CommandToPos.Destination(new Pose2d(1.4, 6.8, new Rotation2d(2.23))));
+            put("Source", new CommandToPos.Destination(new Pose2d(1.4, 6.8, new Rotation2d(-0.98))));
+            put("ReefTest", new CommandToPos.Destination(new Pose2d(2.745, 3.923, new Rotation2d(0))));
             put("TestNoFlip", new CommandToPos.Destination(new Pose2d(1, 1, new Rotation2d(0)), false));
         }};
     }
