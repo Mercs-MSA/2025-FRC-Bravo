@@ -3,10 +3,20 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeFlywheels;
 import frc.robot.subsystems.IntakeBeambreak;
+import frc.robot.Constants;
+import frc.robot.Constants.ScoringConstants;
+import frc.robot.Constants.ScoringStageVal;
+
+
 public class CommandIntakeCollect extends Command {
     private final IntakeFlywheels m_intakeFlywheels;
     private final IntakeBeambreak m_breambreak;
     private double voltage;
+
+    private final ScoringStageVal initialStage = ScoringStageVal.INTAKING;
+    private final ScoringStageVal finalStage = ScoringStageVal.INTAKEREADY;
+
+
 
     public CommandIntakeCollect(IntakeFlywheels m_intakeFlywheels, IntakeBeambreak m_beambreak, double voltage) {
         this.voltage = voltage;
@@ -18,6 +28,7 @@ public class CommandIntakeCollect extends Command {
     @Override 
     public void initialize() {
         // This is where you put stuff that happens right at the start of the command
+        ScoringConstants.ScoringStage = initialStage;
         m_intakeFlywheels.applyVoltage(voltage);
     }
 
@@ -29,6 +40,8 @@ public class CommandIntakeCollect extends Command {
     @Override 
     public void end(boolean interrupted) {
         // This is where you put stuff that happens when the command ends
+        ScoringConstants.ScoringStage = finalStage;
+
         m_intakeFlywheels.stopIntake();
     }
 

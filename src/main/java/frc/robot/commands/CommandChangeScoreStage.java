@@ -15,7 +15,10 @@ public class CommandChangeScoreStage extends Command {
     
     @Override 
     public void initialize() {
-        ScoringConstants.ScoringStage = target;
+        if(ScoringConstants.ScoringStage != ScoringStageVal.INTAKING){
+            ScoringConstants.ScoringStage = target;
+        }
+
         // This is where you put stuff that happens right at the start of the command
     }
 

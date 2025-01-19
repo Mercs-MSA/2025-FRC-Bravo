@@ -1,13 +1,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.controls.NeutralOut;
-
-// import frc.robot.subsystems.SubsystemLib;
-
-// import com.ctre.phoenix6.CANBus;
-
-// import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.robot.Constants.IntakeFlywheelsConstants;
 
 public class IntakeFlywheels extends SubsystemLib {
