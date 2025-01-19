@@ -132,9 +132,9 @@ public class RobotContainer {
 
             driver.rightBumper().onTrue(new CommandElevatorToStage());
 
-            driver.rightTrigger(0.1).onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1));
+            driver.rightTrigger(0.1).onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 8));
 
-            driver.leftTrigger(0.1).onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
+            driver.leftTrigger(0.1).onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 8));
 
             driver.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
@@ -162,9 +162,10 @@ public class RobotContainer {
 
             // operator.rightTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
 
-            operator.y().whileTrue(new CommandToPos(drivetrain, new Pose2d(1.127, 7.160, new Rotation2d(-0.929))));
+            operator.y().onTrue(new CommandSetDriveToPos("Source"));
+            operator.x().onTrue(new CommandSetDriveToPos("ReefTest"));
 
-
+            operator.leftStick().whileTrue(new CommandToPos(drivetrain));
 
             operator.b().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
             operator.a().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posDown));
