@@ -23,7 +23,7 @@ public class CommandToPos extends Command {
   SwerveRequest.FieldCentric driveRequest = new SwerveRequest.FieldCentric();
 
   private final ProfiledPIDController thetaController =
-    new ProfiledPIDController(2, 0, 0, new TrapezoidProfile.Constraints(Math.PI, Math.PI));
+    new ProfiledPIDController(4, 0, 0, new TrapezoidProfile.Constraints(Math.PI, Math.PI));
   private final PIDController xVelController =
     // new ProfiledPIDController(2, 0, 0, new TrapezoidProfile.Constraints(Constants.DriveToPoseConstants.linearMetersMaxVel, Constants.DriveToPoseConstants.linearMetersMaxAccel));
     new PIDController(2, 0, 0);

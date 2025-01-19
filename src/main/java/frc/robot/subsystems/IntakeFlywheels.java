@@ -26,7 +26,7 @@ public class IntakeFlywheels extends SubsystemLib {
             configForwardGains(velocityKs, velocityKv, 0, 0);
             configGearRatio(1);
             configNeutralBrakeMode(true);
-            isClockwise(true);
+            isClockwise(false);
             //SetPositionVoltage(rotations);
         }
     }

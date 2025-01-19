@@ -4,9 +4,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.FunnelPivot;
 
+import frc.robot.Constants;
+
 
 public class CommandFunnelPivot extends Command {
-    private FunnelPivot m_FunnelPivot = new FunnelPivot(false);
+    private FunnelPivot m_FunnelPivot = new FunnelPivot(true);
 
     private double pos;
 
@@ -18,8 +20,9 @@ public class CommandFunnelPivot extends Command {
     @Override 
     public void initialize() {
         // This is where you put stuff that happens right at the start of the command
-
-        m_FunnelPivot.motorToPosMM(pos);
+        if (Constants.ScoringConstants.ScoringStage.canPivot()){
+         m_FunnelPivot.funnelPositionVoltage(pos);
+        }
     }
 
     @Override 

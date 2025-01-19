@@ -2,7 +2,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Climber;
-import frc.robot.Constants.*;
+import frc.robot.Constants;
+import frc.robot.Constants.Elevator1Constants;
 
 public class CommandClimb extends Command {
     private Climber m_Climber = new Climber(Elevator1Constants.attached);
@@ -18,8 +19,9 @@ public class CommandClimb extends Command {
     public void initialize() {
         // This is where you put stuff that happens right at the start of the command
 
-        
-        m_Climber.climberGoToPosition(pos);
+        if (Constants.ScoringConstants.ScoringStage.canClimb()){
+            m_Climber.climberGoToPosition(pos);
+        }
         
     }
 

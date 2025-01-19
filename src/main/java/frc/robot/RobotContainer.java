@@ -60,11 +60,11 @@ public class RobotContainer {
 
     public final Climber m_Climber = new Climber(false);
 
-    public final IntakeFlywheels m_IntakeFlywheels = new IntakeFlywheels(false);
+    public final IntakeFlywheels m_IntakeFlywheels = new IntakeFlywheels(true);
 
     public final IntakeBeambreak m_intakeBeamBreak = new IntakeBeambreak();
 
-    public final FunnelPivot m_FunnelPivot = new FunnelPivot(false);
+    public final FunnelPivot m_FunnelPivot = new FunnelPivot(true);
 
     private final SendableChooser<Command> autoChooser;
 
@@ -132,11 +132,11 @@ public class RobotContainer {
 
             driver.rightBumper().onTrue(new CommandElevatorToStage());
 
-            driver.rightTrigger(0.1).onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 5));
+            driver.rightTrigger(0.1).onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1));
 
             driver.leftTrigger(0.1).onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
 
-
+            driver.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
           
         }
@@ -152,7 +152,7 @@ public class RobotContainer {
 
             operator.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
 
-            // operator.rightStick().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
+            operator.rightStick().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
 
 
             operator.rightBumper().onTrue(new CommandClimb(Constants.ClimberConstants.positionUp));
@@ -162,11 +162,13 @@ public class RobotContainer {
 
             // operator.rightTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
 
-            operator.y().whileTrue(new CommandToPos(drivetrain, new Pose2d(1.4, 6.8, new Rotation2d(2.23))));
+            operator.y().whileTrue(new CommandToPos(drivetrain, new Pose2d(1.127, 7.160, new Rotation2d(-0.929))));
 
 
 
-            operator.b().onTrue(new CommandFunnelPivotToggle());
+            operator.b().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
+            operator.a().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posDown));
+
 
         }
 

@@ -208,7 +208,6 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         } catch (Exception e) {
         // Handle exception as needed
         e.printStackTrace();
-        System.err.println("error00");
         }
     }
 

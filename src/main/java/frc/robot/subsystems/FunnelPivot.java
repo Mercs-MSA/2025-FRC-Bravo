@@ -25,7 +25,7 @@ public class FunnelPivot extends SubsystemLib {
             configForwardGains(velocityKs, velocityKv, 0, 0);
             configGearRatio(1);
             configNeutralBrakeMode(true);
-            isClockwise(true); //true if you want it to spin clockwise
+            isClockwise(false); //true if you want it to spin clockwise
             // configStatorCurrentLimit(10, true);
             configMotionMagic(elevatorMMConstants.speed, elevatorMMConstants.acceleration, elevatorMMConstants.jerk);
             // SetPositionVoltage(rotations);
@@ -47,7 +47,7 @@ public class FunnelPivot extends SubsystemLib {
         setMMPosition(pos);
     }
 
-    public void testMotorGoToPosition(double pos) {
+    public void funnelPositionVoltage(double pos) {
         SetPositionVoltage(pos); // doesnt actually go anywhere
     }
 

@@ -145,8 +145,8 @@ public class Constants {
     }
 
     public static final class FunnelPivotConstants {
-        public static final int id = 30;
-        public static final boolean attached = false;
+        public static final int id = 33;
+        public static final boolean attached = true;
 
 
         public static final double kP = 1.9; 
@@ -159,7 +159,7 @@ public class Constants {
     }
     
     public static final class IntakeFlywheelsConstants{
-        public static final int id = 7;
+        public static final int id = 32;
 
         public static final boolean attached = true;
 
@@ -187,8 +187,8 @@ public class Constants {
     }
 
     public static final class DriveToPoseConstants {
-        public static final double angularDegreesTolerance = 0.5;
-        public static final double linearMetersTolerance = 0.05;
+        public static final double angularDegreesTolerance = 0.3;
+        public static final double linearMetersTolerance = 0.025;
         public static final double linearMetersMaxVel = 2.0;
         public static final double linearMetersMaxAccel = 4.0;
     }

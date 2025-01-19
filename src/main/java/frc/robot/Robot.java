@@ -59,7 +59,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    System.out.println(Constants.ScoringConstants.ScoringStage + " " + Constants.ScoringConstants.ScoringStage.getElevatorRotations());
+    // System.out.println(Constants.ScoringConstants.ScoringStage + " " + Constants.ScoringConstants.ScoringStage.getElevatorRotations());
+
+    SmartDashboard.putString("Scoring Stage", Constants.ScoringConstants.ScoringStage.toString());
 
     moveClimberDown = false;
     spinIntake = false;

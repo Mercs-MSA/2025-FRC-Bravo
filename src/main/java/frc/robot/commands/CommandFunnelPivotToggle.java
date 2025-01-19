@@ -8,7 +8,7 @@ import frc.robot.subsystems.FunnelPivot;
 
 
 public class CommandFunnelPivotToggle extends Command {
-    private FunnelPivot m_FunnelPivot = new FunnelPivot(false);
+    private FunnelPivot m_FunnelPivot = new FunnelPivot(true);
     private static double lastPos = 0.0;
     private double pos;
 
