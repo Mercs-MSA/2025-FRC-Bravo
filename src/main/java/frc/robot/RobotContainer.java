@@ -164,6 +164,7 @@ public class RobotContainer {
 
             operator.y().onTrue(new CommandSetDriveToPos("Source"));
             operator.x().onTrue(new CommandSetDriveToPos("ReefTest"));
+            operator.back().onTrue(new CommandSetDriveToPos("Barge"));
 
             operator.leftStick().whileTrue(new CommandToPos(drivetrain));
 

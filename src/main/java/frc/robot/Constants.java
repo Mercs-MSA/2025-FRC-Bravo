@@ -1,37 +1,13 @@
 package frc.robot;
 
-import com.ctre.phoenix6.signals.InvertedValue;
-import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.ctre.phoenix6.signals.SensorDirectionValue;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.None;
-
-import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.math.geometry.Transform3d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Measure;
-import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.CommandToPos;
 
-import static edu.wpi.first.units.Units.Meters;
-import static edu.wpi.first.units.Units.Rotations;
-
 import java.util.HashMap;
-import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
 public class Constants {
 
@@ -199,9 +175,10 @@ public class Constants {
         public static final double linearMetersMaxVel = 2.0;
         public static final double linearMetersMaxAccel = 5.0;
         public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{
-            put("Source", new CommandToPos.Destination(new Pose2d(1.4, 6.8, new Rotation2d(-0.98))));
-            put("ReefTest", new CommandToPos.Destination(new Pose2d(2.745, 3.923, new Rotation2d(0))));
-            put("TestNoFlip", new CommandToPos.Destination(new Pose2d(1, 1, new Rotation2d(0)), false));
+            put("Source", new CommandToPos.Destination("Source", new Pose2d(0.86, 6.944, new Rotation2d(-0.98))));
+            put("ReefTest", new CommandToPos.Destination("Reef", new Pose2d(2.745, 3.923, new Rotation2d(0))));
+            put("Barge", new CommandToPos.Destination("Barge", new Pose2d(7.253, 5.66, new Rotation2d(Math.PI))));
+            put("TestNoFlip", new CommandToPos.Destination("TestNoFlip", new Pose2d(1, 1, new Rotation2d(0)), false));
         }};
     }
 

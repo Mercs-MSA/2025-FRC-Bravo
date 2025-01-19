@@ -5,7 +5,6 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -21,25 +20,28 @@ public class CommandToPos extends Command {
   SwerveRequest.FieldCentric driveRequest = new SwerveRequest.FieldCentric();
 
   private final ProfiledPIDController thetaController =
-    new ProfiledPIDController(4, 0, 0, new TrapezoidProfile.Constraints(Math.PI, Math.PI));
+    new ProfiledPIDController(5, 0, 0, new TrapezoidProfile.Constraints(Math.PI, Math.PI));
   private final PIDController xVelController =
     // new ProfiledPIDController(2, 0, 0, new TrapezoidProfile.Constraints(Constants.DriveToPoseConstants.linearMetersMaxVel, Constants.DriveToPoseConstants.linearMetersMaxAccel));
-    new PIDController(2, 0, 0);
+    new PIDController(1.6, 0, 0);
   private final PIDController yVelController =
-    new PIDController(2, 0, 0);
+    new PIDController(1.6, 0, 0);
     // new ProfiledPIDController(2, 0, 0, new TrapezoidProfile.Constraints(Constants.DriveToPoseConstants.linearMetersMaxVel, Constants.DriveToPoseConstants.linearMetersMaxAccel));
 
   public static class Destination {
     public Pose2d destPose;
     public boolean invertRed = true;
+    public String name;
 
-    public Destination(Pose2d pose) {
+    public Destination(String destName, Pose2d pose) {
       this.destPose = pose;
+      this.name = destName;
     }
 
-    public Destination(Pose2d pose, boolean allianceInvert) {
+    public Destination(String destName, Pose2d pose, boolean allianceInvert) {
       this.destPose = pose;
       this.invertRed = allianceInvert;
+      this.name = destName;
     }
   }
 
@@ -85,11 +87,13 @@ public class CommandToPos extends Command {
 
     double targetX = target.destPose.getX();
     double targetY = target.destPose.getY();
+    double targetTheta = target.destPose.getRotation().getRadians();
     if (this.target.invertRed) {
       var alliance = DriverStation.getAlliance();
       if (alliance.isPresent() && alliance.get() == DriverStation.Alliance.Red) {
         targetX = Constants.FieldConstants.fieldLengthMeters - targetX;
         targetY = Constants.FieldConstants.fieldWidthMeters - targetY;
+        // targetTheta = targetTheta;
       }
     }
 
@@ -98,7 +102,7 @@ public class CommandToPos extends Command {
     SmartDashboard.putNumber("currPoseY", currPose.getY());
     final double thetaVelocity = atGoal() ? 0.0 :
         thetaController.calculate(
-            currPose.getRotation().getRadians(), target.destPose.getRotation().getRadians());
+            currPose.getRotation().getRadians(), targetTheta);
     final double xVelocity = atGoal() ? 0.0 :
         xVelController.calculate(
             currPose.getX(), targetX
