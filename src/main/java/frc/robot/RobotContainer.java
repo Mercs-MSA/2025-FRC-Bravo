@@ -162,9 +162,10 @@ public class RobotContainer {
 
             // operator.rightTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
 
-            operator.y().whileTrue(new CommandToPos(drivetrain, new Pose2d(1.127, 7.160, new Rotation2d(-0.929))));
+            operator.y().onTrue(new CommandSetDriveToPos("Source"));
+            operator.x().onTrue(new CommandSetDriveToPos("TestNoFlip"));
 
-
+            operator.leftStick().whileTrue(new CommandToPos(drivetrain));
 
             operator.b().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
             operator.a().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posDown));

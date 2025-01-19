@@ -24,10 +24,12 @@ import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.CommandToPos;
 
 import static edu.wpi.first.units.Units.Meters;
 import static edu.wpi.first.units.Units.Rotations;
 
+import java.util.HashMap;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -186,11 +188,20 @@ public class Constants {
         public static final Vector<N3> visionStdDevs = VecBuilder.fill(.7,.7,9999999);
     }
 
+    public static final class FieldConstants {
+        public static final double fieldLengthMeters = 16.54;
+        public static final double fieldWidthMeters = 8.02;
+    }
+
     public static final class DriveToPoseConstants {
         public static final double angularDegreesTolerance = 0.3;
         public static final double linearMetersTolerance = 0.025;
         public static final double linearMetersMaxVel = 2.0;
         public static final double linearMetersMaxAccel = 4.0;
+        public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{
+            put("Source", new CommandToPos.Destination(new Pose2d(1.4, 6.8, new Rotation2d(2.23))));
+            put("TestNoFlip", new CommandToPos.Destination(new Pose2d(1, 1, new Rotation2d(0)), false));
+        }};
     }
 
     public static boolean isWithinTol(double targetPose, double currentPose, double tolerance) {
@@ -199,6 +210,10 @@ public class Constants {
     public class ScoringConstants
     {
         public static ScoringStageVal ScoringStage = ScoringStageVal.INTAKEREADY;
+    }
+
+    public class DriveToPosRuntime {
+        public static String target = null;
     }
     
 }

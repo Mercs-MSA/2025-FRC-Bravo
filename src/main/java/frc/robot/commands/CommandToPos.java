@@ -1,12 +1,11 @@
 package frc.robot.commands;
 
-import java.util.Optional;
-
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -17,9 +16,8 @@ import frc.robot.Constants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 public class CommandToPos extends Command {
-
   private final CommandSwerveDrivetrain drivetrain;
-  private Pose2d targetPose;
+  private CommandToPos.Destination target;
   SwerveRequest.FieldCentric driveRequest = new SwerveRequest.FieldCentric();
 
   private final ProfiledPIDController thetaController =
@@ -31,15 +29,36 @@ public class CommandToPos extends Command {
     new PIDController(2, 0, 0);
     // new ProfiledPIDController(2, 0, 0, new TrapezoidProfile.Constraints(Constants.DriveToPoseConstants.linearMetersMaxVel, Constants.DriveToPoseConstants.linearMetersMaxAccel));
 
-  public CommandToPos(CommandSwerveDrivetrain swerve, Pose2d pose) {
+  public static class Destination {
+    public Pose2d destPose;
+    public boolean invertRed = true;
+
+    public Destination(Pose2d pose) {
+      this.destPose = pose;
+    }
+
+    public Destination(Pose2d pose, boolean allianceInvert) {
+      this.destPose = pose;
+      this.invertRed = allianceInvert;
+    }
+  }
+
+  public CommandToPos(CommandSwerveDrivetrain swerve) {
     this.drivetrain = swerve;
-    this.targetPose = pose;
 
     thetaController.setTolerance(Units.degreesToRadians(Constants.DriveToPoseConstants.angularDegreesTolerance));
     xVelController.setTolerance(Constants.DriveToPoseConstants.linearMetersTolerance);
     yVelController.setTolerance(Constants.DriveToPoseConstants.linearMetersTolerance);
     
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
+    SmartDashboard.putData("driveToPosTheta_Pid", thetaController);
+    SmartDashboard.putData("driveToPosX_Pid", xVelController);
+    SmartDashboard.putData("driveToPosY_Pid", yVelController);
+
+    SmartDashboard.putNumber("driveToPosX_Tgt", -1);
+    SmartDashboard.putNumber("driveToPosY_Tgt", -1);
+    SmartDashboard.putNumber("driveToPosTheta_Tgt", -1);
 
     addRequirements(swerve);
   }
@@ -50,34 +69,52 @@ public class CommandToPos extends Command {
     thetaController.reset(currPose.getRotation().getRadians());
     // xVelController.reset(currPose.getX());
     // yVelController.reset(currPose.getY());
+
+    if (Constants.DriveToPosRuntime.target == null) {
+      return;
+    }
+    System.out.println(Constants.DriveToPosRuntime.target);
   }
 
   @Override
   public void execute() {
+    if (Constants.DriveToPosRuntime.target == null) {
+      return;
+    }
+    this.target = Constants.DriveToPoseConstants.positions.get(Constants.DriveToPosRuntime.target);
+
+    double targetX = target.destPose.getX();
+    double targetY = target.destPose.getY();
+    if (this.target.invertRed) {
+      var alliance = DriverStation.getAlliance();
+      if (alliance.isPresent() && alliance.get() == DriverStation.Alliance.Red) {
+        targetX = Constants.FieldConstants.fieldLengthMeters - targetX;
+        targetY = Constants.FieldConstants.fieldWidthMeters - targetY;
+      }
+    }
+
     var currPose = drivetrain.getState().Pose;
-    SmartDashboard.putNumber("currPose", currPose.getRotation().getRadians());
-    final Optional<Alliance> alliance = DriverStation.getAlliance();
+    SmartDashboard.putNumber("currPoseX", currPose.getX());
+    SmartDashboard.putNumber("currPoseY", currPose.getY());
     final double thetaVelocity = atGoal() ? 0.0 :
         thetaController.calculate(
-            currPose.getRotation().getRadians(), targetPose.getRotation().getRadians());
+            currPose.getRotation().getRadians(), target.destPose.getRotation().getRadians());
     final double xVelocity = atGoal() ? 0.0 :
         xVelController.calculate(
-            currPose.getX(), targetPose.getX()
+            currPose.getX(), targetX
         );
     final double yVelocity = atGoal() ? 0.0 :
         yVelController.calculate(
-            currPose.getY(), targetPose.getY()
+            currPose.getY(), targetY
         );
 
-    SmartDashboard.putNumber("xVel", xVelocity);
-    SmartDashboard.putNumber("yVel", yVelocity);
-    SmartDashboard.putNumber("thetaVel", thetaVelocity);
+    SmartDashboard.putNumber("driveToPosX_Vel", xVelocity);
+    SmartDashboard.putNumber("driveToPosY_Vel", yVelocity);
+    SmartDashboard.putNumber("driveToPosTheta_Vel", thetaVelocity);
 
-    SmartDashboard.putNumber("tgtPoseX", targetPose.getX());
-    SmartDashboard.putNumber("tgtPoseY", targetPose.getY());
-
-    SmartDashboard.putNumber("test", currPose.getX());
-    SmartDashboard.putNumber("test2", targetPose.getX());
+    SmartDashboard.putNumber("driveToPosX_Tgt", targetX);
+    SmartDashboard.putNumber("driveToPosY_Tgt", targetY);
+    SmartDashboard.putNumber("driveToPosTheta_Tgt", target.destPose.getRotation().getDegrees());
 
     drivetrain.setControl(
         driveRequest
@@ -91,13 +128,15 @@ public class CommandToPos extends Command {
   }
 
   @Override
+  public void end(boolean interrupted) {
+    SmartDashboard.putNumber("driveToPosX_Vel", 0);
+    SmartDashboard.putNumber("driveToPosY_Vel", 0);
+    SmartDashboard.putNumber("driveToPosTheta_Vel", 0);
+  }
+
+  @Override
   public boolean isFinished(){
     return atGoal();
     // return true;
   }
-
-//   @Override
-//   public void end(boolean interrupted){
-//     Constants.Vision.autoAlignActice = false;
-//   }
 }
