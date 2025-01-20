@@ -5,6 +5,30 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "reeftest"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "PathWithDriveToPos"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
           "type": "named",
           "data": {
             "name": "PathWithDriveToPos"

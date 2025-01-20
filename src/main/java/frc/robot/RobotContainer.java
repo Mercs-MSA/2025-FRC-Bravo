@@ -133,9 +133,9 @@ public class RobotContainer {
 
             driver.rightBumper().onTrue(new CommandElevatorToStage());
 
-            driver.rightTrigger(0.1).onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 8));
+            driver.rightTrigger(0.1).onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1));
 
-            driver.leftTrigger(0.1).onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 8));
+            driver.leftTrigger(0.1).onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
 
             driver.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
@@ -145,13 +145,13 @@ public class RobotContainer {
         public void operatorControls(){
 
 
-            operator.pov(0).onTrue(new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY));
+            operator.pov(180).onTrue(new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY));
 
-            operator.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L2));
+            operator.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L2));
 
-            operator.pov(180).onTrue(new CommandChangeScoreStage(ScoringStageVal.L3));
+            operator.pov(0).onTrue(new CommandChangeScoreStage(ScoringStageVal.L3));
 
-            operator.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
+            operator.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
 
             operator.rightStick().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
 
