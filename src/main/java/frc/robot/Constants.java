@@ -177,7 +177,7 @@ public class Constants {
         public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{
             put("Source", new CommandToPos.Destination("Source", new Pose2d(0.86, 6.944, new Rotation2d(-0.98))));
             put("ReefTest", new CommandToPos.Destination("Reef", new Pose2d(2.745, 3.923, new Rotation2d(0))));
-            put("Barge", new CommandToPos.Destination("Barge", new Pose2d(7.253, 5.66, new Rotation2d(Math.PI))));
+            put("Barge", new CommandToPos.Destination("Barge", new Pose2d(7.256, 5.79, new Rotation2d(Math.PI))));
             put("TestNoFlip", new CommandToPos.Destination("TestNoFlip", new Pose2d(1, 1, new Rotation2d(0)), false));
         }};
     }

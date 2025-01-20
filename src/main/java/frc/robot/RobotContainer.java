@@ -73,8 +73,9 @@ public class RobotContainer {
             
             // put("Enter Command Name", new Command(m_));
 
-             put("Enter Command Name", new SequentialCommandGroup(
-
+             put("PathWithDriveToPos", new SequentialCommandGroup(
+                new CommandSetDriveToPos("ReefTest"),
+                new CommandToPos(drivetrain)
             ));
     
             
