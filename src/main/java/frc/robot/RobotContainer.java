@@ -163,9 +163,9 @@ public class RobotContainer {
 
             // operator.rightTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
 
-            operator.y().onTrue(new CommandSetDriveToPos("Source"));
-            operator.x().onTrue(new CommandSetDriveToPos("ReefTest"));
-            operator.back().onTrue(new CommandSetDriveToPos("Barge"));
+            operator.y().onTrue(new CommandSetDriveToPos("Source")); //keep
+            operator.x().onTrue(new CommandSetDriveToPos("ReefTest"));//keep
+            operator.back().onTrue(new CommandSetDriveToPos("Barge")); //keep
 
             operator.leftStick().whileTrue(new CommandToPos(drivetrain));
 
