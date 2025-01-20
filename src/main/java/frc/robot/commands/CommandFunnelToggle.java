@@ -7,29 +7,30 @@ import frc.robot.Constants;
 import frc.robot.subsystems.FunnelPivot;
 
 
-public class CommandFunnelPivotToggle extends Command {
+public class CommandFunnelToggle extends Command {
     private FunnelPivot m_FunnelPivot = new FunnelPivot(true);
-    private static double lastPos = 0.0;
-    private double pos;
 
-    public CommandFunnelPivotToggle() {
+
+    public CommandFunnelToggle() {
         addRequirements(m_FunnelPivot);
     }
 
     @Override 
     public void initialize() {
         // This is where you put stuff that happens right at the start of the command
-        if (Constants.isWithinTol(Constants.FunnelPivotConstants.posDown, lastPos, 1))
-        {
-            pos = Constants.FunnelPivotConstants.posUp;
-        }
-        else
-        {
-            pos = Constants.FunnelPivotConstants.posDown;
-        }
-        lastPos = pos;
-        m_FunnelPivot.motorToPosMM(pos);
+        if(Constants.ScoringConstants.ScoringStage.canPivot()){
+            if (Constants.isWithinTol(Constants.FunnelPivotConstants.posDown, m_FunnelPivot.getPivotMotorPosition(), 1))
+            {
+                m_FunnelPivot.motorToPosMM(Constants.FunnelPivotConstants.posUp);
+
+            }
+            else
+            {
+                m_FunnelPivot.motorToPosMM(Constants.FunnelPivotConstants.posDown);
+
+            }
     }
+}
 
     @Override 
     public void execute() {

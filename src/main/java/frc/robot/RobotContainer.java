@@ -133,11 +133,32 @@ public class RobotContainer {
 
             driver.rightBumper().onTrue(new CommandElevatorToStage());
 
-            driver.rightTrigger(0.1).onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1));
 
-            driver.leftTrigger(0.1).onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
+            driver.leftBumper().onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
 
-            driver.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+
+            driver.x().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+
+
+            driver.a().whileTrue(
+                new CommandSetDriveToPos("Source").andThen(
+                new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY)).andThen(
+                new ParallelCommandGroup(
+                    new CommandToPos(drivetrain), 
+                    new CommandElevatorToStage(),
+                    new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1)
+            )));
+
+
+            operator.rightTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
+                new CommandToPos(drivetrain),
+                new CommandElevatorToStage()
+                )));//keep
+
+            operator.leftTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
+                new CommandToPos(drivetrain),
+                new CommandElevatorToStage()
+                )));//keep
 
           
         }
@@ -145,32 +166,30 @@ public class RobotContainer {
         public void operatorControls(){
 
 
-            operator.pov(180).onTrue(new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY));
+            operator.pov(0).onTrue(new CommandChangeScoreStage(ScoringStageVal.L1));
 
-            operator.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L2));
+            operator.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L2));
 
-            operator.pov(0).onTrue(new CommandChangeScoreStage(ScoringStageVal.L3));
+            operator.pov(180).onTrue(new CommandChangeScoreStage(ScoringStageVal.L3));
 
-            operator.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
-
-            operator.rightStick().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
+            operator.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
 
 
-            operator.rightBumper().onTrue(new CommandClimb(Constants.ClimberConstants.positionUp));
-
-            operator.leftBumper().onTrue(new CommandClimb(Constants.ClimberConstants.positionDown));
+            operator.a().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
 
 
-            // operator.rightTrigger().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
+            operator.leftStick().onTrue(new CommandClimbToggle());
 
-            operator.y().onTrue(new CommandSetDriveToPos("Source")); //keep
-            operator.x().onTrue(new CommandSetDriveToPos("ReefTest"));//keep
-            operator.back().onTrue(new CommandSetDriveToPos("Barge")); //keep
+            operator.rightStick().onTrue(new CommandFunnelToggle());
 
-            operator.leftStick().whileTrue(new CommandToPos(drivetrain));
+            operator.leftBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 8));
 
-            operator.b().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp));
-            operator.a().onTrue(new CommandFunnelPivot(Constants.FunnelPivotConstants.posDown));
+
+
+            
+
+        
+
 
 
         }

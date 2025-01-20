@@ -14,6 +14,7 @@ public class Constants {
     public enum ScoringStageVal {
         INTAKEREADY(0, true, false, true),
         INTAKING(0, false, false, false),
+        L1(20, true, false, false),
         L2(27.5, true, false, false),
         L3(53, true, false, false),
         L4(100, true, false, false),
@@ -98,10 +99,11 @@ public class Constants {
 
 
         public static final double voltageOut = 0;
-        public static final double positionUp = -320; //-240
-        public static final double positionHold = -70; //-240
+        public static final double positionUp = 320; //-240
 
         public static final double positionDown = 0;
+
+        public static final double climberTol = 1;
 
     }
 
