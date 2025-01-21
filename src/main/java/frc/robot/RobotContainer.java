@@ -131,7 +131,6 @@ public class RobotContainer {
             // driver.x().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionUp));
             // driver.y().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionDown));
 
-            driver.rightBumper().onTrue(new CommandElevatorToStage());
 
 
             driver.leftBumper().onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
@@ -150,15 +149,15 @@ public class RobotContainer {
             )));
 
 
-            operator.rightTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
+            driver.rightTrigger(0.8).whileTrue(new CommandSetDriveToPos("reefB").andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
                 new CommandElevatorToStage()
                 )));//keep
 
-            operator.leftTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
-                new CommandToPos(drivetrain),
-                new CommandElevatorToStage()
-                )));//keep
+            // driver.leftTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
+            //     new CommandToPos(drivetrain),
+            //     new CommandElevatorToStage()
+            //     )));//keep
 
           
         }
@@ -166,16 +165,20 @@ public class RobotContainer {
         public void operatorControls(){
 
 
-            operator.pov(0).onTrue(new CommandChangeScoreStage(ScoringStageVal.L1));
+            operator.pov(180).onTrue(new CommandChangeScoreStage(ScoringStageVal.L1));
 
-            operator.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L2));
+            operator.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L2));
 
-            operator.pov(180).onTrue(new CommandChangeScoreStage(ScoringStageVal.L3));
+            operator.pov(0).onTrue(new CommandChangeScoreStage(ScoringStageVal.L3));
 
-            operator.pov(270).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
+            operator.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
 
 
             operator.a().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
+
+            operator.b().onTrue(new SequentialCommandGroup(
+                new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
+                new CommandElevatorToStage()));
 
 
             operator.leftStick().onTrue(new CommandClimbToggle());
@@ -185,8 +188,10 @@ public class RobotContainer {
             operator.leftBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 8));
 
 
+            driver.y().onTrue(new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName));
 
-            
+            // SmartDashboard.putData("SeedToMegaTag1_Front", new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName));
+            // SmartDashboard.putData("SeedToMegaTag1_Back", new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightBackName));
 
         
 

@@ -15,8 +15,8 @@ public class Constants {
         INTAKEREADY(0, true, false, true),
         INTAKING(0, false, false, false),
         L1(20, true, false, false),
-        L2(27.5, true, false, false),
-        L3(53, true, false, false),
+        L2(37, true, false, false),
+        L3(65, true, false, false),
         L4(100, true, false, false),
         CLIMBING(0, false, true, false);
 
@@ -109,8 +109,8 @@ public class Constants {
 
 
     public static final class elevatorMMConstants{
-        public static final double acceleration = 50;
-        public static final double speed = 100;
+        public static final double acceleration = 100;
+        public static final double speed = 150;
         public static final double jerk = 0;
 
     }
@@ -133,7 +133,7 @@ public class Constants {
         public static final double kS = 0; 
         public static final double kV = 0; 
 
-        public static final double posUp = 55; //needs to be tested
+        public static final double posUp = 56; //needs to be tested
         public static final double posDown = 0; //needs to be tested
         
     }
@@ -177,6 +177,7 @@ public class Constants {
         public static final double linearMetersMaxVel = 2.0;
         public static final double linearMetersMaxAccel = 5.0;
         public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{
+            put("reefB", new CommandToPos.Destination("reefB", new Pose2d(3.276, 3.7324, new Rotation2d(0))));
             put("Source", new CommandToPos.Destination("Source", new Pose2d(0.86, 6.944, new Rotation2d(-0.98))));
             put("ReefTest", new CommandToPos.Destination("Reef", new Pose2d(2.745, 3.923, new Rotation2d(0))));
             put("Barge", new CommandToPos.Destination("Barge", new Pose2d(7.256, 5.79, new Rotation2d(Math.PI))));
