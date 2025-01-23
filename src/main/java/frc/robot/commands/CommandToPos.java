@@ -32,7 +32,7 @@ public class CommandToPos extends Command {
     public Pose2d destPose;
     public boolean invertRed = true;
     public String name;
-
+ 
     public Destination(String destName, Pose2d pose) {
       this.destPose = pose;
       this.name = destName;
@@ -93,7 +93,7 @@ public class CommandToPos extends Command {
       if (alliance.isPresent() && alliance.get() == DriverStation.Alliance.Red) {
         targetX = Constants.FieldConstants.fieldLengthMeters - targetX;
         targetY = Constants.FieldConstants.fieldWidthMeters - targetY;
-        // targetTheta = targetTheta;
+        targetTheta = targetTheta + Math.PI;
       }
     }
 
