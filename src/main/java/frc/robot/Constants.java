@@ -177,11 +177,24 @@ public class Constants {
         public static final double linearMetersMaxVel = 2.0;
         public static final double linearMetersMaxAccel = 5.0;
         public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{
-            put("reefB", new CommandToPos.Destination("reefB", new Pose2d(3.276, 3.7324, new Rotation2d(0))));
-            put("Source", new CommandToPos.Destination("Source", new Pose2d(0.86, 6.944, new Rotation2d(-0.98))));
-            put("ReefTest", new CommandToPos.Destination("Reef", new Pose2d(2.745, 3.923, new Rotation2d(0))));
-            put("Barge", new CommandToPos.Destination("Barge", new Pose2d(7.256, 5.79, new Rotation2d(Math.PI))));
-            put("TestNoFlip", new CommandToPos.Destination("TestNoFlip", new Pose2d(1, 1, new Rotation2d(0)), false));
+            put("reefA", new CommandToPos.Destination("reefA", new Pose2d(3.162, 4.185, new Rotation2d(0))));
+            put("reefB", new CommandToPos.Destination("reefB", new Pose2d(3.276, 3.7324, new Rotation2d(0))));//
+            put("reefC", new CommandToPos.Destination("reefC", new Pose2d(3.679, 2.958, new Rotation2d(1.047))));
+            put("reefD", new CommandToPos.Destination("reefD", new Pose2d(3.961, 2.801, new Rotation2d(1.047))));
+            put("reefE", new CommandToPos.Destination("reefE", new Pose2d(5.00, 2.789, new Rotation2d(2.0944))));
+            put("reefF", new CommandToPos.Destination("reefF", new Pose2d(5.30, 2.970, new Rotation2d(2.0944))));
+            put("reefG", new CommandToPos.Destination("reefG", new Pose2d(5.806, 3.858, new Rotation2d(3.1459))));
+            put("reefH", new CommandToPos.Destination("reefH", new Pose2d(5.806, 4.190, new Rotation2d(3.1459))));
+            put("reefI", new CommandToPos.Destination("reefI", new Pose2d(5.283, 5.096, new Rotation2d(-2.094))));
+            put("reefJ", new CommandToPos.Destination("reefJ", new Pose2d(5.009, 5.259, new Rotation2d(-2.094))));
+            put("reefK", new CommandToPos.Destination("reefK", new Pose2d(3.981, 5.253, new Rotation2d(-1.047))));
+            put("reefL", new CommandToPos.Destination("reefL", new Pose2d(3.692, 5.092, new Rotation2d(-1.047))));
+
+
+
+
+
+
         }};
     }
 
