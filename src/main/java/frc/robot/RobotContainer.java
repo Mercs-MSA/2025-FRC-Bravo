@@ -73,14 +73,42 @@ public class RobotContainer {
             
             // put("Enter Command Name", new Command(m_));
 
-             put("PathWithDriveToPos", new SequentialCommandGroup(
+            put("PathWithDriveToPos", new SequentialCommandGroup(
                 new CommandSetDriveToPos("ReefTest"),
                 new CommandToPos(drivetrain)
             ));
+
+
+            put("Intake Collect", 
+                new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate)
+                );
+            
+            /* Scoring */
+            put("Score", 
+                new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate)
+                );
+            
+            put("L1", new SequentialCommandGroup(
+                new CommandChangeScoreStage(ScoringStageVal.L1)
+            ));
+
+            put("L2", new SequentialCommandGroup(
+                new CommandChangeScoreStage(ScoringStageVal.L2)
+            ));
+
+            put("L3", new SequentialCommandGroup(
+                new CommandChangeScoreStage(ScoringStageVal.L3)
+            ));
+
+            put("L4", new SequentialCommandGroup(
+                new CommandChangeScoreStage(ScoringStageVal.L4)
+            ));
+
+    
     
             
             put("Reset All", new ParallelCommandGroup(
-            
+                
             ));
     
         }
