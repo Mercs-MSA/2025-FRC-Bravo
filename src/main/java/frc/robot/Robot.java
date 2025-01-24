@@ -15,9 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.*;
+import frc.robot.LimelightHelpers.RawFiducial;
 import frc.robot.commands.CommandClimb;
-import frc.robot.commands.CommandElevatorToPos;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -158,6 +157,25 @@ public class Robot extends TimedRobot {
               Utils.fpgaToCurrentTime(mt_inUse.timestampSeconds));
         }
     }
+
+    RawFiducial closestTag = null;
+    if (mt_front != null) {
+      for (RawFiducial tag : mt_front.rawFiducials) {
+        if (closestTag == null) {
+          closestTag = tag;
+        } else if (tag.distToRobot < closestTag.distToRobot) {
+          closestTag = tag;
+        }
+      }
+    }
+    if (closestTag != null) {
+      if (Constants.DriveToPoseConstants.tagDestinationMap.containsKey(Integer.toString(closestTag.id))) {
+        Constants.DriveToPosRuntime.autoTargets = Constants.DriveToPoseConstants.tagDestinationMap.get(Integer.toString(closestTag.id));
+      }
+    }
+    SmartDashboard.putNumber("frontClosestTag", (closestTag != null ? closestTag.id : 0));
+    SmartDashboard.putString("possibleDestinationA", Constants.DriveToPosRuntime.autoTargets.get(0));
+    SmartDashboard.putString("possibleDestinationB", Constants.DriveToPosRuntime.autoTargets.get(1));
   }
 
 

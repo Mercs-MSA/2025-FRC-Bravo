@@ -20,7 +20,7 @@ public class Elevator1 extends SubsystemLib {
         public final double rotations = Elevator1Constants.positionUp;
 
         public TestSubsystemConfig() {
-            super("ELevatorMotor1", Elevator1Constants.id, "canivore");  //It is on rio, but make sure that you change the id
+            super("ELevatorMotor1", Elevator1Constants.id, "rio");  //It is on rio, but make sure that you change the id
             configPIDGains(velocityKp, 0, 0);
             configForwardGains(velocityKs, velocityKv, 0, 0);
             configGearRatio(1);

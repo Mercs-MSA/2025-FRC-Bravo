@@ -7,7 +7,9 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.numbers.N3;
 import frc.robot.commands.CommandToPos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Constants {
 
@@ -133,7 +135,7 @@ public class Constants {
         public static final double kS = 0; 
         public static final double kV = 0; 
 
-        public static final double posUp = 56; //needs to be tested
+        public static final double posUp = 57; //needs to be tested
         public static final double posDown = 0; //needs to be tested
         
     }
@@ -189,12 +191,11 @@ public class Constants {
             put("reefJ", new CommandToPos.Destination("reefJ", new Pose2d(5.009, 5.259, new Rotation2d(-2.094))));
             put("reefK", new CommandToPos.Destination("reefK", new Pose2d(3.981, 5.253, new Rotation2d(-1.047))));
             put("reefL", new CommandToPos.Destination("reefL", new Pose2d(3.692, 5.092, new Rotation2d(-1.047))));
+            put("Source", new CommandToPos.Destination("Source", new Pose2d(1.192, 7.016, new Rotation2d(-0.9598))));
+        }};
 
-
-
-
-
-
+        public static final HashMap<String, List<String>> tagDestinationMap = new HashMap<String, List<String>>() {{
+            put("18", List.of("reefA", "reefB"));
         }};
     }
 
@@ -208,6 +209,10 @@ public class Constants {
 
     public class DriveToPosRuntime {
         public static String target = null;
+        public static List<String> autoTargets = new ArrayList<String>(2) {{
+            add("");
+            add("");
+        }};
     }
     
 }

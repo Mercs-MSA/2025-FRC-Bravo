@@ -177,7 +177,11 @@ public class RobotContainer {
             )));
 
 
-            driver.rightTrigger(0.8).whileTrue(new CommandSetDriveToPos("reefB").andThen(new ParallelCommandGroup (
+            driver.leftTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)).andThen(new ParallelCommandGroup (
+                new CommandToPos(drivetrain),
+                new CommandElevatorToStage()
+                )));//keep
+            driver.rightTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
                 new CommandElevatorToStage()
                 )));//keep
