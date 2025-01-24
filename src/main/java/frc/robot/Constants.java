@@ -196,6 +196,11 @@ public class Constants {
 
         public static final HashMap<String, List<String>> tagDestinationMap = new HashMap<String, List<String>>() {{
             put("18", List.of("reefA", "reefB"));
+            put("17", List.of("reefC", "reefD"));
+            put("19", List.of("reefK", "reefL"));
+            put("21", List.of("reefH", "reefG"));
+            put("20", List.of("reefI", "reefJ"));
+            put("22", List.of("reefF", "reefE"));
         }};
     }
 
