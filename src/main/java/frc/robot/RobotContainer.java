@@ -207,12 +207,18 @@ public class RobotContainer {
                 new CommandToPos(drivetrain),
                 new CommandElevatorToStage(),
                 new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
-                )));//keep
+                )));
             driver.rightTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
-                new CommandElevatorToStage(),
-                new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
+                new CommandElevatorToStage()
                 )));//keep
+
+            driver.leftTrigger(0.8).onFalse(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
+
+            driver.rightTrigger(0.8).onFalse(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
+
+            driver.rightBumper().onTrue(new CommandElevatorToStage());
+
 
             // driver.leftTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
             //     new CommandToPos(drivetrain),

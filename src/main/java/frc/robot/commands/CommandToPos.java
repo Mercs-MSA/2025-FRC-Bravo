@@ -85,6 +85,10 @@ public class CommandToPos extends Command {
     }
     this.target = Constants.DriveToPoseConstants.positions.get(Constants.DriveToPosRuntime.target);
 
+    if (this.target == null) {
+      return;
+    }
+
     double targetX = target.destPose.getX();
     double targetY = target.destPose.getY();
     double targetTheta = target.destPose.getRotation().getRadians();
