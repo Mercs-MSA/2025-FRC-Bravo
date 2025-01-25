@@ -41,7 +41,7 @@ public class CommandFunnelPivot extends Command {
         // This is where you put a statment that will determine wether a boolean is true or false
         // This is checked after an execute loop and if the return comes out true the execute loop will stop and end will happen
         // In this example, it will just instantly come out as true and stop the command as soon as it's called.
-        return true;
+        return Constants.isWithinTol(pos, m_FunnelPivot.getPivotMotorPosition(), 1);
     }
 
 

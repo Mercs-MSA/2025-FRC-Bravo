@@ -17,6 +17,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -89,19 +90,36 @@ public class RobotContainer {
                 );
             
             put("L1", new SequentialCommandGroup(
-                new CommandChangeScoreStage(ScoringStageVal.L1)
+                new CommandChangeScoreStage(ScoringStageVal.L1),
+                new CommandElevatorToStage()
+
             ));
 
             put("L2", new SequentialCommandGroup(
-                new CommandChangeScoreStage(ScoringStageVal.L2)
+                new CommandChangeScoreStage(ScoringStageVal.L2),
+                new CommandElevatorToStage()
+
             ));
 
             put("L3", new SequentialCommandGroup(
-                new CommandChangeScoreStage(ScoringStageVal.L3)
+                new CommandChangeScoreStage(ScoringStageVal.L3),
+                new CommandElevatorToStage()
+
             ));
 
             put("L4", new SequentialCommandGroup(
-                new CommandChangeScoreStage(ScoringStageVal.L4)
+                new CommandChangeScoreStage(ScoringStageVal.L4),
+                new CommandElevatorToStage()
+            ));
+
+            put("ELEVIntakePos", new SequentialCommandGroup(
+                new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
+                new CommandElevatorToStage()
+            ));
+
+            put("MoveFunnel", new SequentialCommandGroup(
+                new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
+                new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp)
             ));
 
     
@@ -115,12 +133,14 @@ public class RobotContainer {
         
     };
     public RobotContainer() {
+        NamedCommands.registerCommands(autonomousCommands);
+
         autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
         SmartDashboard.putData("Auto Mode", autoChooser);
         configureBindings();
         driverControls();
         operatorControls();
-    }
+        }
 
     private void configureBindings() {
         // Note that X is defined as forward according to WPILib convention,
