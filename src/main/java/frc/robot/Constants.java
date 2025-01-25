@@ -16,10 +16,10 @@ public class Constants {
     public enum ScoringStageVal {
         INTAKEREADY(0, true, false, true),
         INTAKING(0, false, false, false),
-        L1(20, true, false, false),
-        L2(37, true, false, false),
-        L3(65, true, false, false),
-        L4(100, true, false, false),
+        L1(23, true, false, false),
+        L2(40, true, false, false),
+        L3(68, true, false, false),
+        L4(103, true, false, false),
         CLIMBING(0, false, true, false);
 
 
@@ -176,7 +176,7 @@ public class Constants {
 
     public static final class DriveToPoseConstants {
         public static final double angularDegreesTolerance = 0.3;
-        public static final double linearMetersTolerance = 0.025;
+        public static final double linearMetersTolerance = 0.2;
         public static final double linearMetersMaxVel = 2.0;
         public static final double linearMetersMaxAccel = 5.0;
         public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{

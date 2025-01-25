@@ -35,6 +35,7 @@ import frc.robot.subsystems.IntakeFlywheels;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.CANdle_LED;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -66,6 +67,8 @@ public class RobotContainer {
     public final IntakeBeambreak m_intakeBeamBreak = new IntakeBeambreak();
 
     public final FunnelPivot m_FunnelPivot = new FunnelPivot(true);
+
+    public final CANdle_LED m_leds = new CANdle_LED();
 
     private final SendableChooser<Command> autoChooser;
 
@@ -187,6 +190,9 @@ public class RobotContainer {
             driver.x().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
 
+            driver.back().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Larson));
+            driver.start().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
+
             driver.a().whileTrue(
                 new CommandSetDriveToPos("Source").andThen(
                 new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY)).andThen(
@@ -199,11 +205,13 @@ public class RobotContainer {
 
             driver.leftTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
-                new CommandElevatorToStage()
+                new CommandElevatorToStage(),
+                new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
                 )));//keep
             driver.rightTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
-                new CommandElevatorToStage()
+                new CommandElevatorToStage(),
+                new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
                 )));//keep
 
             // driver.leftTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
