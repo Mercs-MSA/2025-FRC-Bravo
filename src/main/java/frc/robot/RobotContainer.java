@@ -36,6 +36,7 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CANdle_LED;
+import frc.robot.commands.StaticCustomCommands;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -72,54 +73,85 @@ public class RobotContainer {
 
     private final SendableChooser<Command> autoChooser;
 
+    private Map<String, Command> m_map = Map.ofEntries(
+        Map.entry("Command 111", Commands.print("Command one was selected!")),
+        Map.entry("PathWithDriveToPos", Commands.sequence(StaticCustomCommands.setDriveToPos("ReefTest"),StaticCustomCommands.toPos(drivetrain))),
+        Map.entry("Intake Collect", StaticCustomCommands.intakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate)),
+        Map.entry("Score", StaticCustomCommands.intakeOut(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate)),
+        Map.entry("L1", Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L1),StaticCustomCommands.elevatorToStage())),
+        Map.entry("L2", Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L2),StaticCustomCommands.elevatorToStage())),
+        Map.entry("L3", Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L3),StaticCustomCommands.elevatorToStage())),
+        Map.entry("L4", Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L4),StaticCustomCommands.elevatorToStage())),
+        Map.entry("ELEVIntakePos", Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY),StaticCustomCommands.elevatorToStage())),
+        Map.entry("MoveFunnel", Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY),StaticCustomCommands.funnelPivot(Constants.FunnelPivotConstants.posUp))),
+        Map.entry("Brake", drivetrain.applyRequest(() -> brake)), //WHILETRUE
+        Map.entry("Thingy", drivetrain.applyRequest(() -> point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX())))), //WHILETRUE
+        Map.entry("THingy 2", drivetrain.sysIdDynamic(Direction.kForward)), //WHILETRUE
+        Map.entry("Thingy 3", drivetrain.sysIdDynamic(Direction.kReverse)), //WHILETRUE
+        Map.entry("Thingy 4", ),
+        Map.entry("Thingy 5", ),
+        Map.entry("Thingy 6", ),
+        Map.entry("Thingy 7", ),
+        Map.entry("Thingy 8", ),
+        Map.entry("Thingy 9", ),
+        Map.entry("Thingy 10", ),
+        Map.entry("Thingy 11", ),
+        Map.entry("Thingy 12", ),
+        Map.entry("Thingy 13", ),
+        Map.entry("Thingy 14", ),
+        Map.entry("Thingy 15", ),
+        Map.entry("Thingy 16", )
+        );
+
        Map<String, Command> autonomousCommands = new HashMap<String, Command>() {
         {
             
             // put("Enter Command Name", new Command(m_));
-
+            //DONE
             put("PathWithDriveToPos", new SequentialCommandGroup(
                 new CommandSetDriveToPos("ReefTest"),
                 new CommandToPos(drivetrain)
             ));
 
-
+            //DONE
             put("Intake Collect", 
                 new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate)
                 );
             
             /* Scoring */
+            //DONE
             put("Score", 
                 new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate)
                 );
-            
+            //DONE
             put("L1", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.L1),
                 new CommandElevatorToStage()
 
             ));
-
+            //DONE
             put("L2", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.L2),
                 new CommandElevatorToStage()
 
             ));
-
+            //DONE
             put("L3", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.L3),
                 new CommandElevatorToStage()
 
             ));
-
+            //DONE
             put("L4", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.L4),
                 new CommandElevatorToStage()
             ));
-
+            //DONE
             put("ELEVIntakePos", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
                 new CommandElevatorToStage()
             ));
-
+            //DONE
             put("MoveFunnel", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
                 new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp)
@@ -127,7 +159,7 @@ public class RobotContainer {
 
     
     
-            
+            //DONT NEED?
             put("Reset All", new ParallelCommandGroup(
                 
             ));

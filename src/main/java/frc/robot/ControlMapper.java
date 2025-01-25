@@ -21,6 +21,10 @@ public class ControlMapper {
     public String chooserTitle;
     
     public ControlMapper(Trigger buttonTrigger, String title, String pKey) {
+        self(buttonTrigger, title, pKey, true);
+    }
+
+    public ControlMapper(Trigger buttonTrigger, String title, String pKey, boolean isPress) {
         new CommandMap().getMap().forEach((key, value) -> {
             mappingChooser = key;
         });
@@ -28,7 +32,11 @@ public class ControlMapper {
         SmartDashboard.putString(title, mappingChooser);
         preferenceKey = pKey;
         chooserTitle = title;
-        buttonTrigger.onTrue(mappedCommand);
+        if (isPress) {
+            buttonTrigger.onTrue(mappedCommand);
+        } else {
+            buttonTrigger.whileTrue(mappedCommand);
+        }
     }
 
     public String getMappedCommandKey() {
