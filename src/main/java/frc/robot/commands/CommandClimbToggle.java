@@ -20,13 +20,13 @@ public class CommandClimbToggle extends Command {
         // This is where you put stuff that happens right at the start of the command
 
         if (Constants.ScoringConstants.ScoringStage.canClimb()){
-            if (Constants.isWithinTol(Constants.ClimberConstants.positionUp, m_Climber.GetPosition(), Constants.ClimberConstants.climberTol)){
+            if (Constants.isWithinTol(Constants.ClimberConstants.positionUp, m_Climber.GetPosition(), 3)){
                 m_Climber.climberGoToPosition(ClimberConstants.positionDown);
 
             }
 
             else {
-                m_Climber.climberGoToPosition(ClimberConstants.positionDown);
+                m_Climber.climberGoToPosition(ClimberConstants.positionUp);
 
             }
         }
