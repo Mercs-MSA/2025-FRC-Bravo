@@ -10,13 +10,14 @@ import frc.robot.commands.CommandMap;
 
 public class ControlMapper {
     // This is the dashboard widget with a dropdown to select a Command
-    private SendableChooser<String> mappingChooser = new SendableChooser<>();
+    private SendableChooser<String> mappingChooser = new SendableChooser<String>();
     private Command mappedCommand =
         new SelectCommand<>(
             new CommandMap().getMap(),
             this::getMappedCommandKey
         );
         public String preferenceKey;
+        public String chooserTitle;
         
         public ControlMapper(Trigger buttonTrigger, String title, String pKey) {
             new CommandMap().getMap().forEach((key, value) -> {
@@ -25,11 +26,17 @@ public class ControlMapper {
             
             SmartDashboard.putData(title, mappingChooser);
             preferenceKey = pKey;
+            chooserTitle = title;
             buttonTrigger.onTrue(mappedCommand);
         }
 
     public String getMappedCommandKey() {
         return mappingChooser.getSelected();
+    }
+
+    public void setMapperCommandKey(String input) {
+        //SmartDashboard.putData(chooserTitle, input);
+        mappingChooser.setDefaultOption(input, input);
     }
 
     public Command getCommand() {

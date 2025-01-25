@@ -35,15 +35,14 @@ public class Robot extends TimedRobot {
   private final ControlMapper driverMappedButtonX = new ControlMapper(driver.x(), "Driver Button X", "xButton");
   private final ControlMapper driverMappedButtonY = new ControlMapper(driver.y(), "Driver Button Y", "yButton");
 
-  // Need input field for text on elastic, treat like seeds/codes in a game where you enter the name of the person and get your presets
-
   private final RobotContainer m_robotContainer;
   private SendableChooser<String> savePref = new SendableChooser<>();
-  private SendableChooser<String> loadPref = new SendableChooser<>();
   private NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
   private NetworkTable controlMapTable = networkTableInstance.getTable("Control Map Table");
   private BooleanTopic saveTriggerTopic = controlMapTable.getBooleanTopic("SaveTrigger");
   private BooleanEntry saveTrigger = saveTriggerTopic.getEntry(false);
+  private BooleanTopic loadTriggerTopic = controlMapTable.getBooleanTopic("LoadTrigger");
+  private BooleanEntry loadTrigger = loadTriggerTopic.getEntry(false);
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -53,13 +52,9 @@ public class Robot extends TimedRobot {
     savePref.addOption("B", "B");
     savePref.addOption("C", "C");
     SmartDashboard.putData("Save Map Slot", savePref);
-    loadPref.addOption("Competition", "Competition");
-    loadPref.setDefaultOption("Testing", "Testing");
-    loadPref.addOption("A", "A");
-    loadPref.addOption("B", "B");
-    loadPref.addOption("C", "C");
-    SmartDashboard.putData("Load Map Slot", loadPref);
+
     saveTriggerTopic.publish();
+    loadTriggerTopic.publish();
   }
   
   @Override
@@ -130,6 +125,20 @@ public class Robot extends TimedRobot {
       Preferences.setString(savePref.getSelected() + driverMappedButtonA.preferenceKey, driverMappedButtonA.getMappedCommandKey());
       Preferences.setString(savePref.getSelected() + driverMappedButtonB.preferenceKey, driverMappedButtonB.getMappedCommandKey());
     }
+    if (loadTrigger.get() == true) {
+      loadTrigger.set(false);
+      String loadBController = Preferences.getString(savePref.getSelected() + driverMappedButtonB.preferenceKey, driverMappedButtonB.getMappedCommandKey());
+      String loadXController = Preferences.getString(savePref.getSelected() + driverMappedButtonX.preferenceKey, driverMappedButtonX.getMappedCommandKey());
+      String loadYController = Preferences.getString(savePref.getSelected() + driverMappedButtonY.preferenceKey, driverMappedButtonY.getMappedCommandKey());
+      String loadAController = Preferences.getString(savePref.getSelected() + driverMappedButtonA.preferenceKey, driverMappedButtonA.getMappedCommandKey());
+      driverMappedButtonX.setMapperCommandKey(loadXController);
+      driverMappedButtonA.setMapperCommandKey(loadAController);
+      driverMappedButtonY.setMapperCommandKey(loadYController);
+      driverMappedButtonB.setMapperCommandKey(loadBController);
+      System.out.println(loadXController);
+    }
+
+    driverMappedButtonX.getMappedCommandKey();
   }
 
 
