@@ -117,9 +117,9 @@ public class RobotContainer {
     public RobotContainer() {
         autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
         SmartDashboard.putData("Auto Mode", autoChooser);
-        configureBindings();
-        driverControls();
-        operatorControls();
+        // configureBindings();
+        // driverControls();
+        // operatorControls();
     }
 
     private void configureBindings() {

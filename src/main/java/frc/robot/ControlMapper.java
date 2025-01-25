@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -10,33 +11,33 @@ import frc.robot.commands.CommandMap;
 
 public class ControlMapper {
     // This is the dashboard widget with a dropdown to select a Command
-    private SendableChooser<String> mappingChooser = new SendableChooser<String>();
+    private String mappingChooser = new String();
     private Command mappedCommand =
         new SelectCommand<>(
             new CommandMap().getMap(),
             this::getMappedCommandKey
         );
-        public String preferenceKey;
-        public String chooserTitle;
+    public String preferenceKey;
+    public String chooserTitle;
+    
+    public ControlMapper(Trigger buttonTrigger, String title, String pKey) {
+        new CommandMap().getMap().forEach((key, value) -> {
+            mappingChooser = key;
+        });
         
-        public ControlMapper(Trigger buttonTrigger, String title, String pKey) {
-            new CommandMap().getMap().forEach((key, value) -> {
-                mappingChooser.setDefaultOption(key, key);
-            });
-            
-            SmartDashboard.putData(title, mappingChooser);
-            preferenceKey = pKey;
-            chooserTitle = title;
-            buttonTrigger.onTrue(mappedCommand);
-        }
+        SmartDashboard.putString(title, mappingChooser);
+        preferenceKey = pKey;
+        chooserTitle = title;
+        buttonTrigger.onTrue(mappedCommand);
+    }
 
     public String getMappedCommandKey() {
-        return mappingChooser.getSelected();
+        String output = SmartDashboard.getString(chooserTitle, "");
+        return output;
     }
 
     public void setMapperCommandKey(String input) {
-        //SmartDashboard.putData(chooserTitle, input);
-        mappingChooser.setDefaultOption(input, input);
+        SmartDashboard.putString(chooserTitle, input);
     }
 
     public Command getCommand() {

@@ -29,7 +29,7 @@ import frc.robot.Constants.*;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   
-  public final CommandXboxController driver = new CommandXboxController(2);
+  public final CommandXboxController driver = new CommandXboxController(0);
   private final ControlMapper driverMappedButtonA = new ControlMapper(driver.a(), "Driver Button A", "aButton");
   private final ControlMapper driverMappedButtonB = new ControlMapper(driver.b(), "Driver Button B", "bButton");
   private final ControlMapper driverMappedButtonX = new ControlMapper(driver.x(), "Driver Button X", "xButton");
@@ -125,6 +125,7 @@ public class Robot extends TimedRobot {
       Preferences.setString(savePref.getSelected() + driverMappedButtonA.preferenceKey, driverMappedButtonA.getMappedCommandKey());
       Preferences.setString(savePref.getSelected() + driverMappedButtonB.preferenceKey, driverMappedButtonB.getMappedCommandKey());
     }
+
     if (loadTrigger.get() == true) {
       loadTrigger.set(false);
       String loadBController = Preferences.getString(savePref.getSelected() + driverMappedButtonB.preferenceKey, driverMappedButtonB.getMappedCommandKey());
@@ -135,10 +136,9 @@ public class Robot extends TimedRobot {
       driverMappedButtonA.setMapperCommandKey(loadAController);
       driverMappedButtonY.setMapperCommandKey(loadYController);
       driverMappedButtonB.setMapperCommandKey(loadBController);
-      System.out.println(loadXController);
     }
 
-    driverMappedButtonX.getMappedCommandKey();
+    SmartDashboard.updateValues();
   }
 
 
