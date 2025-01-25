@@ -6,6 +6,15 @@ package frc.robot;
 
 import com.ctre.phoenix6.Utils;
 
+import edu.wpi.first.networktables.BooleanArrayEntry;
+import edu.wpi.first.networktables.BooleanArrayTopic;
+import edu.wpi.first.networktables.BooleanEntry;
+import edu.wpi.first.networktables.BooleanTopic;
+import edu.wpi.first.networktables.DoubleEntry;
+import edu.wpi.first.networktables.DoubleTopic;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -29,12 +38,30 @@ public class Robot extends TimedRobot {
   // Need input field for text on elastic, treat like seeds/codes in a game where you enter the name of the person and get your presets
 
   private final RobotContainer m_robotContainer;
-
+  private SendableChooser<String> savePref = new SendableChooser<>();
+  private SendableChooser<String> loadPref = new SendableChooser<>();
+  private NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
+  private NetworkTable controlMapTable = networkTableInstance.getTable("Control Map Table");
+  private BooleanTopic saveTriggerTopic = controlMapTable.getBooleanTopic("SaveTrigger");
+  private BooleanEntry saveTrigger = saveTriggerTopic.getEntry(false);
 
   public Robot() {
     m_robotContainer = new RobotContainer();
+    savePref.addOption("Competition", "Competition");
+    savePref.setDefaultOption("Testing", "Testing");
+    savePref.addOption("A", "A");
+    savePref.addOption("B", "B");
+    savePref.addOption("C", "C");
+    SmartDashboard.putData("Save Map Slot", savePref);
+    loadPref.addOption("Competition", "Competition");
+    loadPref.setDefaultOption("Testing", "Testing");
+    loadPref.addOption("A", "A");
+    loadPref.addOption("B", "B");
+    loadPref.addOption("C", "C");
+    SmartDashboard.putData("Load Map Slot", loadPref);
+    saveTriggerTopic.publish();
   }
-
+  
   @Override
   public void robotPeriodic() {
     // System.out.println(Constants.ScoringConstants.ScoringStage + " " + Constants.ScoringConstants.ScoringStage.getElevatorRotations());
@@ -90,6 +117,18 @@ public class Robot extends TimedRobot {
               mt_inUse.pose,
               Utils.fpgaToCurrentTime(mt_inUse.timestampSeconds));
         }
+    }
+
+    // In RobotPeriodic, I want you to make an if statement that checks the "saveTrigger" Network Tables value
+    if (saveTrigger.get() == true) {
+      // and if it's `true` update the boolean to false
+      saveTrigger.set(false);
+      // then read the current values of our four existing ControlMapper objects
+      // save them into Preferences using the "Save To Map Slot" KEY + the ControlMapper value
+      Preferences.setString(savePref.getSelected() + driverMappedButtonY.preferenceKey, driverMappedButtonY.getMappedCommandKey());
+      Preferences.setString(savePref.getSelected() + driverMappedButtonX.preferenceKey, driverMappedButtonX.getMappedCommandKey());
+      Preferences.setString(savePref.getSelected() + driverMappedButtonA.preferenceKey, driverMappedButtonA.getMappedCommandKey());
+      Preferences.setString(savePref.getSelected() + driverMappedButtonB.preferenceKey, driverMappedButtonB.getMappedCommandKey());
     }
   }
 

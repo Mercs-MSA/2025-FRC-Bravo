@@ -16,16 +16,17 @@ public class ControlMapper {
             new CommandMap().getMap(),
             this::getMappedCommandKey
         );
-
-    public ControlMapper(Trigger buttonTrigger, String title, String preferenceKey) {
-        new CommandMap().getMap().forEach((key, value) -> {
-            mappingChooser.setDefaultOption(key, key);
-        });
-
-        SmartDashboard.putData(title, mappingChooser);
-
-        buttonTrigger.onTrue(mappedCommand);
-    }
+        public String preferenceKey;
+        
+        public ControlMapper(Trigger buttonTrigger, String title, String pKey) {
+            new CommandMap().getMap().forEach((key, value) -> {
+                mappingChooser.setDefaultOption(key, key);
+            });
+            
+            SmartDashboard.putData(title, mappingChooser);
+            preferenceKey = pKey;
+            buttonTrigger.onTrue(mappedCommand);
+        }
 
     public String getMappedCommandKey() {
         return mappingChooser.getSelected();
