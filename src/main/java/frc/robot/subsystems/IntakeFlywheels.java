@@ -14,7 +14,7 @@ public class IntakeFlywheels extends SubsystemLib {
         public final double velocityKv = 0;
 
         public TestSubsystemConfig() {
-            super("FlywheelsMotor", IntakeFlywheelsConstants.id, "canivore");  //It is on rio, but make sure that you change the id
+            super("FlywheelsMotor", IntakeFlywheelsConstants.id, "rio");  //It is on rio, but make sure that you change the id
             configPIDGains(velocityKp, 0, 0);
             configForwardGains(velocityKs, velocityKv, 0, 0);
             configGearRatio(1);

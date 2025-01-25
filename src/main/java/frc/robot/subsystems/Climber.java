@@ -14,7 +14,7 @@ public class Climber extends SubsystemLib {
         
 
         public TestSubsystemConfig() {
-            super("IntakePivotMotor", ClimberConstants.id, "canivore");  //It is on rio, but make sure that you change the id
+            super("IntakePivotMotor", ClimberConstants.id, "rio");  //It is on rio, but make sure that you change the id
             configPIDGains(velocityKp, 0, 0);
             configForwardGains(velocityKs, velocityKv, 0, 0);
             configGearRatio(1);

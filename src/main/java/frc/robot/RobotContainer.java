@@ -17,6 +17,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -34,6 +35,7 @@ import frc.robot.subsystems.IntakeFlywheels;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.CANdle_LED;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -66,6 +68,8 @@ public class RobotContainer {
 
     public final FunnelPivot m_FunnelPivot = new FunnelPivot(true);
 
+    public final CANdle_LED m_leds = new CANdle_LED();
+
     private final SendableChooser<Command> autoChooser;
 
        Map<String, Command> autonomousCommands = new HashMap<String, Command>() {
@@ -89,19 +93,36 @@ public class RobotContainer {
                 );
             
             put("L1", new SequentialCommandGroup(
-                new CommandChangeScoreStage(ScoringStageVal.L1)
+                new CommandChangeScoreStage(ScoringStageVal.L1),
+                new CommandElevatorToStage()
+
             ));
 
             put("L2", new SequentialCommandGroup(
-                new CommandChangeScoreStage(ScoringStageVal.L2)
+                new CommandChangeScoreStage(ScoringStageVal.L2),
+                new CommandElevatorToStage()
+
             ));
 
             put("L3", new SequentialCommandGroup(
-                new CommandChangeScoreStage(ScoringStageVal.L3)
+                new CommandChangeScoreStage(ScoringStageVal.L3),
+                new CommandElevatorToStage()
+
             ));
 
             put("L4", new SequentialCommandGroup(
-                new CommandChangeScoreStage(ScoringStageVal.L4)
+                new CommandChangeScoreStage(ScoringStageVal.L4),
+                new CommandElevatorToStage()
+            ));
+
+            put("ELEVIntakePos", new SequentialCommandGroup(
+                new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
+                new CommandElevatorToStage()
+            ));
+
+            put("MoveFunnel", new SequentialCommandGroup(
+                new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
+                new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp)
             ));
 
     
@@ -115,12 +136,14 @@ public class RobotContainer {
         
     };
     public RobotContainer() {
+        NamedCommands.registerCommands(autonomousCommands);
+
         autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
         SmartDashboard.putData("Auto Mode", autoChooser);
-        // configureBindings();
-        // driverControls();
-        // operatorControls();
-    }
+        configureBindings();
+        driverControls();
+        operatorControls();
+        }
 
     private void configureBindings() {
         // Note that X is defined as forward according to WPILib convention,
@@ -167,6 +190,9 @@ public class RobotContainer {
             driver.x().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
 
+            driver.back().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Larson));
+            driver.start().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
+
             driver.a().whileTrue(
                 new CommandSetDriveToPos("Source").andThen(
                 new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY)).andThen(
@@ -177,9 +203,15 @@ public class RobotContainer {
             )));
 
 
-            driver.rightTrigger(0.8).whileTrue(new CommandSetDriveToPos("reefB").andThen(new ParallelCommandGroup (
+            driver.leftTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
-                new CommandElevatorToStage()
+                new CommandElevatorToStage(),
+                new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
+                )));//keep
+            driver.rightTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)).andThen(new ParallelCommandGroup (
+                new CommandToPos(drivetrain),
+                new CommandElevatorToStage(),
+                new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
                 )));//keep
 
             // driver.leftTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
