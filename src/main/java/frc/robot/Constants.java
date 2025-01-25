@@ -7,18 +7,21 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.numbers.N3;
 import frc.robot.commands.CommandToPos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Constants {
 
     public enum ScoringStageVal {
         INTAKEREADY(0, true, false, true),
         INTAKING(0, false, false, false),
-        L1(20, true, false, false),
-        L2(37, true, false, false),
-        L3(65, true, false, false),
-        L4(100, true, false, false),
+        L1(23, true, false, false),
+        L2(40, true, false, false),
+        L3(68, true, false, false),
+        L4(103, true, false, false),
         CLIMBING(0, false, true, false);
+
 
         private double elevatorRotations;
         private boolean canElev;
@@ -133,7 +136,7 @@ public class Constants {
         public static final double kS = 0; 
         public static final double kV = 0; 
 
-        public static final double posUp = 56; //needs to be tested
+        public static final double posUp = 57; //needs to be tested
         public static final double posDown = 0; //needs to be tested
         
     }
@@ -173,7 +176,7 @@ public class Constants {
 
     public static final class DriveToPoseConstants {
         public static final double angularDegreesTolerance = 0.3;
-        public static final double linearMetersTolerance = 0.025;
+        public static final double linearMetersTolerance = 0.2;
         public static final double linearMetersMaxVel = 2.0;
         public static final double linearMetersMaxAccel = 5.0;
         public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{
@@ -189,12 +192,16 @@ public class Constants {
             put("reefJ", new CommandToPos.Destination("reefJ", new Pose2d(5.009, 5.259, new Rotation2d(-2.094))));
             put("reefK", new CommandToPos.Destination("reefK", new Pose2d(3.981, 5.253, new Rotation2d(-1.047))));
             put("reefL", new CommandToPos.Destination("reefL", new Pose2d(3.692, 5.092, new Rotation2d(-1.047))));
+            put("Source", new CommandToPos.Destination("Source", new Pose2d(1.00, 7.2, new Rotation2d(-1.13))));
+        }};
 
-
-
-
-
-
+        public static final HashMap<String, List<String>> tagDestinationMap = new HashMap<String, List<String>>() {{
+            put("18", List.of("reefA", "reefB"));
+            put("17", List.of("reefC", "reefD"));
+            put("19", List.of("reefK", "reefL"));
+            put("21", List.of("reefH", "reefG"));
+            put("20", List.of("reefI", "reefJ"));
+            put("22", List.of("reefF", "reefE"));
         }};
     }
 
@@ -208,6 +215,10 @@ public class Constants {
 
     public class DriveToPosRuntime {
         public static String target = null;
+        public static List<String> autoTargets = new ArrayList<String>(2) {{
+            add("");
+            add("");
+        }};
     }
     
 }

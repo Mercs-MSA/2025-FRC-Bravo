@@ -7,79 +7,79 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BQP-Preload"
+            "pathName": "FieldTestPreload"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 0.25
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "BQP-humanPickup1"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BQP-pickupScore1"
+            "name": "Score"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 0.2
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "BQP-humanPickup2"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BQP-pickupScore2"
+            "name": "ELEVIntakePos"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 0.2
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BQP-humanPickup3"
+            "pathName": "FieldTestPickup"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Collect"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "FieldTestL3"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 0.25
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "BQP-finalScore"
+            "name": "Score"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.2
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ELEVIntakePos"
           }
         }
       ]
