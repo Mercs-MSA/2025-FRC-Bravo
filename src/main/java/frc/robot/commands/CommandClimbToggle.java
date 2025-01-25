@@ -5,7 +5,6 @@ import frc.robot.subsystems.Climber;
 import frc.robot.Constants;
 import frc.robot.Constants.ClimberConstants;
 import frc.robot.Constants.Elevator1Constants;
-import frc.robot.Constants;
 
 public class CommandClimbToggle extends Command {
     private Climber m_Climber = new Climber(Elevator1Constants.attached);

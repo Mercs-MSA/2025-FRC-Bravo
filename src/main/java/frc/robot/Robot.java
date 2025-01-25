@@ -146,18 +146,18 @@ public class Robot extends TimedRobot {
       saveTrigger.set(false);
       // then read the current values of our four existing ControlMapper objects
       // save them into Preferences using the "Save To Map Slot" KEY + the ControlMapper value
-      Preferences.setString(savePref.getSelected() + driverMappedButtonY.preferenceKey, driverMappedButtonY.getMappedCommandKey());
-      Preferences.setString(savePref.getSelected() + driverMappedButtonX.preferenceKey, driverMappedButtonX.getMappedCommandKey());
-      Preferences.setString(savePref.getSelected() + driverMappedButtonA.preferenceKey, driverMappedButtonA.getMappedCommandKey());
-      Preferences.setString(savePref.getSelected() + driverMappedButtonB.preferenceKey, driverMappedButtonB.getMappedCommandKey());
+      Preferences.setString(savePref.getSelected() + driverMappedButtonY.getPreferenceKey(), driverMappedButtonY.getMappedCommandKey());
+      Preferences.setString(savePref.getSelected() + driverMappedButtonX.getPreferenceKey(), driverMappedButtonX.getMappedCommandKey());
+      Preferences.setString(savePref.getSelected() + driverMappedButtonA.getPreferenceKey(), driverMappedButtonA.getMappedCommandKey());
+      Preferences.setString(savePref.getSelected() + driverMappedButtonB.getPreferenceKey(), driverMappedButtonB.getMappedCommandKey());
     }
 
     if (loadTrigger.get() == true) {
       loadTrigger.set(false);
-      String loadBController = Preferences.getString(savePref.getSelected() + driverMappedButtonB.preferenceKey, driverMappedButtonB.getMappedCommandKey());
-      String loadXController = Preferences.getString(savePref.getSelected() + driverMappedButtonX.preferenceKey, driverMappedButtonX.getMappedCommandKey());
-      String loadYController = Preferences.getString(savePref.getSelected() + driverMappedButtonY.preferenceKey, driverMappedButtonY.getMappedCommandKey());
-      String loadAController = Preferences.getString(savePref.getSelected() + driverMappedButtonA.preferenceKey, driverMappedButtonA.getMappedCommandKey());
+      String loadBController = Preferences.getString(savePref.getSelected() + driverMappedButtonB.getPreferenceKey(), driverMappedButtonB.getMappedCommandKey());
+      String loadXController = Preferences.getString(savePref.getSelected() + driverMappedButtonX.getPreferenceKey(), driverMappedButtonX.getMappedCommandKey());
+      String loadYController = Preferences.getString(savePref.getSelected() + driverMappedButtonY.getPreferenceKey(), driverMappedButtonY.getMappedCommandKey());
+      String loadAController = Preferences.getString(savePref.getSelected() + driverMappedButtonA.getPreferenceKey(), driverMappedButtonA.getMappedCommandKey());
       driverMappedButtonX.setMapperCommandKey(loadXController);
       driverMappedButtonA.setMapperCommandKey(loadAController);
       driverMappedButtonY.setMapperCommandKey(loadYController);

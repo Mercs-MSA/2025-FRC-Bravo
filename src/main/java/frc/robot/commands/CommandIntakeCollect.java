@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeFlywheels;
 import frc.robot.subsystems.IntakeBeambreak;
-import frc.robot.Constants;
 import frc.robot.Constants.ScoringConstants;
 import frc.robot.Constants.ScoringStageVal;
 
