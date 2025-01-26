@@ -47,17 +47,6 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "MoveFunnel",
-      "waypointRelativePos": 0.127686357973422,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "MoveFunnel"
-        }
-      }
-    },
-    {
       "name": "L4",
       "waypointRelativePos": 0.8539909149902635,
       "endWaypointRelativePos": null,
@@ -70,8 +59,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 6.0,
-    "maxAcceleration": 3.5,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -87,5 +76,5 @@
     "velocity": 0.25,
     "rotation": 180.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
