@@ -5,7 +5,7 @@ import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.numbers.N3;
-import frc.robot.commands.CommandToPos;
+import frc.robot.commands.DriveToPosCommands.CommandToPos;
 
 import java.util.ArrayList;
 import java.util.HashMap;
