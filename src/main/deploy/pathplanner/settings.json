@@ -2,8 +2,18 @@
   "robotWidth": 0.9,
   "robotLength": 0.9,
   "holonomicMode": true,
-  "pathFolders": [],
-  "autoFolders": [],
+  "pathFolders": [
+    "AQP",
+    "BMQP",
+    "BQP",
+    "MJ",
+    "CONFIG",
+    "SC"
+  ],
+  "autoFolders": [
+    "Competition Autos",
+    "Untested"
+  ],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 2.0,
   "defaultMaxAngVel": 540.0,

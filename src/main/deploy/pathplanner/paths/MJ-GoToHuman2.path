@@ -61,7 +61,7 @@
     "rotation": -53.5
   },
   "reversed": false,
-  "folder": null,
+  "folder": "MJ",
   "idealStartingState": {
     "velocity": 0.5,
     "rotation": 119.99999999999999
