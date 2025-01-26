@@ -26,16 +26,28 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.*;
+import frc.robot.commands.CANdleCommands.CommandCandleSetAnimation;
+import frc.robot.commands.ClimberCommands.CommandClimbToggle;
+import frc.robot.commands.DriveToPosCommands.CommandLoadDriveToPos;
+import frc.robot.commands.DriveToPosCommands.CommandSetDriveToPos;
+import frc.robot.commands.DriveToPosCommands.CommandToPos;
+import frc.robot.commands.ElevatorCommands.CommandElevatorToStage;
+import frc.robot.commands.FunnelCommands.CommandFunnelPivotToPos;
+import frc.robot.commands.FunnelCommands.CommandFunnelToggle;
+import frc.robot.commands.IntakeCommands.CommandIntakeCollect;
+import frc.robot.commands.IntakeCommands.CommandIntakeOut;
+import frc.robot.commands.ScoringModeCommands.CommandChangeScoreStage;
+import frc.robot.commands.VisionCommands.SeedToMegaTag;
 import frc.robot.Constants.ScoringStageVal;
-import frc.robot.subsystems.Elevator1;
-import frc.robot.subsystems.Elevator2;
-import frc.robot.subsystems.FunnelPivot;
-import frc.robot.subsystems.IntakeBeambreak;
-import frc.robot.subsystems.IntakeFlywheels;
+import frc.robot.subsystems.Mechanisms.Climber.Climber;
+import frc.robot.subsystems.Mechanisms.Elevator.Elevator1;
+import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
+import frc.robot.subsystems.Mechanisms.Funnel.FunnelPivot;
+import frc.robot.subsystems.Mechanisms.Intake.IntakeFlywheels;
+import frc.robot.subsystems.SensorSubsystems.CANdle_LED;
+import frc.robot.subsystems.SensorSubsystems.IntakeBeambreak;
+import frc.robot.subsystems.Swerve.CommandSwerveDrivetrain;
 import frc.robot.generated.TunerConstants;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.CANdle_LED;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -122,7 +134,7 @@ public class RobotContainer {
 
             put("MoveFunnel", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-                new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp)
+                new CommandFunnelPivotToPos(Constants.FunnelPivotConstants.posUp)
             ));
 
     
