@@ -2,9 +2,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ScoringStageVal;
+import frc.robot.subsystems.CANdle_LED;
+import frc.robot.subsystems.CANdle_LED.AnimationTypes;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.IntakeBeambreak;
 import frc.robot.subsystems.IntakeFlywheels;
+import frc.robot.Constants;
 
 public class StaticCustomCommands {
     public static Command intakeCollect(IntakeFlywheels m_intakeFlywheels, IntakeBeambreak m_beambreak, double voltage) {
@@ -53,5 +56,13 @@ public class StaticCustomCommands {
 
     public static Command seedToMegaTag(CommandSwerveDrivetrain swerve, String limelightName) {
         return new SeedToMegaTag(swerve, limelightName);
+    }
+
+    public static Command candleSetAnimation(CANdle_LED candle, AnimationTypes anim) {
+        return new CommandCandleSetAnimation(candle, anim);
+    }
+
+    public static Command loadDriveToPos (int index) {
+        return new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(index));
     }
 }
