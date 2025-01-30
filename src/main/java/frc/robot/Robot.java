@@ -31,14 +31,14 @@ import frc.robot.commands.CommandClimb;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   
-  public final CommandXboxController driver = new CommandXboxController(0);
-  private final ControlMapper driverMappedButtonA = new ControlMapper(driver.a(), "Driver Button A", "aButton");
-  private final ControlMapper driverMappedButtonB = new ControlMapper(driver.b(), "Driver Button B", "bButton");
-  private final ControlMapper driverMappedButtonX = new ControlMapper(driver.x(), "Driver Button X", "xButton");
-  private final ControlMapper driverMappedButtonY = new ControlMapper(driver.y(), "Driver Button Y", "yButton");
+  // public final CommandXboxController driver = new CommandXboxController(0);
+  // private final ControlMapper driverMappedButtonA = new ControlMapper(driver.a(), "Driver Button A", "aButton");
+  // private final ControlMapper driverMappedButtonB = new ControlMapper(driver.b(), "Driver Button B", "bButton");
+  // private final ControlMapper driverMappedButtonX = new ControlMapper(driver.x(), "Driver Button X", "xButton");
+  // private final ControlMapper driverMappedButtonY = new ControlMapper(driver.y(), "Driver Button Y", "yButton");
 
   private final RobotContainer m_robotContainer;
-  private SendableChooser<String> savePref = new SendableChooser<>();
+  public SendableChooser<String> savePref = new SendableChooser<>();
   private NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
   private NetworkTable controlMapTable = networkTableInstance.getTable("Control Map Table");
   private BooleanTopic saveTriggerTopic = controlMapTable.getBooleanTopic("SaveTrigger");
@@ -144,24 +144,22 @@ public class Robot extends TimedRobot {
     if (saveTrigger.get() == true) {
       // and if it's `true` update the boolean to false
       saveTrigger.set(false);
+      m_robotContainer.savePreference(savePref);
       // then read the current values of our four existing ControlMapper objects
       // save them into Preferences using the "Save To Map Slot" KEY + the ControlMapper value
-      Preferences.setString(savePref.getSelected() + driverMappedButtonY.getPreferenceKey(), driverMappedButtonY.getMappedCommandKey());
-      Preferences.setString(savePref.getSelected() + driverMappedButtonX.getPreferenceKey(), driverMappedButtonX.getMappedCommandKey());
-      Preferences.setString(savePref.getSelected() + driverMappedButtonA.getPreferenceKey(), driverMappedButtonA.getMappedCommandKey());
-      Preferences.setString(savePref.getSelected() + driverMappedButtonB.getPreferenceKey(), driverMappedButtonB.getMappedCommandKey());
-    }
+      }
 
     if (loadTrigger.get() == true) {
       loadTrigger.set(false);
-      String loadBController = Preferences.getString(savePref.getSelected() + driverMappedButtonB.getPreferenceKey(), driverMappedButtonB.getMappedCommandKey());
-      String loadXController = Preferences.getString(savePref.getSelected() + driverMappedButtonX.getPreferenceKey(), driverMappedButtonX.getMappedCommandKey());
-      String loadYController = Preferences.getString(savePref.getSelected() + driverMappedButtonY.getPreferenceKey(), driverMappedButtonY.getMappedCommandKey());
-      String loadAController = Preferences.getString(savePref.getSelected() + driverMappedButtonA.getPreferenceKey(), driverMappedButtonA.getMappedCommandKey());
-      driverMappedButtonX.setMapperCommandKey(loadXController);
-      driverMappedButtonA.setMapperCommandKey(loadAController);
-      driverMappedButtonY.setMapperCommandKey(loadYController);
-      driverMappedButtonB.setMapperCommandKey(loadBController);
+      m_robotContainer.loadPreference(savePref);
+      // String loadBController = Preferences.getString(savePref.getSelected() + driverMappedButtonB.getPreferenceKey(), driverMappedButtonB.getMappedCommandKey());
+      // String loadXController = Preferences.getString(savePref.getSelected() + driverMappedButtonX.getPreferenceKey(), driverMappedButtonX.getMappedCommandKey());
+      // String loadYController = Preferences.getString(savePref.getSelected() + driverMappedButtonY.getPreferenceKey(), driverMappedButtonY.getMappedCommandKey());
+      // String loadAController = Preferences.getString(savePref.getSelected() + driverMappedButtonA.getPreferenceKey(), driverMappedButtonA.getMappedCommandKey());
+      // driverMappedButtonX.setMapperCommandKey(loadXController);
+      // driverMappedButtonA.setMapperCommandKey(loadAController);
+      // driverMappedButtonY.setMapperCommandKey(loadYController);
+      // driverMappedButtonB.setMapperCommandKey(loadBController);
     }
 
     SmartDashboard.updateValues();
