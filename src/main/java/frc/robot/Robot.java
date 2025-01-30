@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.ctre.phoenix6.Utils;
 
 import edu.wpi.first.util.sendable.Sendable;
@@ -32,6 +36,9 @@ public class Robot extends TimedRobot {
   private final RobotContainer m_robotContainer;
 
   public final XboxController testJoystick = new XboxController(2);
+
+  private List<Integer> validIDs = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22));
+
 
 
 
@@ -121,6 +128,9 @@ public class Robot extends TimedRobot {
     LimelightHelpers.PoseEstimate mt_front = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limelightFrontName);
     LimelightHelpers.PoseEstimate mt_back = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limelightBackName);
 
+    //Update Valid IDs
+    LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs.stream().mapToInt(Integer::intValue).toArray());
+
     SmartDashboard.putBoolean("FrontLimelightOnlineStatus", mt_front != null);
     SmartDashboard.putBoolean("BackLimelightOnlineStatus", mt_back != null);
 
@@ -163,6 +173,22 @@ public class Robot extends TimedRobot {
               Utils.fpgaToCurrentTime(mt_inUse.timestampSeconds));
         }
     }
+    if (Constants.DriveToPosRuntime.target == "Source") {
+      if (validIDs.contains(18)) {
+        validIDs.remove(Integer.valueOf(18));
+      }
+      
+      if (validIDs.contains(7)) {
+        validIDs.remove(Integer.valueOf(7));
+      }
+    } else {
+      if (!validIDs.contains(18)) {
+        validIDs.add(18);
+      }
+      if (!validIDs.contains(7)) {
+        validIDs.add(7);
+      }
+    }
 
     RawFiducial closestTag = null;
     if (mt_front != null) {
@@ -182,6 +208,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("frontClosestTag", (closestTag != null ? closestTag.id : 0));
     SmartDashboard.putString("possibleDestinationA", Constants.DriveToPosRuntime.autoTargets.get(0));
     SmartDashboard.putString("possibleDestinationB", Constants.DriveToPosRuntime.autoTargets.get(1));
+    SmartDashboard.putNumberArray("Valid IDs", validIDs.stream().mapToDouble(Integer::intValue).toArray());
+
   }
 
 
