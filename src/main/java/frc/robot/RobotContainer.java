@@ -103,65 +103,65 @@ public class RobotContainer {
     private final SendableChooser<Command> autoChooser;
 
     private Map<String, Command> commandMap = Map.ofEntries(
-            Map.entry("Command 111", Commands.print("Command one was selected!")),
-            Map.entry("PathWithDriveToPos",
-                Commands.sequence(StaticCustomCommands.setDriveToPos("ReefTest"),
-                StaticCustomCommands.toPos(drivetrain))),
-            Map.entry("Intake Collect",
-                StaticCustomCommands.intakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate)),
-            Map.entry("Score", StaticCustomCommands.intakeOut(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate)),
-            Map.entry("L1",
-                Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L1),
-                StaticCustomCommands.elevatorToStage())),
-            Map.entry("L2",
-                Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L2),
-                StaticCustomCommands.elevatorToStage())),
-            Map.entry("L3",
-                Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L3),
-                StaticCustomCommands.elevatorToStage())),
-            Map.entry("L4",
-                Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L4),
-                StaticCustomCommands.elevatorToStage())),
-            Map.entry("ELEVIntakePos",
-                Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY),
-                StaticCustomCommands.elevatorToStage())),
-            Map.entry("MoveFunnel",
-                Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY),
-                StaticCustomCommands.funnelPivot(Constants.FunnelPivotConstants.posUp))),
-            Map.entry("Brake", drivetrain.applyRequest(() -> brake)), // WHILETRUE
-            Map.entry("Move Turn",
-                drivetrain.applyRequest(
-                () -> point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX())))), // WHILETRUE
-            Map.entry("Move Forward", drivetrain.sysIdDynamic(Direction.kForward)), // WHILETRUE
-            Map.entry("Move Backward", drivetrain.sysIdDynamic(Direction.kReverse)), // WHILETRUE
-            Map.entry("Intake Reverse", StaticCustomCommands.intakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5)),
-            Map.entry("Set Field Centric?", drivetrain.runOnce(() -> drivetrain.seedFieldCentric())),
-            Map.entry("Drive To Source", StaticCustomCommands.setDriveToPos("Source")
-                .andThen(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY)).andThen(
-                Commands.parallel(StaticCustomCommands.toPos(drivetrain),
-                StaticCustomCommands.elevatorToStage(),
-                StaticCustomCommands.intakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1)))), // WHILETRUE
-            Map.entry("Score L1", StaticCustomCommands.changeScoreStage(ScoringStageVal.L1)),
-            Map.entry("Score L2", StaticCustomCommands.changeScoreStage(ScoringStageVal.L2)),
-            Map.entry("Score L3", StaticCustomCommands.changeScoreStage(ScoringStageVal.L3)),
-            Map.entry("Score L4", StaticCustomCommands.changeScoreStage(ScoringStageVal.L4)),
-            Map.entry("Score Climb", StaticCustomCommands.changeScoreStage(ScoringStageVal.CLIMBING)),
-            Map.entry("Score Intake",
-            Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY),
-                StaticCustomCommands.elevatorToStage())),
-            Map.entry("Toggle Climb", StaticCustomCommands.climbToggle()),
-            Map.entry("Toggle Funnel", StaticCustomCommands.funnelToggle()),
-            Map.entry("Intake Collect", StaticCustomCommands.intakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 8)),
-            Map.entry("Limelight Action?",
-                StaticCustomCommands.seedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName)),
-            Map.entry("Drive Position 1", StaticCustomCommands.loadDriveToPos(0).andThen(Commands.parallel(
-                StaticCustomCommands.toPos(drivetrain), StaticCustomCommands.elevatorToStage(),
-                StaticCustomCommands.candleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)))), // WHILETRUE
-            Map.entry("Drive Position 2", StaticCustomCommands.loadDriveToPos(1).andThen(Commands.parallel(
-                StaticCustomCommands.toPos(drivetrain), StaticCustomCommands.elevatorToStage(),
-                StaticCustomCommands.candleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)))), // WHILETRUE
-            Map.entry("Candle Larson", StaticCustomCommands.candleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Larson)),
-            Map.entry("Candle Twinkle", StaticCustomCommands.candleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle)));
+            // Map.entry("Command 111", Commands.print("Command one was selected!")),
+            // Map.entry("PathWithDriveToPos",
+            //     Commands.sequence(StaticCustomCommands.setDriveToPos("ReefTest"),
+            //     StaticCustomCommands.toPos(drivetrain))),
+            Map.entry("Intake Collect", StaticCustomCommands.intakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate))
+            //Map.entry("Intake Collect", StaticCustomCommands.intakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 8)),
+            // Map.entry("Score", StaticCustomCommands.intakeOut(m_IntakeFlywheels, m_intakeBeamBreak, MaxAngularRate)),
+            // Map.entry("L1",
+            //     Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L1),
+            //     StaticCustomCommands.elevatorToStage())),
+            // Map.entry("L2",
+            //     Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L2),
+            //     StaticCustomCommands.elevatorToStage())),
+            // Map.entry("L3",
+            //     Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L3),
+            //     StaticCustomCommands.elevatorToStage())),
+            // Map.entry("L4",
+            //     Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.L4),
+            //     StaticCustomCommands.elevatorToStage())),
+            // Map.entry("ELEVIntakePos",
+            //     Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY),
+            //     StaticCustomCommands.elevatorToStage())),
+            // Map.entry("MoveFunnel",
+            //     Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY),
+            //     StaticCustomCommands.funnelPivot(Constants.FunnelPivotConstants.posUp))),
+            // Map.entry("Brake", drivetrain.applyRequest(() -> brake)), // WHILETRUE
+            // Map.entry("Move Turn",
+            //     drivetrain.applyRequest(
+            //     () -> point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX())))), // WHILETRUE
+            // Map.entry("Move Forward", drivetrain.sysIdDynamic(Direction.kForward)), // WHILETRUE
+            // Map.entry("Move Backward", drivetrain.sysIdDynamic(Direction.kReverse)), // WHILETRUE
+            // Map.entry("Intake Reverse", StaticCustomCommands.intakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5)),
+            // Map.entry("Set Field Centric?", drivetrain.runOnce(() -> drivetrain.seedFieldCentric())),
+            // Map.entry("Drive To Source", StaticCustomCommands.setDriveToPos("Source")
+            //     .andThen(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY)).andThen(
+            //     Commands.parallel(StaticCustomCommands.toPos(drivetrain),
+            //     StaticCustomCommands.elevatorToStage(),
+            //     StaticCustomCommands.intakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1)))), // WHILETRUE
+            // Map.entry("Score L1", StaticCustomCommands.changeScoreStage(ScoringStageVal.L1)),
+            // Map.entry("Score L2", StaticCustomCommands.changeScoreStage(ScoringStageVal.L2)),
+            // Map.entry("Score L3", StaticCustomCommands.changeScoreStage(ScoringStageVal.L3)),
+            // Map.entry("Score L4", StaticCustomCommands.changeScoreStage(ScoringStageVal.L4)),
+            // Map.entry("Score Climb", StaticCustomCommands.changeScoreStage(ScoringStageVal.CLIMBING)),
+            // Map.entry("Score Intake",
+            // Commands.sequence(StaticCustomCommands.changeScoreStage(ScoringStageVal.INTAKEREADY),
+            //     StaticCustomCommands.elevatorToStage())),
+            // Map.entry("Toggle Climb", StaticCustomCommands.climbToggle()),
+            // Map.entry("Toggle Funnel", StaticCustomCommands.funnelToggle()),
+            // Map.entry("Limelight Action?",
+            //     StaticCustomCommands.seedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName)),
+            // Map.entry("Drive Position 1", StaticCustomCommands.loadDriveToPos(0).andThen(Commands.parallel(
+            //     StaticCustomCommands.toPos(drivetrain), StaticCustomCommands.elevatorToStage(),
+            //     StaticCustomCommands.candleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)))), // WHILETRUE
+            // Map.entry("Drive Position 2", StaticCustomCommands.loadDriveToPos(1).andThen(Commands.parallel(
+            //     StaticCustomCommands.toPos(drivetrain), StaticCustomCommands.elevatorToStage(),
+            //     StaticCustomCommands.candleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)))), // WHILETRUE
+            // Map.entry("Candle Larson", StaticCustomCommands.candleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Larson)),
+            // Map.entry("Candle Twinkle", StaticCustomCommands.candleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle))
+        );
 
     public RobotContainer() {
         // TODO if for some reason the pKeys are acting weird, check if you need to differenciate between driver and operator
