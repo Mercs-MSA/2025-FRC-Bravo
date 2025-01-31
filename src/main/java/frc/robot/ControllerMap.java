@@ -7,16 +7,16 @@ import frc.robot.commands.CommandMap;
 public class ControllerMap {
     CommandMap commandMap;
     CommandXboxController controller;
-    String name;
+    String controllerName;
 
-    public ControllerMap(CommandMap commandMap, CommandXboxController controller, String name) {
+    public ControllerMap(CommandMap commandMap, CommandXboxController controller, String controllerName) {
         this.commandMap = commandMap;
         this.controller = controller;
-        this.name = name;
+        this.controllerName = controllerName;
     }
 
     private ButtonMap getButtonMap(Trigger trigger, String button) {
-        String title = String.join(" ", name, button);
+        String title = String.join(" ", controllerName, button);
 
         return new ButtonMap(
             commandMap.getMap(), 
