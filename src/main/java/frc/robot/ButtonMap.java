@@ -7,17 +7,17 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-public class ControlMapper {
+public class ButtonMap {
     private Command mappedCommand;
     private String widgetString;
     private String preferenceKey;
     private String widgetTitle;
     
-    public ControlMapper(Map<String, Command> map, Trigger buttonTrigger, String title, String pKey) {
+    public ButtonMap(Map<String, Command> map, Trigger buttonTrigger, String title, String pKey) {
         this(map, buttonTrigger, title, pKey, true);
     }
 
-    public ControlMapper(Map<String, Command> map, Trigger buttonTrigger, String title, String pKey, boolean isPress) {
+    public ButtonMap(Map<String, Command> map, Trigger buttonTrigger, String title, String pKey, boolean isPress) {
         mappedCommand = new SelectCommand<>(map, this::getMappedCommandKey);
         preferenceKey = pKey;
         widgetTitle = title;

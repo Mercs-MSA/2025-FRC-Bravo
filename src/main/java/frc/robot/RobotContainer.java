@@ -38,39 +38,39 @@ public class RobotContainer {
     private final CommandXboxController driver = new CommandXboxController(0);
     private final CommandXboxController operator = new CommandXboxController(1);
 
-    private ControlMapper driverMappedButtonA;
-    private ControlMapper driverMappedButtonB;
-    private ControlMapper driverMappedButtonX;
-    private ControlMapper driverMappedButtonY;
-    private ControlMapper driverMappedButtonRightBumper;
-    private ControlMapper driverMappedButtonLeftBumper;
-    private ControlMapper driverMappedButtonStart;
-    private ControlMapper driverMappedButtonBack;
-    private ControlMapper driverMappedButtonLeftTrigger;
-    private ControlMapper driverMappedButtonRightTrigger;
-    private ControlMapper driverMappedButtonDpadUp;
-    private ControlMapper driverMappedButtonDpadDown;
-    private ControlMapper driverMappedButtonDpadLeft;
-    private ControlMapper driverMappedButtonDpadRight;
-    private ControlMapper driverMappedButtonLeftStickPress;
-    private ControlMapper driverMappedButtonRightStickPress;
+    private ButtonMap driverA;
+    private ButtonMap driverB;
+    private ButtonMap driverX;
+    private ButtonMap driverY;
+    private ButtonMap driverRightBumper;
+    private ButtonMap driverLeftBumper;
+    private ButtonMap driverStart;
+    private ButtonMap driverBack;
+    private ButtonMap driverLeftTrigger;
+    private ButtonMap driverRightTrigger;
+    private ButtonMap driverDpadUp;
+    private ButtonMap driverDpadDown;
+    private ButtonMap driverDpadLeft;
+    private ButtonMap driverDpadRight;
+    private ButtonMap driverLeftStickPress;
+    private ButtonMap driverRightStickPress;
 
-    private ControlMapper operatorMappedButtonA;
-    private ControlMapper operatorMappedButtonB;
-    private ControlMapper operatorMappedButtonX;
-    private ControlMapper operatorMappedButtonY;
-    private ControlMapper operatorMappedButtonRightBumper;
-    private ControlMapper operatorMappedButtonLeftBumper;
-    private ControlMapper operatorMappedButtonStart;
-    private ControlMapper operatorMappedButtonBack;
-    private ControlMapper operatorMappedButtonLeftTrigger;
-    private ControlMapper operatorMappedButtonRightTrigger;
-    private ControlMapper operatorMappedButtonDpadUp;
-    private ControlMapper operatorMappedButtonDpadDown;
-    private ControlMapper operatorMappedButtonDpadLeft;
-    private ControlMapper operatorMappedButtonDpadRight;
-    private ControlMapper operatorMappedButtonLeftStickPress;
-    private ControlMapper operatorMappedButtonRightStickPress;
+    private ButtonMap operatorA;
+    private ButtonMap operatorB;
+    private ButtonMap operatorX;
+    private ButtonMap operatorY;
+    private ButtonMap operatorRightBumper;
+    private ButtonMap operatorLeftBumper;
+    private ButtonMap operatorStart;
+    private ButtonMap operatorBack;
+    private ButtonMap operatorLeftTrigger;
+    private ButtonMap operatorRightTrigger;
+    private ButtonMap operatorDpadUp;
+    private ButtonMap operatorDpadDown;
+    private ButtonMap operatorDpadLeft;
+    private ButtonMap operatorDpadRight;
+    private ButtonMap operatorLeftStickPress;
+    private ButtonMap operatorRightStickPress;
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
@@ -88,10 +88,12 @@ public class RobotContainer {
 
     public final CANdle_LED m_leds = new CANdle_LED();
 
+    private final CommandMap commandMap = new CommandMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver);
+
     private final SendableChooser<Command> autoChooser;
 
     public RobotContainer() {
-        NamedCommands.registerCommands(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver));
+        NamedCommands.registerCommands(commandMap.getMap());
         autoChooser = AutoBuilder.buildAutoChooser("Do Nothing");
         SmartDashboard.putData("Auto Mode", autoChooser);
         configureBindings();
@@ -100,109 +102,109 @@ public class RobotContainer {
     }
 
     public void savePreference(SendableChooser<String> savePref) {
-        Preferences.setString(savePref.getSelected() + driverMappedButtonY.getPreferenceKey(), driverMappedButtonY.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonX.getPreferenceKey(), driverMappedButtonX.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonA.getPreferenceKey(), driverMappedButtonA.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonB.getPreferenceKey(), driverMappedButtonB.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonLeftTrigger.getPreferenceKey(), driverMappedButtonLeftTrigger.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonRightTrigger.getPreferenceKey(), driverMappedButtonRightTrigger.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonLeftBumper.getPreferenceKey(), driverMappedButtonLeftBumper.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonRightBumper.getPreferenceKey(), driverMappedButtonRightBumper.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonStart.getPreferenceKey(), driverMappedButtonStart.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonBack.getPreferenceKey(), driverMappedButtonBack.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonDpadUp.getPreferenceKey(), driverMappedButtonDpadUp.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonDpadDown.getPreferenceKey(), driverMappedButtonDpadDown.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonDpadLeft.getPreferenceKey(), driverMappedButtonDpadLeft.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonDpadRight.getPreferenceKey(), driverMappedButtonDpadRight.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonLeftStickPress.getPreferenceKey(), driverMappedButtonLeftStickPress.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + driverMappedButtonRightStickPress.getPreferenceKey(), driverMappedButtonRightStickPress.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverY.getPreferenceKey(), driverY.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverX.getPreferenceKey(), driverX.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverA.getPreferenceKey(), driverA.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverB.getPreferenceKey(), driverB.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverLeftTrigger.getPreferenceKey(), driverLeftTrigger.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverRightTrigger.getPreferenceKey(), driverRightTrigger.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverLeftBumper.getPreferenceKey(), driverLeftBumper.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverRightBumper.getPreferenceKey(), driverRightBumper.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverStart.getPreferenceKey(), driverStart.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverBack.getPreferenceKey(), driverBack.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverDpadUp.getPreferenceKey(), driverDpadUp.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverDpadDown.getPreferenceKey(), driverDpadDown.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverDpadLeft.getPreferenceKey(), driverDpadLeft.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverDpadRight.getPreferenceKey(), driverDpadRight.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverLeftStickPress.getPreferenceKey(), driverLeftStickPress.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + driverRightStickPress.getPreferenceKey(), driverRightStickPress.getMappedCommandKey());
 
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonY.getPreferenceKey(), operatorMappedButtonY.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonX.getPreferenceKey(), operatorMappedButtonX.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonA.getPreferenceKey(), operatorMappedButtonA.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonB.getPreferenceKey(), operatorMappedButtonB.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonLeftTrigger.getPreferenceKey(), operatorMappedButtonLeftTrigger.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonRightTrigger.getPreferenceKey(), operatorMappedButtonRightTrigger.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonLeftBumper.getPreferenceKey(), operatorMappedButtonLeftBumper.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonRightBumper.getPreferenceKey(), operatorMappedButtonRightBumper.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonStart.getPreferenceKey(), operatorMappedButtonStart.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonBack.getPreferenceKey(), operatorMappedButtonBack.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonDpadUp.getPreferenceKey(), operatorMappedButtonDpadUp.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonDpadDown.getPreferenceKey(), operatorMappedButtonDpadDown.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonDpadLeft.getPreferenceKey(), operatorMappedButtonDpadLeft.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonDpadRight.getPreferenceKey(), operatorMappedButtonDpadRight.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonLeftStickPress.getPreferenceKey(), operatorMappedButtonLeftStickPress.getMappedCommandKey());
-        Preferences.setString(savePref.getSelected() + operatorMappedButtonRightStickPress.getPreferenceKey(), operatorMappedButtonRightStickPress.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorY.getPreferenceKey(), operatorY.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorX.getPreferenceKey(), operatorX.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorA.getPreferenceKey(), operatorA.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorB.getPreferenceKey(), operatorB.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorLeftTrigger.getPreferenceKey(), operatorLeftTrigger.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorRightTrigger.getPreferenceKey(), operatorRightTrigger.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorLeftBumper.getPreferenceKey(), operatorLeftBumper.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorRightBumper.getPreferenceKey(), operatorRightBumper.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorStart.getPreferenceKey(), operatorStart.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorBack.getPreferenceKey(), operatorBack.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorDpadUp.getPreferenceKey(), operatorDpadUp.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorDpadDown.getPreferenceKey(), operatorDpadDown.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorDpadLeft.getPreferenceKey(), operatorDpadLeft.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorDpadRight.getPreferenceKey(), operatorDpadRight.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorLeftStickPress.getPreferenceKey(), operatorLeftStickPress.getMappedCommandKey());
+        Preferences.setString(savePref.getSelected() + operatorRightStickPress.getPreferenceKey(), operatorRightStickPress.getMappedCommandKey());
     }
 
     public void loadPreference(SendableChooser<String> savePref) {
-        String loadBControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonB.getPreferenceKey(), driverMappedButtonB.getMappedCommandKey());
-        String loadXControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonX.getPreferenceKey(), driverMappedButtonX.getMappedCommandKey());
-        String loadYControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonY.getPreferenceKey(), driverMappedButtonY.getMappedCommandKey());
-        String loadAControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonA.getPreferenceKey(), driverMappedButtonA.getMappedCommandKey());
-        String loadLeftTriggerControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonLeftTrigger.getPreferenceKey(), driverMappedButtonLeftTrigger.getMappedCommandKey());
-        String loadRightTriggerControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonRightTrigger.getPreferenceKey(), driverMappedButtonRightTrigger.getMappedCommandKey());
-        String loadLeftBumperControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonLeftBumper.getPreferenceKey(), driverMappedButtonLeftBumper.getMappedCommandKey());
-        String loadRightBumperControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonRightBumper.getPreferenceKey(), driverMappedButtonRightBumper.getMappedCommandKey());
-        String loadStartControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonStart.getPreferenceKey(), driverMappedButtonStart.getMappedCommandKey());
-        String loadBackControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonBack.getPreferenceKey(), driverMappedButtonBack.getMappedCommandKey());
-        String loadDpadUpControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonDpadUp.getPreferenceKey(), driverMappedButtonDpadUp.getMappedCommandKey());
-        String loadDpadDownControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonDpadDown.getPreferenceKey(), driverMappedButtonDpadDown.getMappedCommandKey());
-        String loadDpadLeftControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonDpadLeft.getPreferenceKey(), driverMappedButtonDpadLeft.getMappedCommandKey());
-        String loadDpadRightControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonDpadRight.getPreferenceKey(), driverMappedButtonDpadRight.getMappedCommandKey());
-        String loadLeftStickPressControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonLeftStickPress.getPreferenceKey(), driverMappedButtonLeftStickPress.getMappedCommandKey());
-        String loadRightStickPressControllerD = Preferences.getString(savePref.getSelected() + driverMappedButtonRightStickPress.getPreferenceKey(), driverMappedButtonRightStickPress.getMappedCommandKey());
+        String loadBControllerD = Preferences.getString(savePref.getSelected() + driverB.getPreferenceKey(), driverB.getMappedCommandKey());
+        String loadXControllerD = Preferences.getString(savePref.getSelected() + driverX.getPreferenceKey(), driverX.getMappedCommandKey());
+        String loadYControllerD = Preferences.getString(savePref.getSelected() + driverY.getPreferenceKey(), driverY.getMappedCommandKey());
+        String loadAControllerD = Preferences.getString(savePref.getSelected() + driverA.getPreferenceKey(), driverA.getMappedCommandKey());
+        String loadLeftTriggerControllerD = Preferences.getString(savePref.getSelected() + driverLeftTrigger.getPreferenceKey(), driverLeftTrigger.getMappedCommandKey());
+        String loadRightTriggerControllerD = Preferences.getString(savePref.getSelected() + driverRightTrigger.getPreferenceKey(), driverRightTrigger.getMappedCommandKey());
+        String loadLeftBumperControllerD = Preferences.getString(savePref.getSelected() + driverLeftBumper.getPreferenceKey(), driverLeftBumper.getMappedCommandKey());
+        String loadRightBumperControllerD = Preferences.getString(savePref.getSelected() + driverRightBumper.getPreferenceKey(), driverRightBumper.getMappedCommandKey());
+        String loadStartControllerD = Preferences.getString(savePref.getSelected() + driverStart.getPreferenceKey(), driverStart.getMappedCommandKey());
+        String loadBackControllerD = Preferences.getString(savePref.getSelected() + driverBack.getPreferenceKey(), driverBack.getMappedCommandKey());
+        String loadDpadUpControllerD = Preferences.getString(savePref.getSelected() + driverDpadUp.getPreferenceKey(), driverDpadUp.getMappedCommandKey());
+        String loadDpadDownControllerD = Preferences.getString(savePref.getSelected() + driverDpadDown.getPreferenceKey(), driverDpadDown.getMappedCommandKey());
+        String loadDpadLeftControllerD = Preferences.getString(savePref.getSelected() + driverDpadLeft.getPreferenceKey(), driverDpadLeft.getMappedCommandKey());
+        String loadDpadRightControllerD = Preferences.getString(savePref.getSelected() + driverDpadRight.getPreferenceKey(), driverDpadRight.getMappedCommandKey());
+        String loadLeftStickPressControllerD = Preferences.getString(savePref.getSelected() + driverLeftStickPress.getPreferenceKey(), driverLeftStickPress.getMappedCommandKey());
+        String loadRightStickPressControllerD = Preferences.getString(savePref.getSelected() + driverRightStickPress.getPreferenceKey(), driverRightStickPress.getMappedCommandKey());
 
-        String loadBControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonB.getPreferenceKey(), operatorMappedButtonB.getMappedCommandKey());
-        String loadXControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonX.getPreferenceKey(), operatorMappedButtonX.getMappedCommandKey());
-        String loadYControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonY.getPreferenceKey(), operatorMappedButtonY.getMappedCommandKey());
-        String loadAControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonA.getPreferenceKey(), operatorMappedButtonA.getMappedCommandKey());
-        String loadLeftTriggerControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonLeftTrigger.getPreferenceKey(), operatorMappedButtonLeftTrigger.getMappedCommandKey());
-        String loadRightTriggerControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonRightTrigger.getPreferenceKey(), operatorMappedButtonRightTrigger.getMappedCommandKey());
-        String loadLeftBumperControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonLeftBumper.getPreferenceKey(), operatorMappedButtonLeftBumper.getMappedCommandKey());
-        String loadRightBumperControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonRightBumper.getPreferenceKey(), operatorMappedButtonRightBumper.getMappedCommandKey());
-        String loadStartControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonStart.getPreferenceKey(), operatorMappedButtonStart.getMappedCommandKey());
-        String loadBackControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonBack.getPreferenceKey(), operatorMappedButtonBack.getMappedCommandKey());
-        String loadDpadUpControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonDpadUp.getPreferenceKey(), operatorMappedButtonDpadUp.getMappedCommandKey());
-        String loadDpadDownControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonDpadDown.getPreferenceKey(), operatorMappedButtonDpadDown.getMappedCommandKey());
-        String loadDpadLeftControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonDpadLeft.getPreferenceKey(), operatorMappedButtonDpadLeft.getMappedCommandKey());
-        String loadDpadRightControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonDpadRight.getPreferenceKey(), operatorMappedButtonDpadRight.getMappedCommandKey());
-        String loadLeftStickPressControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonLeftStickPress.getPreferenceKey(), operatorMappedButtonLeftStickPress.getMappedCommandKey());
-        String loadRightStickPressControllerO = Preferences.getString(savePref.getSelected() + operatorMappedButtonRightStickPress.getPreferenceKey(), operatorMappedButtonRightStickPress.getMappedCommandKey());
+        String loadBControllerO = Preferences.getString(savePref.getSelected() + operatorB.getPreferenceKey(), operatorB.getMappedCommandKey());
+        String loadXControllerO = Preferences.getString(savePref.getSelected() + operatorX.getPreferenceKey(), operatorX.getMappedCommandKey());
+        String loadYControllerO = Preferences.getString(savePref.getSelected() + operatorY.getPreferenceKey(), operatorY.getMappedCommandKey());
+        String loadAControllerO = Preferences.getString(savePref.getSelected() + operatorA.getPreferenceKey(), operatorA.getMappedCommandKey());
+        String loadLeftTriggerControllerO = Preferences.getString(savePref.getSelected() + operatorLeftTrigger.getPreferenceKey(), operatorLeftTrigger.getMappedCommandKey());
+        String loadRightTriggerControllerO = Preferences.getString(savePref.getSelected() + operatorRightTrigger.getPreferenceKey(), operatorRightTrigger.getMappedCommandKey());
+        String loadLeftBumperControllerO = Preferences.getString(savePref.getSelected() + operatorLeftBumper.getPreferenceKey(), operatorLeftBumper.getMappedCommandKey());
+        String loadRightBumperControllerO = Preferences.getString(savePref.getSelected() + operatorRightBumper.getPreferenceKey(), operatorRightBumper.getMappedCommandKey());
+        String loadStartControllerO = Preferences.getString(savePref.getSelected() + operatorStart.getPreferenceKey(), operatorStart.getMappedCommandKey());
+        String loadBackControllerO = Preferences.getString(savePref.getSelected() + operatorBack.getPreferenceKey(), operatorBack.getMappedCommandKey());
+        String loadDpadUpControllerO = Preferences.getString(savePref.getSelected() + operatorDpadUp.getPreferenceKey(), operatorDpadUp.getMappedCommandKey());
+        String loadDpadDownControllerO = Preferences.getString(savePref.getSelected() + operatorDpadDown.getPreferenceKey(), operatorDpadDown.getMappedCommandKey());
+        String loadDpadLeftControllerO = Preferences.getString(savePref.getSelected() + operatorDpadLeft.getPreferenceKey(), operatorDpadLeft.getMappedCommandKey());
+        String loadDpadRightControllerO = Preferences.getString(savePref.getSelected() + operatorDpadRight.getPreferenceKey(), operatorDpadRight.getMappedCommandKey());
+        String loadLeftStickPressControllerO = Preferences.getString(savePref.getSelected() + operatorLeftStickPress.getPreferenceKey(), operatorLeftStickPress.getMappedCommandKey());
+        String loadRightStickPressControllerO = Preferences.getString(savePref.getSelected() + operatorRightStickPress.getPreferenceKey(), operatorRightStickPress.getMappedCommandKey());
         
-        driverMappedButtonX.setMapperCommandKey(loadXControllerD);
-        driverMappedButtonA.setMapperCommandKey(loadAControllerD);
-        driverMappedButtonY.setMapperCommandKey(loadYControllerD);
-        driverMappedButtonB.setMapperCommandKey(loadBControllerD);
-        driverMappedButtonLeftTrigger.setMapperCommandKey(loadLeftTriggerControllerD);
-        driverMappedButtonRightTrigger.setMapperCommandKey(loadRightTriggerControllerD);
-        driverMappedButtonLeftBumper.setMapperCommandKey(loadLeftBumperControllerD);
-        driverMappedButtonRightBumper.setMapperCommandKey(loadRightBumperControllerD);
-        driverMappedButtonStart.setMapperCommandKey(loadStartControllerD);
-        driverMappedButtonBack.setMapperCommandKey(loadBackControllerD);
-        driverMappedButtonDpadUp.setMapperCommandKey(loadDpadUpControllerD);
-        driverMappedButtonDpadDown.setMapperCommandKey(loadDpadDownControllerD);
-        driverMappedButtonDpadLeft.setMapperCommandKey(loadDpadLeftControllerD);
-        driverMappedButtonDpadRight.setMapperCommandKey(loadDpadRightControllerD);
-        driverMappedButtonLeftStickPress.setMapperCommandKey(loadLeftStickPressControllerD);
-        driverMappedButtonRightStickPress.setMapperCommandKey(loadRightStickPressControllerD);
+        driverX.setMapperCommandKey(loadXControllerD);
+        driverA.setMapperCommandKey(loadAControllerD);
+        driverY.setMapperCommandKey(loadYControllerD);
+        driverB.setMapperCommandKey(loadBControllerD);
+        driverLeftTrigger.setMapperCommandKey(loadLeftTriggerControllerD);
+        driverRightTrigger.setMapperCommandKey(loadRightTriggerControllerD);
+        driverLeftBumper.setMapperCommandKey(loadLeftBumperControllerD);
+        driverRightBumper.setMapperCommandKey(loadRightBumperControllerD);
+        driverStart.setMapperCommandKey(loadStartControllerD);
+        driverBack.setMapperCommandKey(loadBackControllerD);
+        driverDpadUp.setMapperCommandKey(loadDpadUpControllerD);
+        driverDpadDown.setMapperCommandKey(loadDpadDownControllerD);
+        driverDpadLeft.setMapperCommandKey(loadDpadLeftControllerD);
+        driverDpadRight.setMapperCommandKey(loadDpadRightControllerD);
+        driverLeftStickPress.setMapperCommandKey(loadLeftStickPressControllerD);
+        driverRightStickPress.setMapperCommandKey(loadRightStickPressControllerD);
 
-        operatorMappedButtonX.setMapperCommandKey(loadXControllerO);
-        operatorMappedButtonA.setMapperCommandKey(loadAControllerO);
-        operatorMappedButtonY.setMapperCommandKey(loadYControllerO);
-        operatorMappedButtonB.setMapperCommandKey(loadBControllerO);
-        operatorMappedButtonLeftTrigger.setMapperCommandKey(loadLeftTriggerControllerO);
-        operatorMappedButtonRightTrigger.setMapperCommandKey(loadRightTriggerControllerO);
-        operatorMappedButtonLeftBumper.setMapperCommandKey(loadLeftBumperControllerO);
-        operatorMappedButtonRightBumper.setMapperCommandKey(loadRightBumperControllerO);
-        operatorMappedButtonStart.setMapperCommandKey(loadStartControllerO);
-        operatorMappedButtonBack.setMapperCommandKey(loadBackControllerO);
-        operatorMappedButtonDpadUp.setMapperCommandKey(loadDpadUpControllerO);
-        operatorMappedButtonDpadDown.setMapperCommandKey(loadDpadDownControllerO);
-        operatorMappedButtonDpadLeft.setMapperCommandKey(loadDpadLeftControllerO);
-        operatorMappedButtonDpadRight.setMapperCommandKey(loadDpadRightControllerO);
-        operatorMappedButtonLeftStickPress.setMapperCommandKey(loadLeftStickPressControllerO);
-        operatorMappedButtonRightStickPress.setMapperCommandKey(loadRightStickPressControllerO);
+        operatorX.setMapperCommandKey(loadXControllerO);
+        operatorA.setMapperCommandKey(loadAControllerO);
+        operatorY.setMapperCommandKey(loadYControllerO);
+        operatorB.setMapperCommandKey(loadBControllerO);
+        operatorLeftTrigger.setMapperCommandKey(loadLeftTriggerControllerO);
+        operatorRightTrigger.setMapperCommandKey(loadRightTriggerControllerO);
+        operatorLeftBumper.setMapperCommandKey(loadLeftBumperControllerO);
+        operatorRightBumper.setMapperCommandKey(loadRightBumperControllerO);
+        operatorStart.setMapperCommandKey(loadStartControllerO);
+        operatorBack.setMapperCommandKey(loadBackControllerO);
+        operatorDpadUp.setMapperCommandKey(loadDpadUpControllerO);
+        operatorDpadDown.setMapperCommandKey(loadDpadDownControllerO);
+        operatorDpadLeft.setMapperCommandKey(loadDpadLeftControllerO);
+        operatorDpadRight.setMapperCommandKey(loadDpadRightControllerO);
+        operatorLeftStickPress.setMapperCommandKey(loadLeftStickPressControllerO);
+        operatorRightStickPress.setMapperCommandKey(loadRightStickPressControllerO);
     }
 
     private void configureBindings() {
@@ -221,41 +223,45 @@ public class RobotContainer {
     }
 
     public void driverControls() {
-        driverMappedButtonY = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.y(), "Driver Button Y", "yButtonD");
-        driverMappedButtonA = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.a(), "Driver Button A", "aButtonD");
-        driverMappedButtonX = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.x(), "Driver Button X", "xButtonD");
-        driverMappedButtonB = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.b(), "Driver Button B", "bButtonD");
-        driverMappedButtonLeftBumper = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.leftBumper(), "Driver Bumper Left", "leftBumperD");
-        driverMappedButtonRightBumper = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.rightBumper(), "Driver Bumper Right", "rightBumperD");
-        driverMappedButtonLeftTrigger = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.leftTrigger(.8), "Driver Trigger Left", "leftTriggerD");
-        driverMappedButtonRightTrigger = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.rightTrigger(.8), "Driver Trigger Right", "rightTriggerD");
-        driverMappedButtonStart = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.start(), "Driver Button Start", "startButtonD");
-        driverMappedButtonBack = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.back(), "Driver Button Back", "backButtonD");
-        driverMappedButtonLeftStickPress = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.leftStick(), "Driver Button Left Stick", "leftStickD");
-        driverMappedButtonRightStickPress = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.rightStick(), "Driver Button Right Stick", "rightStickD");
-        driverMappedButtonDpadUp = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.povUp(), "Driver Dpad Up", "upDpadD");
-        driverMappedButtonDpadDown = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.povDown(), "Driver Dpad Down", "downDpadD");
-        driverMappedButtonDpadLeft = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.povLeft(), "Driver Dpad Left", "leftDpadD");
-        driverMappedButtonDpadRight = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), driver.povRight(), "Driver Dpad Right", "rightDpadD");
+        ControllerMap driverMap = new ControllerMap(commandMap, driver, "Driver");
+
+        driverA = driverMap.a();
+        driverB = driverMap.b();
+        driverX = driverMap.x();
+        driverY = driverMap.y();
+        driverLeftBumper = driverMap.leftBumper();
+        driverRightBumper = driverMap.rightBumper();
+        driverLeftTrigger = driverMap.leftTrigger();
+        driverRightTrigger = driverMap.rightTrigger();
+        driverStart = driverMap.start();
+        driverBack = driverMap.back();
+        driverLeftStickPress = driverMap.leftStick();
+        driverRightStickPress = driverMap.rightStick();
+        driverDpadUp = driverMap.povUp();
+        driverDpadDown = driverMap.povDown();
+        driverDpadLeft = driverMap.povLeft();
+        driverDpadRight = driverMap.povRight();
     }
 
     public void operatorControls() {
-        operatorMappedButtonA = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.a(), "Operator Button A", "aButtonO");
-        operatorMappedButtonX = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.x(), "Operator Button X", "xButtonO");
-        operatorMappedButtonY = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.y(), "Operator Button Y", "yButtonO");
-        operatorMappedButtonB = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.b(), "Operator Button B", "bButtonO");
-        operatorMappedButtonLeftBumper = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.leftBumper(), "Operator Bumper Left", "leftBumperO");
-        operatorMappedButtonRightBumper = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.rightBumper(), "Operator Bumper Right", "rightBumperO");
-        operatorMappedButtonLeftTrigger = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.leftTrigger(.8), "Operator Trigger Left", "leftTriggerO");
-        operatorMappedButtonRightTrigger = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.rightTrigger(.8), "Operator Trigger Right", "rightTriggerO");
-        operatorMappedButtonStart = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.start(), "Operator Button Start", "startButtonO");
-        operatorMappedButtonBack = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.back(), "Operator Button Back", "backButtonO");
-        operatorMappedButtonLeftStickPress = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.leftStick(), "Operator Button Left Stick", "leftStickO");
-        operatorMappedButtonRightStickPress = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.rightStick(), "Operator Button Right Stick", "rightStickO");
-        operatorMappedButtonDpadUp = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.povUp(), "Operator Dpad Up", "upDpadO");
-        operatorMappedButtonDpadDown = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.povDown(), "Operator Dpad Down", "downDpadO");
-        operatorMappedButtonDpadLeft = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.povLeft(), "Operator Dpad Left", "leftDpadO");
-        operatorMappedButtonDpadRight = new ControlMapper(new CommandMap().getMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver), operator.povRight(), "Operator Dpad Right", "rightDpadO");
+        ControllerMap operatorMap = new ControllerMap(commandMap, operator, "Operator");
+        
+        operatorA = operatorMap.a();
+        operatorB = operatorMap.b();
+        operatorX = operatorMap.x();
+        operatorY = operatorMap.y();
+        operatorLeftBumper = operatorMap.leftBumper();
+        operatorRightBumper = operatorMap.rightBumper();
+        operatorLeftTrigger = operatorMap.leftTrigger();
+        operatorRightTrigger = operatorMap.rightTrigger();
+        operatorStart = operatorMap.start();
+        operatorBack = operatorMap.back();
+        operatorLeftStickPress = operatorMap.leftStick();
+        operatorRightStickPress = operatorMap.rightStick();
+        operatorDpadUp = operatorMap.povUp();
+        operatorDpadDown = operatorMap.povDown();
+        operatorDpadLeft = operatorMap.povLeft();
+        operatorDpadRight = operatorMap.povRight();
     }
 
     public Command getAutonomousCommand() {
