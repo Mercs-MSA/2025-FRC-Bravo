@@ -35,10 +35,6 @@ public class ControlMapper {
         }
     }
 
-    public ControlMapper() {
-        //TODO Auto-generated constructor stub
-    }
-
     public String getMappedCommandKey() {
         String output = SmartDashboard.getString(widgetTitle, "");
         return output;

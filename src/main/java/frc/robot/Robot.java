@@ -30,12 +30,6 @@ import frc.robot.commands.CommandClimb;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  
-  // public final CommandXboxController driver = new CommandXboxController(0);
-  // private final ControlMapper driverMappedButtonA = new ControlMapper(driver.a(), "Driver Button A", "aButton");
-  // private final ControlMapper driverMappedButtonB = new ControlMapper(driver.b(), "Driver Button B", "bButton");
-  // private final ControlMapper driverMappedButtonX = new ControlMapper(driver.x(), "Driver Button X", "xButton");
-  // private final ControlMapper driverMappedButtonY = new ControlMapper(driver.y(), "Driver Button Y", "yButton");
 
   private final RobotContainer m_robotContainer;
   public SendableChooser<String> savePref = new SendableChooser<>();
@@ -45,9 +39,6 @@ public class Robot extends TimedRobot {
   private BooleanEntry saveTrigger = saveTriggerTopic.getEntry(false);
   private BooleanTopic loadTriggerTopic = controlMapTable.getBooleanTopic("LoadTrigger");
   private BooleanEntry loadTrigger = loadTriggerTopic.getEntry(false);
-
-
-
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -140,26 +131,14 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("possibleDestinationA", Constants.DriveToPosRuntime.autoTargets.get(0));
     SmartDashboard.putString("possibleDestinationB", Constants.DriveToPosRuntime.autoTargets.get(1));
 
-    // In RobotPeriodic, I want you to make an if statement that checks the "saveTrigger" Network Tables value
     if (saveTrigger.get() == true) {
-      // and if it's `true` update the boolean to false
       saveTrigger.set(false);
       m_robotContainer.savePreference(savePref);
-      // then read the current values of our four existing ControlMapper objects
-      // save them into Preferences using the "Save To Map Slot" KEY + the ControlMapper value
-      }
+    }
 
     if (loadTrigger.get() == true) {
       loadTrigger.set(false);
       m_robotContainer.loadPreference(savePref);
-      // String loadBController = Preferences.getString(savePref.getSelected() + driverMappedButtonB.getPreferenceKey(), driverMappedButtonB.getMappedCommandKey());
-      // String loadXController = Preferences.getString(savePref.getSelected() + driverMappedButtonX.getPreferenceKey(), driverMappedButtonX.getMappedCommandKey());
-      // String loadYController = Preferences.getString(savePref.getSelected() + driverMappedButtonY.getPreferenceKey(), driverMappedButtonY.getMappedCommandKey());
-      // String loadAController = Preferences.getString(savePref.getSelected() + driverMappedButtonA.getPreferenceKey(), driverMappedButtonA.getMappedCommandKey());
-      // driverMappedButtonX.setMapperCommandKey(loadXController);
-      // driverMappedButtonA.setMapperCommandKey(loadAController);
-      // driverMappedButtonY.setMapperCommandKey(loadYController);
-      // driverMappedButtonB.setMapperCommandKey(loadBController);
     }
 
     SmartDashboard.updateValues();
