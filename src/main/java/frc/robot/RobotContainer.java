@@ -16,16 +16,16 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
-import frc.robot.subsystems.Elevator1;
-import frc.robot.subsystems.Elevator2;
-import frc.robot.subsystems.FunnelPivot;
-import frc.robot.subsystems.IntakeBeambreak;
-import frc.robot.subsystems.IntakeFlywheels;
-import frc.robot.generated.TunerConstants;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.CANdle_LED;
 import frc.robot.commands.CommandMap;
+import frc.robot.subsystems.Mechanisms.Climber.Climber;
+import frc.robot.subsystems.Mechanisms.Elevator.Elevator1;
+import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
+import frc.robot.subsystems.Mechanisms.Funnel.FunnelPivot;
+import frc.robot.subsystems.Mechanisms.Intake.IntakeFlywheels;
+import frc.robot.subsystems.SensorSubsystems.CANdle_LED;
+import frc.robot.subsystems.SensorSubsystems.IntakeBeambreak;
+import frc.robot.subsystems.Swerve.CommandSwerveDrivetrain;
+import frc.robot.generated.TunerConstants;
 
 public class RobotContainer {
     /* Setting up bindings for necessary control of the swerve drive platform */

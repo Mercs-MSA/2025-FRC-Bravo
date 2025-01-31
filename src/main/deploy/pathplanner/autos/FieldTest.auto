@@ -13,7 +13,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.25
+            "waitTime": 0.2
           }
         },
         {
@@ -43,7 +43,55 @@
         {
           "type": "path",
           "data": {
-            "pathName": "FieldTestPickup"
+            "pathName": "FieldTestPickup1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Collect"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "FieldTestL4"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.2
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Score"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.2
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ELEVIntakePos"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.2
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "FieldTestPickup2"
           }
         },
         {
@@ -61,7 +109,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.25
+            "waitTime": 0.5
           }
         },
         {

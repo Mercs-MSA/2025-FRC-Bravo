@@ -20,8 +20,8 @@
         "y": 3.74
       },
       "prevControl": {
-        "x": -0.028110655737705326,
-        "y": 3.491547131147541
+        "x": -0.02811065573770577,
+        "y": 3.4915471311475406
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,11 +32,11 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.8227782392026579,
+      "minWaypointRelativePos": 0.8228423101881891,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
-        "maxVelocity": 1.5,
-        "maxAcceleration": 1.5,
+        "maxVelocity": 1.0,
+        "maxAcceleration": 1.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
         "nominalVoltage": 12.0,
@@ -47,19 +47,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "MoveFunnel",
-      "waypointRelativePos": 0.127686357973422,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "MoveFunnel"
-        }
-      }
-    },
-    {
       "name": "L4",
-      "waypointRelativePos": 0.7742561448900278,
+      "waypointRelativePos": 0.8539909149902635,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -70,8 +59,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 5.0,
-    "maxAcceleration": 4.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -87,5 +76,5 @@
     "velocity": 0.25,
     "rotation": 180.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

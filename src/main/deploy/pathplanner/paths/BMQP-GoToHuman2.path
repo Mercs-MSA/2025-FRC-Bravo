@@ -45,7 +45,7 @@
     "rotation": 52.50000000000001
   },
   "reversed": false,
-  "folder": null,
+  "folder": "BMQP",
   "idealStartingState": {
     "velocity": 0.0,
     "rotation": 119.99999999999999

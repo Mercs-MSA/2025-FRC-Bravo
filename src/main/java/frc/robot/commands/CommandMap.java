@@ -13,10 +13,22 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.Constants;
 import frc.robot.Constants.ScoringStageVal;
-import frc.robot.subsystems.CANdle_LED;
-import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.IntakeBeambreak;
-import frc.robot.subsystems.IntakeFlywheels;
+import frc.robot.commands.CANdleCommands.CommandCandleSetAnimation;
+import frc.robot.commands.ClimberCommands.CommandClimbToggle;
+import frc.robot.commands.DriveToPosCommands.CommandLoadDriveToPos;
+import frc.robot.commands.DriveToPosCommands.CommandSetDriveToPos;
+import frc.robot.commands.DriveToPosCommands.CommandToPos;
+import frc.robot.commands.ElevatorCommands.CommandElevatorToStage;
+import frc.robot.commands.FunnelCommands.CommandFunnelPivotToPos;
+import frc.robot.commands.FunnelCommands.CommandFunnelToggle;
+import frc.robot.commands.IntakeCommands.CommandIntakeCollect;
+import frc.robot.commands.IntakeCommands.CommandIntakeOut;
+import frc.robot.commands.ScoringModeCommands.CommandChangeScoreStage;
+import frc.robot.commands.VisionCommands.SeedToMegaTag;
+import frc.robot.subsystems.SensorSubsystems.CANdle_LED;
+import frc.robot.subsystems.Swerve.CommandSwerveDrivetrain;
+import frc.robot.subsystems.SensorSubsystems.IntakeBeambreak;
+import frc.robot.subsystems.Mechanisms.Intake.IntakeFlywheels;
 
 public class CommandMap {
     private CommandSwerveDrivetrain drivetrain;
@@ -103,8 +115,12 @@ public class CommandMap {
                 "MoveFunnel",
                 new SequentialCommandGroup(
                     new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-                    new CommandFunnelPivot(Constants.FunnelPivotConstants.posUp)
+                    new CommandFunnelPivotToPos(Constants.FunnelPivotConstants.posUp)
                 )
+            ),
+            Map.entry(
+                "Reset All",
+                new ParallelCommandGroup()
             ),
             Map.entry(
                 "Calibrate Brake",
@@ -217,8 +233,7 @@ public class CommandMap {
                     new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        new CommandElevatorToStage(),
-                        new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Strobe)
+                        new CommandElevatorToStage()
                     )
                 )
             ), // WHILETRUE
@@ -229,6 +244,20 @@ public class CommandMap {
             Map.entry(
                 "Candle Twinkle",
                 new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Twinkle)
+            ),
+            Map.entry(
+                "Elevator To Stage",
+                new CommandElevatorToStage()
+            ),
+            Map.entry(
+                "Reef Test",
+                new SequentialCommandGroup(
+                    new CommandSetDriveToPos("ReefTest"),
+                    new ParallelCommandGroup(
+                        new CommandToPos(drivetrain),
+                        new CommandElevatorToStage()
+                    )
+                )
             )
         );
     }

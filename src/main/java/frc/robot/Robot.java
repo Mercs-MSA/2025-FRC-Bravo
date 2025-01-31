@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.ctre.phoenix6.Utils;
 
 import edu.wpi.first.networktables.BooleanArrayEntry;
@@ -26,10 +30,17 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.ScoringStageVal;
 import frc.robot.LimelightHelpers.RawFiducial;
-import frc.robot.commands.CommandClimb;
+import frc.robot.commands.ClimberCommands.CommandClimbToPos;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+
+  boolean moveClimberDown;
+  boolean spinIntake;
+  boolean moveClimberUp;
+  private SendableChooser<XboxController.Button> controlChoiceClimberDown = new SendableChooser<>();
+  private SendableChooser<XboxController.Button> controlChoiceIntake = new SendableChooser<>();
+  private SendableChooser<XboxController.Button> controlChoiceClimberUp = new SendableChooser<>();
 
   private final RobotContainer m_robotContainer;
   public SendableChooser<String> savePref = new SendableChooser<>();
@@ -39,6 +50,14 @@ public class Robot extends TimedRobot {
   private BooleanEntry saveTrigger = saveTriggerTopic.getEntry(false);
   private BooleanTopic loadTriggerTopic = controlMapTable.getBooleanTopic("LoadTrigger");
   private BooleanEntry loadTrigger = loadTriggerTopic.getEntry(false);
+
+  public final XboxController testJoystick = new XboxController(2);
+
+  private List<Integer> validIDs = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22));
+
+
+
+
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -58,6 +77,51 @@ public class Robot extends TimedRobot {
     // System.out.println(Constants.ScoringConstants.ScoringStage + " " + Constants.ScoringConstants.ScoringStage.getElevatorRotations());
 
     SmartDashboard.putString("Scoring Stage", Constants.ScoringConstants.ScoringStage.toString());
+
+    moveClimberDown = false;
+    spinIntake = false;
+    moveClimberUp = false;
+    if (testJoystick.getAButton()) {
+      if (controlChoiceClimberDown.getSelected() == XboxController.Button.kA) {
+        moveClimberDown = true;
+        new CommandClimbToPos(Constants.ClimberConstants.positionDown);
+      }
+      else if (controlChoiceClimberUp.getSelected() == XboxController.Button.kA) {
+        moveClimberUp = true;
+        new CommandClimbToPos(Constants.ClimberConstants.positionUp);
+      }
+      else if (controlChoiceIntake.getSelected() == XboxController.Button.kA) {
+        spinIntake = true;
+      }
+    }
+
+    if (testJoystick.getBButton()) {
+      if (controlChoiceClimberDown.getSelected() == XboxController.Button.kB) {
+        moveClimberDown = true;
+        new CommandClimbToPos(Constants.ClimberConstants.positionDown);
+      }
+      else if (controlChoiceClimberUp.getSelected() == XboxController.Button.kB) {
+        moveClimberUp = true;
+        new CommandClimbToPos(Constants.ClimberConstants.positionUp);
+      }
+      else if (controlChoiceIntake.getSelected() == XboxController.Button.kB) {
+        spinIntake = true;
+      }
+    }
+    
+    if (testJoystick.getXButton()) {
+      if (controlChoiceClimberDown.getSelected() == XboxController.Button.kX) {
+        moveClimberDown = true;
+        new CommandClimbToPos(Constants.ClimberConstants.positionDown);
+      }
+      else if (controlChoiceClimberUp.getSelected() == XboxController.Button.kX) {
+        moveClimberUp = true;
+        new CommandClimbToPos(Constants.ClimberConstants.positionUp);
+      }
+      else if (controlChoiceIntake.getSelected() == XboxController.Button.kX) {
+        spinIntake = true;
+      }
+    }
     
     CommandScheduler.getInstance().run(); 
 
@@ -68,6 +132,9 @@ public class Robot extends TimedRobot {
     
     LimelightHelpers.PoseEstimate mt_front = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limelightFrontName);
     LimelightHelpers.PoseEstimate mt_back = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limelightBackName);
+
+    //Update Valid IDs
+    LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs.stream().mapToInt(Integer::intValue).toArray());
 
     SmartDashboard.putBoolean("FrontLimelightOnlineStatus", mt_front != null);
     SmartDashboard.putBoolean("BackLimelightOnlineStatus", mt_back != null);
@@ -111,6 +178,22 @@ public class Robot extends TimedRobot {
               Utils.fpgaToCurrentTime(mt_inUse.timestampSeconds));
         }
     }
+    if (Constants.DriveToPosRuntime.target == "Source") {
+      if (validIDs.contains(18)) {
+        validIDs.remove(Integer.valueOf(18));
+      }
+      
+      if (validIDs.contains(7)) {
+        validIDs.remove(Integer.valueOf(7));
+      }
+    } else {
+      if (!validIDs.contains(18)) {
+        validIDs.add(18);
+      }
+      if (!validIDs.contains(7)) {
+        validIDs.add(7);
+      }
+    }
 
     RawFiducial closestTag = null;
     if (mt_front != null) {
@@ -142,6 +225,8 @@ public class Robot extends TimedRobot {
     }
 
     SmartDashboard.updateValues();
+    SmartDashboard.putNumberArray("Valid IDs", validIDs.stream().mapToDouble(Integer::intValue).toArray());
+
   }
 
 
