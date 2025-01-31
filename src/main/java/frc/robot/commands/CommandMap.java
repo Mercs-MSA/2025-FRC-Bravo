@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.Constants;
 import frc.robot.Constants.ScoringStageVal;
 import frc.robot.commands.CANdleCommands.CommandCandleSetAnimation;
+import frc.robot.commands.ClimberCommands.CommandClimbToPos;
 import frc.robot.commands.ClimberCommands.CommandClimbToggle;
 import frc.robot.commands.DriveToPosCommands.CommandLoadDriveToPos;
 import frc.robot.commands.DriveToPosCommands.CommandSetDriveToPos;
@@ -53,10 +54,45 @@ public class CommandMap {
 
     public Map<String, Command> getMap() {
         return Map.ofEntries(
+
+
+
+            /****************************************/
+            /*         DRIVE TO POS COMMANDS        */
+            /****************************************/
             Map.entry(
-                "Test Print",
-                new PrintCommand("Command one was selected!")
-            ),
+                "Drive To Source",
+                new SequentialCommandGroup(
+                    new CommandSetDriveToPos("Source"),
+                    new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
+                    new ParallelCommandGroup(
+                        new CommandToPos(drivetrain),
+                        new CommandElevatorToStage(),
+                        new CommandIntakeCollect(flywheels, beamBreak, 1)
+                    )
+                )
+            ), // WHILETRUE
+            Map.entry(
+                "Drive Position 1",
+                new SequentialCommandGroup(
+                    new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)),
+                    new ParallelCommandGroup(
+                        new CommandToPos(drivetrain),
+                        new CommandElevatorToStage(),
+                        new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Strobe)
+                    )
+                )
+            ), // WHILETRUE
+            Map.entry(
+                "Drive Position 2",
+                new SequentialCommandGroup(
+                    new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)),
+                    new ParallelCommandGroup(
+                        new CommandToPos(drivetrain),
+                        new CommandElevatorToStage()
+                    )
+                )
+            ), // WHILETRUE
             Map.entry(
                 "PathWithDriveToPos",
                 new SequentialCommandGroup(
@@ -64,6 +100,22 @@ public class CommandMap {
                     new CommandToPos(drivetrain)
                 )
             ),
+            Map.entry(
+                "Reef Test",
+                new SequentialCommandGroup(
+                    new CommandSetDriveToPos("ReefTest"),
+                    new ParallelCommandGroup(
+                        new CommandToPos(drivetrain),
+                        new CommandElevatorToStage()
+                    )
+                )
+            ),
+
+
+
+            /****************************************/
+            /*            INTAKE COMMANDS           */
+            /****************************************/
             Map.entry(
                 "Intake Collect",
                 new CommandIntakeCollect(flywheels, beamBreak, Constants.MaxAngularRate)
@@ -76,6 +128,16 @@ public class CommandMap {
                 "Score",
                 new CommandIntakeOut(flywheels, beamBreak, Constants.MaxAngularRate)
             ),
+            Map.entry(
+                "Intake Reverse",
+                new CommandIntakeOut(flywheels, beamBreak, 5)
+            ),
+
+
+
+            /****************************************/
+            /*           ELEVATOR COMMANDS          */
+            /****************************************/
             Map.entry(
                 "L1",
                 new SequentialCommandGroup(
@@ -112,6 +174,16 @@ public class CommandMap {
                 )
             ),
             Map.entry(
+                "Elevator To Stage",
+                new CommandElevatorToStage()
+            ),
+
+
+
+            /****************************************/
+            /*            FUNNEL COMMANDS           */
+            /****************************************/
+            Map.entry(
                 "MoveFunnel",
                 new SequentialCommandGroup(
                     new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
@@ -119,9 +191,93 @@ public class CommandMap {
                 )
             ),
             Map.entry(
+                "Toggle Funnel",
+                new CommandFunnelToggle()
+            ),
+
+
+
+            /****************************************/
+            /*           CLIMBING COMMANDS          */
+            /****************************************/
+            Map.entry(
+                "Toggle Climb",
+                new CommandClimbToggle()
+            ),
+            Map.entry(
+                "Climb Up",
+                new CommandClimbToPos(Constants.ClimberConstants.positionDown)
+            ),
+            Map.entry(
+                "Climb Down",
+                new CommandClimbToPos(Constants.ClimberConstants.positionUp)
+            ),
+            Map.entry(
+                "Score Climb",
+                new CommandChangeScoreStage(ScoringStageVal.CLIMBING)
+            ),
+
+
+
+            /****************************************/
+            /*         STATE CHANGE COMMANDS        */
+            /****************************************/
+            Map.entry(
+                "Score L1",
+                new CommandChangeScoreStage(ScoringStageVal.L1)
+            ),
+            Map.entry(
+                "Score L2",
+                new CommandChangeScoreStage(ScoringStageVal.L2)
+            ),
+            Map.entry(
+                "Score L3",
+                new CommandChangeScoreStage(ScoringStageVal.L3)
+            ),
+            Map.entry(
+                "Score L4",
+                new CommandChangeScoreStage(ScoringStageVal.L4)
+            ),
+
+
+
+            /****************************************/
+            /*              LED COMMANDS            */
+            /****************************************/
+            Map.entry(
+                "Candle Larson",
+                new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Larson)
+            ),
+            Map.entry(
+                "Candle Twinkle",
+                new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Twinkle)
+            ),
+
+
+
+            /****************************************/
+            /*            RESET COMMANDS            */
+            /****************************************/
+            Map.entry(
+                "Reset Field Centric",
+                drivetrain.runOnce(
+                    () -> drivetrain.seedFieldCentric()
+                )
+            ),
+            Map.entry(
                 "Reset All",
                 new ParallelCommandGroup()
             ),
+            Map.entry(
+                "Reset MegaTag",
+                new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName)
+            ),
+
+
+
+            /****************************************/
+            /*         CALIBRATION COMMANDS         */
+            /****************************************/
             Map.entry(
                 "Calibrate Brake",
                 drivetrain.applyRequest(
@@ -155,109 +311,15 @@ public class CommandMap {
                 "Calibrate Static Backward",
                 drivetrain.sysIdQuasistatic(Direction.kReverse)
             ), // WHILETRUE
+
+
+
+            /****************************************/
+            /*            TEST COMMANDS             */
+            /****************************************/
             Map.entry(
-                "Intake Reverse",
-                new CommandIntakeOut(flywheels, beamBreak, 5)
-            ),
-            Map.entry(
-                "Reset Field Centric",
-                drivetrain.runOnce(
-                    () -> drivetrain.seedFieldCentric()
-                )
-            ),
-            Map.entry(
-                "Drive To Source",
-                new SequentialCommandGroup(
-                    new CommandSetDriveToPos("Source"),
-                    new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-                    new ParallelCommandGroup(
-                        new CommandToPos(drivetrain),
-                        new CommandElevatorToStage(),
-                        new CommandIntakeCollect(flywheels, beamBreak, 1)
-                    )
-                )
-            ), // WHILETRUE
-            Map.entry(
-                "Score L1",
-                new CommandChangeScoreStage(ScoringStageVal.L1)
-            ),
-            Map.entry(
-                "Score L2",
-                new CommandChangeScoreStage(ScoringStageVal.L2)
-            ),
-            Map.entry(
-                "Score L3",
-                new CommandChangeScoreStage(ScoringStageVal.L3)
-            ),
-            Map.entry(
-                "Score L4",
-                new CommandChangeScoreStage(ScoringStageVal.L4)
-            ),
-            Map.entry(
-                "Score Climb",
-                new CommandChangeScoreStage(ScoringStageVal.CLIMBING)
-            ),
-            Map.entry(
-                "Score Intake",
-                new SequentialCommandGroup(
-                    new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-                    new CommandElevatorToStage()
-                )
-            ),
-            Map.entry(
-                "Toggle Climb",
-                new CommandClimbToggle()
-            ),
-            Map.entry(
-                "Toggle Funnel",
-                new CommandFunnelToggle()
-            ),
-            Map.entry(
-                "Reset MegaTag",
-                new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName)
-            ),
-            Map.entry(
-                "Drive Position 1",
-                new SequentialCommandGroup(
-                    new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)),
-                    new ParallelCommandGroup(
-                        new CommandToPos(drivetrain),
-                        new CommandElevatorToStage(),
-                        new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Strobe)
-                    )
-                )
-            ), // WHILETRUE
-            Map.entry(
-                "Drive Position 2",
-                new SequentialCommandGroup(
-                    new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)),
-                    new ParallelCommandGroup(
-                        new CommandToPos(drivetrain),
-                        new CommandElevatorToStage()
-                    )
-                )
-            ), // WHILETRUE
-            Map.entry(
-                "Candle Larson",
-                new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Larson)
-            ),
-            Map.entry(
-                "Candle Twinkle",
-                new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Twinkle)
-            ),
-            Map.entry(
-                "Elevator To Stage",
-                new CommandElevatorToStage()
-            ),
-            Map.entry(
-                "Reef Test",
-                new SequentialCommandGroup(
-                    new CommandSetDriveToPos("ReefTest"),
-                    new ParallelCommandGroup(
-                        new CommandToPos(drivetrain),
-                        new CommandElevatorToStage()
-                    )
-                )
+                "Test Print",
+                new PrintCommand("Command one was selected!")
             )
         );
     }
