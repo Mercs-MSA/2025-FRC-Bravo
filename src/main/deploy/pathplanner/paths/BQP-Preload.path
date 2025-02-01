@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 4.981,
-        "y": 5.257199096679687
+        "x": 5.009,
+        "y": 5.259
       },
       "prevControl": {
-        "x": 5.289649117606027,
-        "y": 5.855624389648438
+        "x": 5.317649117606027,
+        "y": 5.857425292968751
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,7 +32,7 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7285316780821917,
+      "minWaypointRelativePos": 0.5751473477406766,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 1.0,
@@ -48,18 +48,18 @@
   "eventMarkers": [
     {
       "name": "Funnel up",
-      "waypointRelativePos": 0.0,
+      "waypointRelativePos": 0.15471512770137147,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "Funnel up"
+          "name": "MoveFunnel"
         }
       }
     },
     {
       "name": "L4",
-      "waypointRelativePos": 0.741384845890411,
+      "waypointRelativePos": 0.6105108055009898,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

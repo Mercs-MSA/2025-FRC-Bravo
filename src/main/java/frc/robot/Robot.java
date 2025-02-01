@@ -206,6 +206,7 @@ public class Robot extends TimedRobot {
 
     }
     else {
+      
       if (!validIDs.contains(19)) {
           validIDs.add(19);
       }
