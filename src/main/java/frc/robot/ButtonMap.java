@@ -14,6 +14,8 @@ public class ButtonMap {
     private String preferenceKey;
     private String widgetKey;
     private String widgetModeKey;
+    private ButtonMode savedMode;
+    private String savedCommandValue;
 
     private enum ButtonMode {
         PRESS,
@@ -35,19 +37,29 @@ public class ButtonMap {
         
         SmartDashboard.putString(widgetKey, commandName);
 
+        
         buttonAction.setDefaultOption("Press", ButtonMode.PRESS);
         buttonAction.addOption("Hold", ButtonMode.HOLD);
         buttonAction.addOption("Release", ButtonMode.RELEASE);
         SmartDashboard.putData(widgetModeKey, buttonAction);
-
-        buttonTrigger.and(() -> buttonAction.getSelected() == ButtonMode.PRESS).onTrue(mappedCommand);
-        buttonTrigger.and(() -> buttonAction.getSelected() == ButtonMode.HOLD).whileTrue(mappedCommand);
-        buttonTrigger.and(() -> buttonAction.getSelected() == ButtonMode.RELEASE).onFalse(mappedCommand);
+        
+        buttonTrigger.and(
+            () -> {
+                if (!Constants.robotEnabled) {
+                    savedMode = buttonAction.getSelected();
+                }
+                return savedMode == ButtonMode.PRESS;
+            })
+            .onTrue(mappedCommand);
+        buttonTrigger.and(() -> savedMode == ButtonMode.HOLD).whileTrue(mappedCommand);
+        buttonTrigger.and(() -> savedMode == ButtonMode.RELEASE).onFalse(mappedCommand);
     }
 
     public String getMappedCommandKey() {
-        String output = SmartDashboard.getString(widgetKey, "");
-        return output;
+        if (!Constants.robotEnabled) {
+            savedCommandValue = SmartDashboard.getString(widgetKey, "");
+        }
+        return savedCommandValue;
     }
 
     public void setMapperCommandKey(String newCommandName) {
@@ -66,3 +78,10 @@ public class ButtonMap {
         return widgetKey;
     }
 }
+
+// HOWWWW
+/*
+ * when robot is disabled we are allowed to pull data from smartdashboard as much as we want 
+ * when the robot is enabled, we should not ask smartdashboard for any data. 
+ * 
+ */

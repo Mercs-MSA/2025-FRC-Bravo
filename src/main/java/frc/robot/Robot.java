@@ -214,16 +214,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("possibleDestinationA", Constants.DriveToPosRuntime.autoTargets.get(0));
     SmartDashboard.putString("possibleDestinationB", Constants.DriveToPosRuntime.autoTargets.get(1));
 
-    if (saveTrigger.get() == true) {
-      saveTrigger.set(false);
-      m_robotContainer.savePreference(savePref);
-    }
-
-    if (loadTrigger.get() == true) {
-      loadTrigger.set(false);
-      m_robotContainer.loadPreference(savePref);
-    }
-
     SmartDashboard.updateValues();
     SmartDashboard.putNumberArray("Valid IDs", validIDs.stream().mapToDouble(Integer::intValue).toArray());
 
@@ -237,6 +227,29 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+  }
+
+  @Override
+  public void disabledInit() {
+    Constants.robotEnabled = false;
+  }
+
+  @Override
+  public void disabledPeriodic() {
+    if (saveTrigger.get() == true)  {
+      saveTrigger.set(false);
+      m_robotContainer.savePreference(savePref);
+    }
+
+    if (loadTrigger.get() == true) {
+      loadTrigger.set(false);
+      m_robotContainer.loadPreference(savePref);
+    }
+  }
+
+  @Override
+  public void disabledExit() {
+    Constants.robotEnabled = true;
   }
 
   @Override
