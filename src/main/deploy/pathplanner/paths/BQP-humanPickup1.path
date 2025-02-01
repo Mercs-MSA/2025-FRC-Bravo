@@ -3,33 +3,52 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.462,
-        "y": 5.345
+        "x": 4.981,
+        "y": 5.257
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.878995901639344,
-        "y": 6.41654713114754
+        "x": 5.314671543666294,
+        "y": 6.250782993861606
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.86,
-        "y": 6.944
+        "x": 1.05,
+        "y": 7.15
       },
       "prevControl": {
-        "x": 2.478467389787946,
-        "y": 6.255902142882977
+        "x": 3.1081695556640625,
+        "y": 6.175546264648437
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
-  "constraintZones": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.8337204391891894,
+      "rotationDegrees": -53.966
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.8871575342465754,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 1.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -48,7 +67,7 @@
   "folder": "BQP",
   "idealStartingState": {
     "velocity": 0.25,
-    "rotation": -120.60678923274561
+    "rotation": -120.27845295814578
   },
   "useDefaultConstraints": true
 }
