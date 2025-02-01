@@ -106,7 +106,7 @@ public class Constants {
 
 
         public static final double voltageOut = 0;
-        public static final double positionUp = 320; //-240
+        public static final double positionUp = 330; //-240
 
         public static final double positionDown = 0;
 

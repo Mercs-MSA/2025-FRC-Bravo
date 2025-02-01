@@ -13,10 +13,26 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import frc.robot.commands.CommandMap;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+import frc.robot.commands.CANdleCommands.CommandCandleSetAnimation;
+import frc.robot.commands.ClimberCommands.CommandClimbToggle;
+import frc.robot.commands.DriveToPosCommands.CommandLoadDriveToPos;
+import frc.robot.commands.DriveToPosCommands.CommandSetDriveToPos;
+import frc.robot.commands.DriveToPosCommands.CommandToPos;
+import frc.robot.commands.ElevatorCommands.CommandElevatorToStage;
+import frc.robot.commands.FunnelCommands.CommandFunnelPivotToPos;
+import frc.robot.commands.FunnelCommands.CommandFunnelToggle;
+import frc.robot.commands.IntakeCommands.CommandIntakeCollect;
+import frc.robot.commands.IntakeCommands.CommandIntakeOut;
+import frc.robot.commands.ScoringModeCommands.CommandChangeScoreStage;
+import frc.robot.commands.VisionCommands.SeedToMegaTag;
+import frc.robot.Constants.ScoringStageVal;
+
 import frc.robot.subsystems.Mechanisms.Climber.Climber;
 import frc.robot.subsystems.Mechanisms.Elevator.Elevator1;
 import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
