@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+// import frc.robot.commands.*;
 import frc.robot.commands.CANdleCommands.CommandCandleSetAnimation;
 import frc.robot.commands.ClimberCommands.CommandClimbToggle;
 import frc.robot.commands.DriveToPosCommands.CommandLoadDriveToPos;
@@ -201,8 +202,8 @@ public class RobotContainer {
             driver.x().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
 
-            driver.back().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Larson));
-            driver.start().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
+            driver.back().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Fire));
+            driver.start().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Rainbow));
 
             driver.a().whileTrue(
                 new CommandSetDriveToPos("Source").andThen(
@@ -214,12 +215,12 @@ public class RobotContainer {
             )));
 
 
-            driver.leftTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)).andThen(new ParallelCommandGroup (
+            driver.leftTrigger(0.8).whileTrue(new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName).andThen(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0))).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
                 new CommandElevatorToStage(),
                 new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
                 )));
-            driver.rightTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)).andThen(new ParallelCommandGroup (
+            driver.rightTrigger(0.8).whileTrue(new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName).andThen(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1))).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
                 new CommandElevatorToStage()
                 )));//keep

@@ -17,7 +17,7 @@ public class Constants {
         INTAKEREADY(0, true, false, true),
         INTAKING(0, false, false, false),
         L1(21, true, false, false),
-        L2(38, true, false, false),
+        L2(34, true, false, false),
         L3(63, true, false, false),
         L4(101, true, false, false),
         CLIMBING(0, false, true, false);
@@ -180,8 +180,8 @@ public class Constants {
         public static final double linearMetersMaxVel = 2.0;
         public static final double linearMetersMaxAccel = 5.0;
         public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{
-            put("reefA", new CommandToPos.Destination("reefA", new Pose2d(3.276, 4.185, new Rotation2d(0))));
-            put("reefB", new CommandToPos.Destination("reefB", new Pose2d(3.276, 3.79, new Rotation2d(0))));//
+            put("reefA", new CommandToPos.Destination("reefA", new Pose2d(3.2, 4.1, new Rotation2d(0))));
+            put("reefB", new CommandToPos.Destination("reefB", new Pose2d(3.2, 3.8139, new Rotation2d(0))));//
             put("reefC", new CommandToPos.Destination("reefC", new Pose2d(3.679, 2.958, new Rotation2d(1.047))));
             put("reefD", new CommandToPos.Destination("reefD", new Pose2d(3.961, 2.801, new Rotation2d(1.047))));
             put("reefE", new CommandToPos.Destination("reefE", new Pose2d(5.00, 2.789, new Rotation2d(2.0944))));
@@ -191,7 +191,7 @@ public class Constants {
             put("reefI", new CommandToPos.Destination("reefI", new Pose2d(5.283, 5.096, new Rotation2d(-2.094))));
             put("reefJ", new CommandToPos.Destination("reefJ", new Pose2d(5.009, 5.259, new Rotation2d(-2.094))));
             put("reefK", new CommandToPos.Destination("reefK", new Pose2d(3.981, 5.253, new Rotation2d(-1.047))));
-            put("reefL", new CommandToPos.Destination("reefL", new Pose2d(3.692, 5.092, new Rotation2d(-1.047))));
+            put("reefL", new CommandToPos.Destination("reefL", new Pose2d(3.656, 5.11, new Rotation2d(-1.047))));
             put("Source", new CommandToPos.Destination("Source", new Pose2d(1.00, 7.2, new Rotation2d(-1.13))));
         }};
 
