@@ -78,6 +78,8 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putString("Scoring Stage", Constants.ScoringConstants.ScoringStage.toString());
 
+    System.out.println(validIDs);
+
     moveClimberDown = false;
     spinIntake = false;
     moveClimberUp = false;
@@ -134,7 +136,14 @@ public class Robot extends TimedRobot {
     LimelightHelpers.PoseEstimate mt_back = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limelightBackName);
 
     //Update Valid IDs
+
     LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs.stream().mapToInt(Integer::intValue).toArray());
+    if(Constants.DriveToPosRuntime.target != null){
+    SmartDashboard.putString("reefTarget", Constants.DriveToPosRuntime.target);
+    }
+
+
+
 
     SmartDashboard.putBoolean("FrontLimelightOnlineStatus", mt_front != null);
     SmartDashboard.putBoolean("BackLimelightOnlineStatus", mt_back != null);
@@ -194,6 +203,23 @@ public class Robot extends TimedRobot {
         validIDs.add(7);
       }
     }
+
+    if (Constants.DriveToPosRuntime.target == "reefA") {
+      if (validIDs.contains(19)) {
+        validIDs.remove(Integer.valueOf(19));
+      }
+
+    }
+    else {
+      
+      if (!validIDs.contains(19)) {
+          validIDs.add(19);
+      }
+
+  
+    }
+
+    
 
     RawFiducial closestTag = null;
     if (mt_front != null) {

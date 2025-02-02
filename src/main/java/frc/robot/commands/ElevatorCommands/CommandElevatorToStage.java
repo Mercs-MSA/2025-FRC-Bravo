@@ -5,6 +5,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.Elevator1Constants;
 import frc.robot.subsystems.Mechanisms.Elevator.Elevator1;
 import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
+import frc.robot.subsystems.SensorSubsystems.IntakeBeambreak;
 
 public class CommandElevatorToStage extends Command {
     private Elevator1 m_Elevator1 = new Elevator1(Elevator1Constants.attached);
@@ -12,10 +13,14 @@ public class CommandElevatorToStage extends Command {
 
     private double pos;
 
-    public CommandElevatorToStage() {
+    private IntakeBeambreak m_Beambreak;
+
+    public CommandElevatorToStage(IntakeBeambreak beambreak) {
         // if (Constants.ScoringConstants.ScoringStage.canElev())
         // {
+        // addRequirements(beambreak);
             addRequirements(m_Elevator1, m_Elevator2);
+            m_Beambreak = beambreak;
         // }
     }
 
@@ -24,11 +29,15 @@ public class CommandElevatorToStage extends Command {
         // This is where you put stuff that happens right at the start of the command
 
         if (Constants.ScoringConstants.ScoringStage.canElev()){
+
+            if(m_Beambreak.checkBreak() || Constants.ScoringConstants.ScoringStage == Constants.ScoringStageVal.INTAKEREADY) {
             this.pos = Constants.ScoringConstants.ScoringStage.getElevatorRotations();
 
             System.out.println(pos);
             m_Elevator1.motorToPosMM(pos);
             m_Elevator2.motorToPosMM(pos);
+
+            }
         }
     }
 

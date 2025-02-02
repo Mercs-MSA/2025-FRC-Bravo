@@ -104,14 +104,14 @@ public class CommandToPos extends Command {
     var currPose = drivetrain.getState().Pose;
     SmartDashboard.putNumber("currPoseX", currPose.getX());
     SmartDashboard.putNumber("currPoseY", currPose.getY());
-    final double thetaVelocity = atGoal() ? 0.0 :
+    final double thetaVelocity = //thetaController.atGoal() ? 0.0 :
         thetaController.calculate(
             currPose.getRotation().getRadians(), targetTheta);
-    final double xVelocity = atGoal() ? 0.0 :
+    final double xVelocity = //xVelController.atSetpoint() ? 0.0 :
         xVelController.calculate(
             currPose.getX(), targetX
         );
-    final double yVelocity = atGoal() ? 0.0 :
+    final double yVelocity = //yVelController.atSetpoint() ? 0.0 :
         yVelController.calculate(
             currPose.getY(), targetY
         );
