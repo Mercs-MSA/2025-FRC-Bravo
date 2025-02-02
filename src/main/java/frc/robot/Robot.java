@@ -10,11 +10,20 @@ import java.util.List;
 
 import com.ctre.phoenix6.Utils;
 
+import edu.wpi.first.networktables.BooleanArrayEntry;
+import edu.wpi.first.networktables.BooleanArrayTopic;
+import edu.wpi.first.networktables.BooleanEntry;
+import edu.wpi.first.networktables.BooleanTopic;
+import edu.wpi.first.networktables.DoubleEntry;
+import edu.wpi.first.networktables.DoubleTopic;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-// import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -34,6 +43,13 @@ public class Robot extends TimedRobot {
   private SendableChooser<XboxController.Button> controlChoiceClimberUp = new SendableChooser<>();
 
   private final RobotContainer m_robotContainer;
+  public SendableChooser<String> savePref = new SendableChooser<>();
+  private NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
+  private NetworkTable controlMapTable = networkTableInstance.getTable("Control Map Table");
+  private BooleanTopic saveTriggerTopic = controlMapTable.getBooleanTopic("SaveTrigger");
+  private BooleanEntry saveTrigger = saveTriggerTopic.getEntry(false);
+  private BooleanTopic loadTriggerTopic = controlMapTable.getBooleanTopic("LoadTrigger");
+  private BooleanEntry loadTrigger = loadTriggerTopic.getEntry(false);
 
   public final XboxController testJoystick = new XboxController(2);
 
@@ -45,28 +61,17 @@ public class Robot extends TimedRobot {
 
   public Robot() {
     m_robotContainer = new RobotContainer();
+    savePref.addOption("Competition", "Competition");
+    savePref.setDefaultOption("Testing", "Testing");
+    savePref.addOption("A", "A");
+    savePref.addOption("B", "B");
+    savePref.addOption("C", "C");
+    SmartDashboard.putData("Save Map Slot", savePref);
 
-    SmartDashboard.putData("Selectable Action Test", new Sendable() {
-      @Override
-      public void initSendable(SendableBuilder builder) {
-        builder.addBooleanProperty("Climber Up", () -> moveClimberDown, null);
-        builder.addBooleanProperty("Spin Intake", () -> spinIntake, null);
-        builder.addBooleanProperty("Climber Down", () -> moveClimberUp, null);
-      }});
-    controlChoiceClimberDown.setDefaultOption("A Button", XboxController.Button.kA);
-    controlChoiceClimberDown.addOption("B Button", XboxController.Button.kB);
-    controlChoiceClimberDown.addOption("X Button", XboxController.Button.kX);
-    SmartDashboard.putData("Climber Up Buttonmap", controlChoiceClimberDown);
-    controlChoiceIntake.addOption("A Button", XboxController.Button.kA);
-    controlChoiceIntake.setDefaultOption("B Button", XboxController.Button.kB);
-    controlChoiceIntake.addOption("X Button", XboxController.Button.kX);
-    SmartDashboard.putData("Intake Buttonmap", controlChoiceIntake);
-    controlChoiceClimberUp.addOption("A Button", XboxController.Button.kA);
-    controlChoiceClimberUp.addOption("B Button", XboxController.Button.kB);
-    controlChoiceClimberUp.setDefaultOption("X Button", XboxController.Button.kX);
-    SmartDashboard.putData("Climber Down Buttonmap", controlChoiceClimberUp);
+    saveTriggerTopic.publish();
+    loadTriggerTopic.publish();
   }
-
+  
   @Override
   public void robotPeriodic() {
     // System.out.println(Constants.ScoringConstants.ScoringStage + " " + Constants.ScoringConstants.ScoringStage.getElevatorRotations());
@@ -234,6 +239,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("frontClosestTag", (closestTag != null ? closestTag.id : 0));
     SmartDashboard.putString("possibleDestinationA", Constants.DriveToPosRuntime.autoTargets.get(0));
     SmartDashboard.putString("possibleDestinationB", Constants.DriveToPosRuntime.autoTargets.get(1));
+
+    SmartDashboard.updateValues();
     SmartDashboard.putNumberArray("Valid IDs", validIDs.stream().mapToDouble(Integer::intValue).toArray());
 
   }
@@ -246,6 +253,29 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+  }
+
+  @Override
+  public void disabledInit() {
+    Constants.robotEnabled = false;
+  }
+
+  @Override
+  public void disabledPeriodic() {
+    if (saveTrigger.get() == true)  {
+      saveTrigger.set(false);
+      m_robotContainer.savePreference(savePref);
+    }
+
+    if (loadTrigger.get() == true) {
+      loadTrigger.set(false);
+      m_robotContainer.loadPreference(savePref);
+    }
+  }
+
+  @Override
+  public void disabledExit() {
+    Constants.robotEnabled = true;
   }
 
   @Override

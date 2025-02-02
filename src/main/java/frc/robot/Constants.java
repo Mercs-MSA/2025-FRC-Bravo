@@ -1,17 +1,26 @@
 package frc.robot;
 
+import static edu.wpi.first.units.Units.*;
+
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.numbers.N3;
 import frc.robot.commands.DriveToPosCommands.CommandToPos;
+import frc.robot.generated.TunerConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Constants {
+
+    public static boolean robotEnabled = false;
+    
+    public static final double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+    public static final double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second
+                                                                                                            // max angular velocity
 
     public enum ScoringStageVal {
         INTAKEREADY(0, true, false, true),
@@ -88,8 +97,6 @@ public class Constants {
 
     }
 
- 
-
     public static final class ClimberConstants{
         public static final int id = 16;
 
@@ -110,15 +117,12 @@ public class Constants {
 
     }
 
-
     public static final class elevatorMMConstants{
         public static final double acceleration = 100;
         public static final double speed = 150;
         public static final double jerk = 0;
 
     }
-
-
 
     public static final class elevatorBeambreakConstants {
         public static boolean breakAttached = false;
@@ -154,7 +158,6 @@ public class Constants {
         // public static final double voltageOut = 2;
         // public static final double position = 0;
     }
-
 
     public static final class IntakeBeambreakConstants {
         public static final boolean breakAttached = true;
@@ -208,8 +211,8 @@ public class Constants {
     public static boolean isWithinTol(double targetPose, double currentPose, double tolerance) {
         return (Math.abs(targetPose - currentPose) <= tolerance);
     }
-    public class ScoringConstants
-    {
+
+    public class ScoringConstants {
         public static ScoringStageVal ScoringStage = ScoringStageVal.INTAKEREADY;
     }
 
