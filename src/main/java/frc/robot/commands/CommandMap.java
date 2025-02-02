@@ -67,7 +67,7 @@ public class CommandMap {
                     new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        new CommandElevatorToStage(),
+                        new CommandElevatorToStage(beamBreak),
                         new CommandIntakeCollect(flywheels, beamBreak, 1)
                     )
                 )
@@ -78,7 +78,7 @@ public class CommandMap {
                     new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        new CommandElevatorToStage(),
+                        new CommandElevatorToStage(beamBreak),
                         new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Strobe)
                     )
                 )
@@ -89,7 +89,7 @@ public class CommandMap {
                     new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        new CommandElevatorToStage()
+                        new CommandElevatorToStage(beamBreak)
                     )
                 )
             ), // WHILETRUE
@@ -106,7 +106,7 @@ public class CommandMap {
                     new CommandSetDriveToPos("ReefTest"),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        new CommandElevatorToStage()
+                        new CommandElevatorToStage(beamBreak)
                     )
                 )
             ),
@@ -120,17 +120,17 @@ public class CommandMap {
                 "Intake Collect",
                 new CommandIntakeCollect(flywheels, beamBreak, Constants.MaxAngularRate)
             ),
-            // Map.entry(
-            //     "Intake Collect",
-            //     new CommandIntakeCollect(flywheels, beamBreak, 8)
-            // ),
+            Map.entry(
+                "Intake Collect 2",
+                new CommandIntakeCollect(flywheels, beamBreak, 8)
+            ),
             Map.entry(
                 "Score",
                 new CommandIntakeOut(flywheels, beamBreak, Constants.MaxAngularRate)
             ),
             Map.entry(
                 "Intake Reverse",
-                new CommandIntakeOut(flywheels, beamBreak, 5)
+                new CommandIntakeOut(flywheels, beamBreak, 16)
             ),
 
 
@@ -142,40 +142,40 @@ public class CommandMap {
                 "L1",
                 new SequentialCommandGroup(
                     new CommandChangeScoreStage(ScoringStageVal.L1),
-                    new CommandElevatorToStage()
+                    new CommandElevatorToStage(beamBreak)
                 )
             ),
             Map.entry(
                 "L2",
                 new SequentialCommandGroup(
                     new CommandChangeScoreStage(ScoringStageVal.L2),
-                    new CommandElevatorToStage()
+                    new CommandElevatorToStage(beamBreak)
                 )
             ),
             Map.entry(
                 "L3",
                 new SequentialCommandGroup(
                     new CommandChangeScoreStage(ScoringStageVal.L3),
-                    new CommandElevatorToStage()
+                    new CommandElevatorToStage(beamBreak)
                 )
             ),
             Map.entry(
                 "L4",
                 new SequentialCommandGroup(
                     new CommandChangeScoreStage(ScoringStageVal.L4),
-                    new CommandElevatorToStage()
+                    new CommandElevatorToStage(beamBreak)
                 )
             ),
             Map.entry(
                 "ELEVIntakePos",
                 new SequentialCommandGroup(
                     new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-                    new CommandElevatorToStage()
+                    new CommandElevatorToStage(beamBreak)
                 )
             ),
             Map.entry(
                 "Elevator To Stage",
-                new CommandElevatorToStage()
+                new CommandElevatorToStage(beamBreak)
             ),
 
 
@@ -246,11 +246,11 @@ public class CommandMap {
             /****************************************/
             Map.entry(
                 "Candle Larson",
-                new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Larson)
+                new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Fire)
             ),
             Map.entry(
                 "Candle Twinkle",
-                new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Twinkle)
+                new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Rainbow)
             ),
 
 
