@@ -67,7 +67,7 @@ public class CommandMap {
                     new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        new CommandElevatorToStage(beamBreak),
+                        // new CommandElevatorToStage(beamBreak),
                         new CommandIntakeCollect(flywheels, beamBreak, 1)
                     )
                 )
@@ -78,7 +78,7 @@ public class CommandMap {
                     new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        new CommandElevatorToStage(beamBreak),
+                        // new CommandElevatorToStage(beamBreak),
                         new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Strobe)
                     )
                 )
@@ -89,7 +89,8 @@ public class CommandMap {
                     new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        new CommandElevatorToStage(beamBreak)
+                        // new CommandElevatorToStage(beamBreak)
+                        new PrintCommand("moo")
                     )
                 )
             ), // WHILETRUE
@@ -106,7 +107,8 @@ public class CommandMap {
                     new CommandSetDriveToPos("ReefTest"),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        new CommandElevatorToStage(beamBreak)
+                        // new CommandElevatorToStage(beamBreak)
+                        new PrintCommand("moo")
                     )
                 )
             ),
@@ -135,44 +137,44 @@ public class CommandMap {
 
 
 
-            /****************************************/
-            /*           ELEVATOR COMMANDS          */
-            /****************************************/
-            Map.entry(
-                "L1",
-                new SequentialCommandGroup(
-                    new CommandChangeScoreStage(ScoringStageVal.L1),
-                    new CommandElevatorToStage(beamBreak)
-                )
-            ),
-            Map.entry(
-                "L2",
-                new SequentialCommandGroup(
-                    new CommandChangeScoreStage(ScoringStageVal.L2),
-                    new CommandElevatorToStage(beamBreak)
-                )
-            ),
-            Map.entry(
-                "L3",
-                new SequentialCommandGroup(
-                    new CommandChangeScoreStage(ScoringStageVal.L3),
-                    new CommandElevatorToStage(beamBreak)
-                )
-            ),
-            Map.entry(
-                "L4",
-                new SequentialCommandGroup(
-                    new CommandChangeScoreStage(ScoringStageVal.L4),
-                    new CommandElevatorToStage(beamBreak)
-                )
-            ),
-            Map.entry(
-                "ELEVIntakePos",
-                new SequentialCommandGroup(
-                    new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-                    new CommandElevatorToStage(beamBreak)
-                )
-            ),
+            // /****************************************/
+            // /*           ELEVATOR COMMANDS          */
+            // /****************************************/
+            // Map.entry(
+            //     "L1",
+            //     new SequentialCommandGroup(
+            //         new CommandChangeScoreStage(ScoringStageVal.L1),
+            //         new CommandElevatorToStage(beamBreak)
+            //     )
+            // ),
+            // Map.entry(
+            //     "L2",
+            //     new SequentialCommandGroup(
+            //         new CommandChangeScoreStage(ScoringStageVal.L2),
+            //         new CommandElevatorToStage(beamBreak)
+            //     )
+            // ),
+            // Map.entry(
+            //     "L3",
+            //     new SequentialCommandGroup(
+            //         new CommandChangeScoreStage(ScoringStageVal.L3),
+            //         new CommandElevatorToStage(beamBreak)
+            //     )
+            // ),
+            // Map.entry(
+            //     "L4",
+            //     new SequentialCommandGroup(
+            //         new CommandChangeScoreStage(ScoringStageVal.L4),
+            //         new CommandElevatorToStage(beamBreak)
+            //     )
+            // ),
+            // Map.entry(
+            //     "ELEVIntakePos",
+            //     new SequentialCommandGroup(
+            //         new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
+            //         new CommandElevatorToStage(beamBreak)
+            //     )
+            // ),
             Map.entry(
                 "Elevator To Stage",
                 new CommandElevatorToStage(beamBreak)
@@ -256,18 +258,18 @@ public class CommandMap {
 
 
             /****************************************/
-            /*            RESET COMMANDS            */
+            /*            RESET COMMANDS            */ // IS THIS A REALLY BAD IDEA BECAUSE IT RUNS THEM INSTANTLY????
             /****************************************/
-            Map.entry(
-                "Reset Field Centric",
-                drivetrain.runOnce(
-                    () -> drivetrain.seedFieldCentric()
-                )
-            ),
-            Map.entry(
-                "Reset All",
-                new ParallelCommandGroup()
-            ),
+            // Map.entry(
+            //     "Reset Field Centric",
+            //     drivetrain.runOnce(
+            //         () -> drivetrain.seedFieldCentric()
+            //     )
+            // ),
+            // Map.entry(
+            //     "Reset All",
+            //     new ParallelCommandGroup()
+            // ),
             Map.entry(
                 "Reset MegaTag",
                 new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName)
@@ -276,41 +278,41 @@ public class CommandMap {
 
 
             /****************************************/
-            /*         CALIBRATION COMMANDS         */
+            /*         CALIBRATION COMMANDS         */  // IS THIS A REALLY BAD IDEA BECAUSE IT RUNS THEM INSTANTLY????
             /****************************************/
-            Map.entry(
-                "Calibrate Brake",
-                drivetrain.applyRequest(
-                    () -> new SwerveRequest.SwerveDriveBrake()
-                )
-            ), // WHILETRUE
-            Map.entry(
-                "Calibrate Turn",
-                drivetrain.applyRequest(
-                    () -> new SwerveRequest.PointWheelsAt().withModuleDirection(
-                        new Rotation2d(
-                            -driver.getLeftY(),
-                            -driver.getLeftX()
-                        )
-                    )
-                )
-            ), // WHILETRUE
-            Map.entry(
-                "Calibrate Dyn Forward",
-                drivetrain.sysIdDynamic(Direction.kForward)
-            ), // WHILETRUE
-            Map.entry(
-                "Calibrate Dyn Backward",
-                drivetrain.sysIdDynamic(Direction.kReverse)
-            ), // WHILETRUE
-            Map.entry(
-                "Calibrate Static Forward",
-                drivetrain.sysIdQuasistatic(Direction.kForward)
-            ), // WHILETRUE
-            Map.entry(
-                "Calibrate Static Backward",
-                drivetrain.sysIdQuasistatic(Direction.kReverse)
-            ), // WHILETRUE
+            // Map.entry(
+            //     "Calibrate Brake",
+            //     drivetrain.applyRequest(
+            //         () -> new SwerveRequest.SwerveDriveBrake()
+            //     )
+            // ), // WHILETRUE
+            // Map.entry(
+            //     "Calibrate Turn",
+            //     drivetrain.applyRequest(
+            //         () -> new SwerveRequest.PointWheelsAt().withModuleDirection(
+            //             new Rotation2d(
+            //                 -driver.getLeftY(),
+            //                 -driver.getLeftX()
+            //             )
+            //         )
+            //     )
+            // ), // WHILETRUE
+            // Map.entry(
+            //     "Calibrate Dyn Forward",
+            //     drivetrain.sysIdDynamic(Direction.kForward)
+            // ), // WHILETRUE
+            // Map.entry(
+            //     "Calibrate Dyn Backward",
+            //     drivetrain.sysIdDynamic(Direction.kReverse)
+            // ), // WHILETRUE
+            // Map.entry(
+            //     "Calibrate Static Forward",
+            //     drivetrain.sysIdQuasistatic(Direction.kForward)
+            // ), // WHILETRUE
+            // Map.entry(
+            //     "Calibrate Static Backward",
+            //     drivetrain.sysIdQuasistatic(Direction.kReverse)
+            // ), // WHILETRUE
 
 
 
