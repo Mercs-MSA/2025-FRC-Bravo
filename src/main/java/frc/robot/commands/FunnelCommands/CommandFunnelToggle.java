@@ -6,10 +6,11 @@ import frc.robot.subsystems.Mechanisms.Funnel.FunnelPivot;
 
 
 public class CommandFunnelToggle extends Command {
-    private FunnelPivot m_FunnelPivot = new FunnelPivot(true);
+    private FunnelPivot m_FunnelPivot;
 
 
-    public CommandFunnelToggle() {
+    public CommandFunnelToggle(FunnelPivot m_FunnelPivot) {
+        this.m_FunnelPivot = m_FunnelPivot;
         addRequirements(m_FunnelPivot);
     }
 

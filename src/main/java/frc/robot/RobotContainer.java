@@ -106,30 +106,30 @@ public class RobotContainer {
             
             put("L1", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.L1),
-                new CommandElevatorToStage(m_intakeBeamBreak)
+                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2)
 
             ));
 
             put("L2", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.L2),
-                new CommandElevatorToStage(m_intakeBeamBreak)
+                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2)
 
             ));
 
             put("L3", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.L3),
-                new CommandElevatorToStage(m_intakeBeamBreak)
+                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2)
 
             ));
 
             put("L4", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.L4),
-                new CommandElevatorToStage(m_intakeBeamBreak)
+                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2)
             ));
 
             put("ELEVIntakePos", new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-                new CommandElevatorToStage(m_intakeBeamBreak)
+                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2)
             ));
 
             put("MoveFunnel", new SequentialCommandGroup(
@@ -211,26 +211,26 @@ public class RobotContainer {
                 new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY)).andThen(
                 new ParallelCommandGroup(
                     new CommandToPos(drivetrain), 
-                    new CommandElevatorToStage(m_intakeBeamBreak),
+                    new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2),
                     new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1)
             )));
 
 
             driver.leftTrigger(0.8).whileTrue((new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0))).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
-                new CommandElevatorToStage(m_intakeBeamBreak),
+                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2),
                 new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
                 )));
             driver.rightTrigger(0.8).whileTrue((new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1))).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
-                new CommandElevatorToStage(m_intakeBeamBreak)
+                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2)
                 )));//keep
 
             driver.leftTrigger(0.8).onFalse(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
 
             driver.rightTrigger(0.8).onFalse(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
 
-            driver.rightBumper().onTrue(new CommandElevatorToStage(m_intakeBeamBreak));
+            driver.rightBumper().onTrue(new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2));
 
 
             // driver.leftTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
@@ -257,12 +257,12 @@ public class RobotContainer {
 
             operator.b().onTrue(new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-                new CommandElevatorToStage(m_intakeBeamBreak)));
+                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2)));
 
 
-            operator.leftStick().onTrue(new CommandClimbToggle());
+            operator.leftStick().onTrue(new CommandClimbToggle(m_Climber));
 
-            operator.rightStick().onTrue(new CommandFunnelToggle());
+            operator.rightStick().onTrue(new CommandFunnelToggle(m_FunnelPivot));
 
             operator.leftBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 8));
 

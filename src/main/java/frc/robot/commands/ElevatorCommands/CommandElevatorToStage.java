@@ -8,19 +8,22 @@ import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
 import frc.robot.subsystems.SensorSubsystems.IntakeBeambreak;
 
 public class CommandElevatorToStage extends Command {
-    private Elevator1 m_Elevator1 = new Elevator1(Elevator1Constants.attached);
-    private Elevator2 m_Elevator2 = new Elevator2(Elevator1Constants.attached);
+    private final Elevator1 m_Elevator1;
+    private final Elevator2 m_Elevator2;
 
     private double pos;
 
     private IntakeBeambreak m_Beambreak;
 
-    public CommandElevatorToStage(IntakeBeambreak beambreak) {
+    public CommandElevatorToStage(IntakeBeambreak beambreak, Elevator1 m_Elevator1, Elevator2 m_Elevator2) {
+
+
         // if (Constants.ScoringConstants.ScoringStage.canElev())
         // {
         // addRequirements(beambreak);
-            addRequirements(m_Elevator1, m_Elevator2);
-            m_Beambreak = beambreak;
+            this.m_Elevator1 = m_Elevator1;
+            this.m_Elevator2 = m_Elevator2;
+            this.m_Beambreak = beambreak;
         // }
     }
 
