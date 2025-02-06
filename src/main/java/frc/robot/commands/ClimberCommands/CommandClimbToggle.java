@@ -11,7 +11,7 @@ public class CommandClimbToggle extends Command {
 
 
     public CommandClimbToggle(Climber m_Climber) {
-        
+
         this.m_Climber = m_Climber;
         addRequirements(m_Climber);
     }

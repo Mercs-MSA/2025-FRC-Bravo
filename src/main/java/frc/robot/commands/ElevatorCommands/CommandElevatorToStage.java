@@ -21,9 +21,11 @@ public class CommandElevatorToStage extends Command {
         // if (Constants.ScoringConstants.ScoringStage.canElev())
         // {
         // addRequirements(beambreak);
+
         this.m_Elevator1 = m_Elevator1;
         this.m_Elevator2 = m_Elevator2;
         this.m_Beambreak = beambreak;
+
         // }
     }
 
