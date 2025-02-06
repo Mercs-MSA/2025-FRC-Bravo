@@ -105,7 +105,7 @@ public class RobotContainer {
 
     public final CANdle_LED m_leds = new CANdle_LED();
 
-    private final CommandMap commandMap = new CommandMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver);
+    private final CommandMap commandMap = new CommandMap(drivetrain, m_IntakeFlywheels, m_intakeBeamBreak, m_leds, driver, m_Elevator1, m_Elevator2, m_FunnelPivot,m_Climber);
 
     private final SendableChooser<Command> autoChooser;
 

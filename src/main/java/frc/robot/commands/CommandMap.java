@@ -30,6 +30,10 @@ import frc.robot.subsystems.SensorSubsystems.CANdle_LED;
 import frc.robot.subsystems.Swerve.CommandSwerveDrivetrain;
 import frc.robot.subsystems.SensorSubsystems.IntakeBeambreak;
 import frc.robot.subsystems.Mechanisms.Intake.IntakeFlywheels;
+import frc.robot.subsystems.Mechanisms.Elevator.Elevator1;
+import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
+import frc.robot.subsystems.Mechanisms.Funnel.FunnelPivot;
+import frc.robot.subsystems.Mechanisms.Climber.Climber;
 
 public class CommandMap {
     private CommandSwerveDrivetrain drivetrain;
@@ -37,19 +41,31 @@ public class CommandMap {
     private IntakeBeambreak beamBreak;
     private CANdle_LED leds;
     private CommandXboxController driver;
+    private Elevator1 elevator1;
+    private Elevator2 elevator2;
+    private FunnelPivot funnelPivot;
+    private Climber climber;
 
     public CommandMap (
         CommandSwerveDrivetrain drivetrain,
         IntakeFlywheels flywheels,
         IntakeBeambreak beamBreak,
         CANdle_LED leds,
-        CommandXboxController driver
+        CommandXboxController driver,
+        Elevator1 elevator1,
+        Elevator2 elevator2,
+        FunnelPivot funnelPivot,
+        Climber climber
     ) {
         this.drivetrain = drivetrain;
         this.flywheels = flywheels;
         this.beamBreak = beamBreak;
         this.leds = leds;
         this.driver = driver;
+        this.elevator1 = elevator1;
+        this.elevator2 = elevator2;
+        this.funnelPivot = funnelPivot;
+        this.climber = climber;
     }
 
     public Map<String, Command> getMap() {
@@ -67,7 +83,7 @@ public class CommandMap {
                     new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        // new CommandElevatorToStage(beamBreak),
+                        // new CommandElevatorToStage(beamBreak, elevator1, elevator2),
                         new CommandIntakeCollect(flywheels, beamBreak, 1)
                     )
                 )
@@ -78,7 +94,7 @@ public class CommandMap {
                     new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        // new CommandElevatorToStage(beamBreak),
+                        // new CommandElevatorToStage(beamBreak, elevator1, elevator2),
                         new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Strobe)
                     )
                 )
@@ -89,7 +105,7 @@ public class CommandMap {
                     new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        // new CommandElevatorToStage(beamBreak)
+                        // new CommandElevatorToStage(beamBreak, elevator1, elevator2)
                         new PrintCommand("moo")
                     )
                 )
@@ -107,7 +123,7 @@ public class CommandMap {
                     new CommandSetDriveToPos("ReefTest"),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        // new CommandElevatorToStage(beamBreak)
+                        // new CommandElevatorToStage(beamBreak, elevator1, elevator2)
                         new PrintCommand("moo")
                     )
                 )
@@ -144,40 +160,40 @@ public class CommandMap {
             //     "L1",
             //     new SequentialCommandGroup(
             //         new CommandChangeScoreStage(ScoringStageVal.L1),
-            //         new CommandElevatorToStage(beamBreak)
+            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
             //     )
             // ),
             // Map.entry(
             //     "L2",
             //     new SequentialCommandGroup(
             //         new CommandChangeScoreStage(ScoringStageVal.L2),
-            //         new CommandElevatorToStage(beamBreak)
+            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
             //     )
             // ),
             // Map.entry(
             //     "L3",
             //     new SequentialCommandGroup(
             //         new CommandChangeScoreStage(ScoringStageVal.L3),
-            //         new CommandElevatorToStage(beamBreak)
+            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
             //     )
             // ),
             // Map.entry(
             //     "L4",
             //     new SequentialCommandGroup(
             //         new CommandChangeScoreStage(ScoringStageVal.L4),
-            //         new CommandElevatorToStage(beamBreak)
+            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
             //     )
             // ),
             // Map.entry(
             //     "ELEVIntakePos",
             //     new SequentialCommandGroup(
             //         new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-            //         new CommandElevatorToStage(beamBreak)
+            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
             //     )
             // ),
             Map.entry(
                 "Elevator To Stage",
-                new CommandElevatorToStage(beamBreak)
+                new CommandElevatorToStage(beamBreak, elevator1, elevator2)
             ),
 
 
@@ -194,7 +210,7 @@ public class CommandMap {
             ),
             Map.entry(
                 "Toggle Funnel",
-                new CommandFunnelToggle()
+                new CommandFunnelToggle(funnelPivot)
             ),
 
 
@@ -204,7 +220,7 @@ public class CommandMap {
             /****************************************/
             Map.entry(
                 "Toggle Climb",
-                new CommandClimbToggle()
+                new CommandClimbToggle(climber)
             ),
             Map.entry(
                 "Climb Up",
