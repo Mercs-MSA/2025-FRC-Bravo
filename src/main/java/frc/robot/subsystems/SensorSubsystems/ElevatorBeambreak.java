@@ -7,27 +7,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ElevatorBeambreak extends SubsystemBase{
-    private static final DigitalInput m_beamBreak = new DigitalInput(Constants.elevatorBeambreakConstants.beamBreakChannel);
+public class ElevatorBeambreak extends SubsystemBase {
+    private static final DigitalInput m_beamBreak = new DigitalInput(
+            Constants.elevatorBeambreakConstants.beamBreakChannel);
 
     private boolean elevatorDown = false;
 
     BiConsumer<Boolean, Boolean> callback = (risingEdge, fallingEdge) -> {
-        if (risingEdge){
+        if (risingEdge) {
             this.elevatorDown = false;
- 
+
         }
-        if (fallingEdge){
+        if (fallingEdge) {
             this.elevatorDown = true;
         }
-     
+
     };
-
-
-
-
-
-    
 
     public ElevatorBeambreak() {
 
@@ -37,12 +32,12 @@ public class ElevatorBeambreak extends SubsystemBase{
         return m_beamBreak.get();
     }
 
-@Override
-public void periodic(){
-    elevatorDown = m_beamBreak.get();
-    SmartDashboard.putBoolean("Elevator Down", checkBreak());
+    @Override
+    public void periodic() {
+        elevatorDown = m_beamBreak.get();
+        SmartDashboard.putBoolean("Elevator Down", checkBreak());
 
-    // SmartDashboard.putBoolean("Detects coral", detectsCoral);
+        // SmartDashboard.putBoolean("Detects coral", detectsCoral);
 
-}
+    }
 }

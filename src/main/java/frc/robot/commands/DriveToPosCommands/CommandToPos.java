@@ -54,13 +54,13 @@ public class CommandToPos extends Command {
     
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    SmartDashboard.putData("driveToPosTheta_Pid", thetaController);
-    SmartDashboard.putData("driveToPosX_Pid", xVelController);
-    SmartDashboard.putData("driveToPosY_Pid", yVelController);
+    // SmartDashboard.putData("driveToPosTheta_Pid", thetaController);
+    // SmartDashboard.putData("driveToPosX_Pid", xVelController);
+    // SmartDashboard.putData("driveToPosY_Pid", yVelController);
 
-    SmartDashboard.putNumber("driveToPosX_Tgt", -1);
-    SmartDashboard.putNumber("driveToPosY_Tgt", -1);
-    SmartDashboard.putNumber("driveToPosTheta_Tgt", -1);
+    // SmartDashboard.putNumber("driveToPosX_Tgt", -1);
+    // SmartDashboard.putNumber("driveToPosY_Tgt", -1);
+    // SmartDashboard.putNumber("driveToPosTheta_Tgt", -1);
 
     addRequirements(swerve);
   }
@@ -102,8 +102,8 @@ public class CommandToPos extends Command {
     }
 
     var currPose = drivetrain.getState().Pose;
-    SmartDashboard.putNumber("currPoseX", currPose.getX());
-    SmartDashboard.putNumber("currPoseY", currPose.getY());
+    // SmartDashboard.putNumber("currPoseX", currPose.getX());
+    // SmartDashboard.putNumber("currPoseY", currPose.getY());
     final double thetaVelocity = //thetaController.atGoal() ? 0.0 :
         thetaController.calculate(
             currPose.getRotation().getRadians(), targetTheta);
@@ -116,13 +116,13 @@ public class CommandToPos extends Command {
             currPose.getY(), targetY
         );
 
-    SmartDashboard.putNumber("driveToPosX_Vel", xVelocity);
-    SmartDashboard.putNumber("driveToPosY_Vel", yVelocity);
-    SmartDashboard.putNumber("driveToPosTheta_Vel", thetaVelocity);
+    // SmartDashboard.putNumber("driveToPosX_Vel", xVelocity);
+    // SmartDashboard.putNumber("driveToPosY_Vel", yVelocity);
+    // SmartDashboard.putNumber("driveToPosTheta_Vel", thetaVelocity);
 
-    SmartDashboard.putNumber("driveToPosX_Tgt", targetX);
-    SmartDashboard.putNumber("driveToPosY_Tgt", targetY);
-    SmartDashboard.putNumber("driveToPosTheta_Tgt", target.destPose.getRotation().getDegrees());
+    // SmartDashboard.putNumber("driveToPosX_Tgt", targetX);
+    // SmartDashboard.putNumber("driveToPosY_Tgt", targetY);
+    // SmartDashboard.putNumber("driveToPosTheta_Tgt", target.destPose.getRotation().getDegrees());
 
     drivetrain.setControl(
         driveRequest
@@ -137,9 +137,9 @@ public class CommandToPos extends Command {
 
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putNumber("driveToPosX_Vel", 0);
-    SmartDashboard.putNumber("driveToPosY_Vel", 0);
-    SmartDashboard.putNumber("driveToPosTheta_Vel", 0);
+    // SmartDashboard.putNumber("driveToPosX_Vel", 0);
+    // SmartDashboard.putNumber("driveToPosY_Vel", 0);
+    // SmartDashboard.putNumber("driveToPosTheta_Vel", 0);
   }
 
   @Override
