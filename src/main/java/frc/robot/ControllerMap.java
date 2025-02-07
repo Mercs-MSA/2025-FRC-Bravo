@@ -9,10 +9,44 @@ public class ControllerMap {
     CommandXboxController controller;
     String controllerName;
 
+    private ButtonMap buttonMapA;
+    private ButtonMap buttonMapB;
+    private ButtonMap buttonMapX;
+    private ButtonMap buttonMapY;
+    private ButtonMap buttonMapRightBumper;
+    private ButtonMap buttonMapLeftBumper;
+    private ButtonMap buttonMapStart;
+    private ButtonMap buttonMapBack;
+    private ButtonMap buttonMapLeftTrigger;
+    private ButtonMap buttonMapRightTrigger;
+    private ButtonMap buttonMapDpadUp;
+    private ButtonMap buttonMapDpadDown;
+    private ButtonMap buttonMapDpadLeft;
+    private ButtonMap buttonMapDpadRight;
+    private ButtonMap buttonMapLeftStickPress;
+    private ButtonMap buttonMapRightStickPress;
+
     public ControllerMap(CommandMap commandMap, CommandXboxController controller, String controllerName) {
         this.commandMap = commandMap;
         this.controller = controller;
         this.controllerName = controllerName;
+
+        buttonMapA = getButtonMap(controller.a(), "A Button");
+        buttonMapB = getButtonMap(controller.b(), "B Button");
+        buttonMapX = getButtonMap(controller.x(), "X Button");
+        buttonMapY = getButtonMap(controller.y(), "Y Button");
+        buttonMapRightBumper = getButtonMap(controller.leftBumper(), "Left Bumper");
+        buttonMapLeftBumper = getButtonMap(controller.rightBumper(), "Right Bumper");
+        buttonMapStart = getButtonMap(controller.leftTrigger(.8), "Left Trigger");
+        buttonMapBack = getButtonMap(controller.rightTrigger(.8), "Right Trigger");
+        buttonMapLeftTrigger = getButtonMap(controller.start(), "Start");
+        buttonMapRightTrigger = getButtonMap(controller.back(), "Back");
+        buttonMapDpadUp = getButtonMap(controller.leftStick(), "Left Stick");
+        buttonMapDpadDown = getButtonMap(controller.rightStick(), "Right Stick");
+        buttonMapDpadLeft = getButtonMap(controller.povUp(), "Dpad Up");
+        buttonMapDpadRight = getButtonMap(controller.povDown(), "Dpad Down");
+        buttonMapLeftStickPress = getButtonMap(controller.povLeft(), "Dpad Left");
+        buttonMapRightStickPress = getButtonMap(controller.povRight(), "Dpad Right");
     }
 
     private ButtonMap getButtonMap(Trigger trigger, String button) {
@@ -26,68 +60,61 @@ public class ControllerMap {
         );
     }
 
-    public ButtonMap a() {
-        return getButtonMap(controller.a(), "A Button");
+    public void updateControllerMaps() {
+        buttonMapA.updateCachedValues();
+        buttonMapB.updateCachedValues();
+        buttonMapX.updateCachedValues();
+        buttonMapY.updateCachedValues();
+        buttonMapRightBumper.updateCachedValues();
+        buttonMapLeftBumper.updateCachedValues();
+        buttonMapStart.updateCachedValues();
+        buttonMapBack.updateCachedValues();
+        buttonMapLeftTrigger.updateCachedValues();
+        buttonMapRightTrigger.updateCachedValues();
+        buttonMapDpadUp.updateCachedValues();
+        buttonMapDpadDown.updateCachedValues();
+        buttonMapDpadLeft.updateCachedValues();
+        buttonMapDpadRight.updateCachedValues();
+        buttonMapLeftStickPress.updateCachedValues();
+        buttonMapRightStickPress.updateCachedValues();
     }
 
-    public ButtonMap b() {
-        return getButtonMap(controller.b(), "B Button");
+    public void savePreference(String saveSlotKey) {
+        buttonMapA.savePreferenceCommandKey(saveSlotKey);
+        buttonMapB.savePreferenceCommandKey(saveSlotKey);
+        buttonMapX.savePreferenceCommandKey(saveSlotKey);
+        buttonMapY.savePreferenceCommandKey(saveSlotKey);
+        buttonMapRightBumper.savePreferenceCommandKey(saveSlotKey);
+        buttonMapLeftBumper.savePreferenceCommandKey(saveSlotKey);
+        buttonMapStart.savePreferenceCommandKey(saveSlotKey);
+        buttonMapBack.savePreferenceCommandKey(saveSlotKey);
+        buttonMapLeftTrigger.savePreferenceCommandKey(saveSlotKey);
+        buttonMapRightTrigger.savePreferenceCommandKey(saveSlotKey);
+        buttonMapDpadUp.savePreferenceCommandKey(saveSlotKey);
+        buttonMapDpadDown.savePreferenceCommandKey(saveSlotKey);
+        buttonMapDpadLeft.savePreferenceCommandKey(saveSlotKey);
+        buttonMapDpadRight.savePreferenceCommandKey(saveSlotKey);
+        buttonMapLeftStickPress.savePreferenceCommandKey(saveSlotKey);
+        buttonMapRightStickPress.savePreferenceCommandKey(saveSlotKey);
     }
 
-    public ButtonMap x() {
-        return getButtonMap(controller.x(), "X Button");
-    }
-
-    public ButtonMap y() {
-        return getButtonMap(controller.y(), "Y Button");
-    }
-
-    public ButtonMap leftBumper() {
-        return getButtonMap(controller.leftBumper(), "Left Bumper");
-    }
-
-    public ButtonMap rightBumper() {
-        return getButtonMap(controller.rightBumper(), "Right Bumper");
-    }
-
-    public ButtonMap leftTrigger() {
-        return getButtonMap(controller.leftTrigger(.8), "Left Trigger");
-    }
-
-    public ButtonMap rightTrigger() {
-        return getButtonMap(controller.rightTrigger(.8), "Right Trigger");
-    }
-
-    public ButtonMap start() {
-        return getButtonMap(controller.start(), "Start");
-    }
-
-    public ButtonMap back() {
-        return getButtonMap(controller.back(), "Back");
-    }
-
-    public ButtonMap leftStick() {
-        return getButtonMap(controller.leftStick(), "Left Stick");
-    }
-
-    public ButtonMap rightStick() {
-        return getButtonMap(controller.rightStick(), "Right Stick");
-    }
-
-    public ButtonMap povUp() {
-        return getButtonMap(controller.povUp(), "Dpad Up");
-    }
-
-    public ButtonMap povDown() {
-        return getButtonMap(controller.povDown(), "Dpad Down");
-    }
-
-    public ButtonMap povLeft() {
-        return getButtonMap(controller.povLeft(), "Dpad Left");
-    }
-
-    public ButtonMap povRight() {
-        return getButtonMap(controller.povRight(), "Dpad Right");
+    public void loadPreference(String saveSlotKey) {
+        buttonMapA.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapB.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapX.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapY.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapRightBumper.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapLeftBumper.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapStart.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapBack.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapLeftTrigger.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapRightTrigger.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapDpadUp.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapDpadDown.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapDpadLeft.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapDpadRight.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapLeftStickPress.loadPreferenceCommandKey(saveSlotKey);
+        buttonMapRightStickPress.loadPreferenceCommandKey(saveSlotKey);
     }
 
     public String convertToSnakeCase(String input) {

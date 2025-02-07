@@ -217,18 +217,19 @@ public class Robot extends TimedRobot {
     public void disabledPeriodic() {
         if (saveTrigger.get() == true) {
             saveTrigger.set(false);
-            m_robotContainer.savePreference(savePref);
+            m_robotContainer.savePreference(savePref.getSelected());
         }
 
         if (loadTrigger.get() == true) {
             loadTrigger.set(false);
-            m_robotContainer.loadPreference(savePref);
+            m_robotContainer.loadPreference(savePref.getSelected());
         }
     }
 
     @Override
     public void disabledExit() {
         Constants.robotEnabled = true;
+        m_robotContainer.updateControllerMaps();
     }
 
     @Override

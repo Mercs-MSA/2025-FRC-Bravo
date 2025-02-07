@@ -83,7 +83,7 @@ public class CommandMap {
                     new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        // new CommandElevatorToStage(beamBreak, elevator1, elevator2),
+                        new CommandElevatorToStage(beamBreak, elevator1, elevator2),
                         new CommandIntakeCollect(flywheels, beamBreak, 1)
                     )
                 )
@@ -94,7 +94,7 @@ public class CommandMap {
                     new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        // new CommandElevatorToStage(beamBreak, elevator1, elevator2),
+                        new CommandElevatorToStage(beamBreak, elevator1, elevator2),
                         new CommandCandleSetAnimation(leds, CANdle_LED.AnimationTypes.Strobe)
                     )
                 )
@@ -105,8 +105,7 @@ public class CommandMap {
                     new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        // new CommandElevatorToStage(beamBreak, elevator1, elevator2)
-                        new PrintCommand("moo")
+                        new CommandElevatorToStage(beamBreak, elevator1, elevator2)
                     )
                 )
             ), // WHILETRUE
@@ -123,8 +122,7 @@ public class CommandMap {
                     new CommandSetDriveToPos("ReefTest"),
                     new ParallelCommandGroup(
                         new CommandToPos(drivetrain),
-                        // new CommandElevatorToStage(beamBreak, elevator1, elevator2)
-                        new PrintCommand("moo")
+                        new CommandElevatorToStage(beamBreak, elevator1, elevator2)
                     )
                 )
             ),
@@ -153,44 +151,44 @@ public class CommandMap {
 
 
 
-            // /****************************************/
-            // /*           ELEVATOR COMMANDS          */
-            // /****************************************/
-            // Map.entry(
-            //     "L1",
-            //     new SequentialCommandGroup(
-            //         new CommandChangeScoreStage(ScoringStageVal.L1),
-            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
-            //     )
-            // ),
-            // Map.entry(
-            //     "L2",
-            //     new SequentialCommandGroup(
-            //         new CommandChangeScoreStage(ScoringStageVal.L2),
-            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
-            //     )
-            // ),
-            // Map.entry(
-            //     "L3",
-            //     new SequentialCommandGroup(
-            //         new CommandChangeScoreStage(ScoringStageVal.L3),
-            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
-            //     )
-            // ),
-            // Map.entry(
-            //     "L4",
-            //     new SequentialCommandGroup(
-            //         new CommandChangeScoreStage(ScoringStageVal.L4),
-            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
-            //     )
-            // ),
-            // Map.entry(
-            //     "ELEVIntakePos",
-            //     new SequentialCommandGroup(
-            //         new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-            //         new CommandElevatorToStage(beamBreak, elevator1, elevator2)
-            //     )
-            // ),
+            /****************************************/
+            /*           ELEVATOR COMMANDS          */
+            /****************************************/
+            Map.entry(
+                "L1",
+                new SequentialCommandGroup(
+                    new CommandChangeScoreStage(ScoringStageVal.L1),
+                    new CommandElevatorToStage(beamBreak, elevator1, elevator2)
+                )
+            ),
+            Map.entry(
+                "L2",
+                new SequentialCommandGroup(
+                    new CommandChangeScoreStage(ScoringStageVal.L2),
+                    new CommandElevatorToStage(beamBreak, elevator1, elevator2)
+                )
+            ),
+            Map.entry(
+                "L3",
+                new SequentialCommandGroup(
+                    new CommandChangeScoreStage(ScoringStageVal.L3),
+                    new CommandElevatorToStage(beamBreak, elevator1, elevator2)
+                )
+            ),
+            Map.entry(
+                "L4",
+                new SequentialCommandGroup(
+                    new CommandChangeScoreStage(ScoringStageVal.L4),
+                    new CommandElevatorToStage(beamBreak, elevator1, elevator2)
+                )
+            ),
+            Map.entry(
+                "ELEVIntakePos",
+                new SequentialCommandGroup(
+                    new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
+                    new CommandElevatorToStage(beamBreak, elevator1, elevator2)
+                )
+            ),
             Map.entry(
                 "Elevator To Stage",
                 new CommandElevatorToStage(beamBreak, elevator1, elevator2)

@@ -2,6 +2,7 @@ package frc.robot;
 
 import java.util.Map;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,8 +15,8 @@ public class ButtonMap {
     private String preferenceKey;
     private String widgetKey;
     private String widgetModeKey;
-    private ButtonMode savedMode;
-    private String savedCommandValue;
+    private ButtonMode cachedMode;
+    private String cachedCommandValue;
 
     private enum ButtonMode {
         PRESS,
@@ -26,7 +27,7 @@ public class ButtonMap {
     private SendableChooser<ButtonMode> buttonAction = new SendableChooser<>();
     
     public ButtonMap(Map<String, Command> map, Trigger buttonTrigger, String title, String pKey) {
-        mappedCommand = new SelectCommand<>(map, this::getMappedCommandKey);
+        mappedCommand = new SelectCommand<>(map, this::getSavedCommandKey);
         preferenceKey = pKey;
         widgetKey = title;
         widgetModeKey = widgetKey + " Mode";
@@ -43,45 +44,26 @@ public class ButtonMap {
         buttonAction.addOption("Release", ButtonMode.RELEASE);
         SmartDashboard.putData(widgetModeKey, buttonAction);
         
-        buttonTrigger.and(
-            () -> {
-                if (!Constants.robotEnabled) {
-                    savedMode = buttonAction.getSelected();
-                }
-                return savedMode == ButtonMode.PRESS;
-            })
-            .onTrue(mappedCommand);
-        buttonTrigger.and(() -> savedMode == ButtonMode.HOLD).whileTrue(mappedCommand);
-        buttonTrigger.and(() -> savedMode == ButtonMode.RELEASE).onFalse(mappedCommand);
+        buttonTrigger.and(() -> cachedMode == ButtonMode.PRESS).onTrue(mappedCommand);
+        buttonTrigger.and(() -> cachedMode == ButtonMode.HOLD).whileTrue(mappedCommand);
+        buttonTrigger.and(() -> cachedMode == ButtonMode.RELEASE).onFalse(mappedCommand);
     }
 
-    public String getMappedCommandKey() {
-        if (!Constants.robotEnabled) {
-            savedCommandValue = SmartDashboard.getString(widgetKey, "");
-        }
-        return savedCommandValue;
+    public void updateCachedValues() {
+        cachedCommandValue = SmartDashboard.getString(widgetKey, "");
+        cachedMode = buttonAction.getSelected();
     }
 
-    public void setMapperCommandKey(String newCommandName) {
+    public String getSavedCommandKey() {
+        return cachedCommandValue;
+    }
+
+    public void loadPreferenceCommandKey(String saveSlotKey) {
+        String newCommandName = Preferences.getString(saveSlotKey + preferenceKey, SmartDashboard.getString(widgetKey, ""));
         SmartDashboard.putString(widgetKey, newCommandName);
     }
 
-    public Command getCommand() {
-        return mappedCommand;
-    }
-
-    public String getPreferenceKey() {
-        return preferenceKey;
-    }
-
-    public String getWidgetKey() {
-        return widgetKey;
+    public void savePreferenceCommandKey(String saveSlotKey) {
+        Preferences.setString(saveSlotKey + preferenceKey, SmartDashboard.getString(widgetKey, ""));
     }
 }
-
-// HOWWWW
-/*
- * when robot is disabled we are allowed to pull data from smartdashboard as much as we want 
- * when the robot is enabled, we should not ask smartdashboard for any data. 
- * 
- */
