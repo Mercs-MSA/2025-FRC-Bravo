@@ -70,6 +70,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         WebServer.start(5800, Filesystem.getDeployDirectory().getPath());
         DriverStation.silenceJoystickConnectionWarning(true);
+        m_robotContainer.loadPreference("Competition");
     }
 
     @Override
