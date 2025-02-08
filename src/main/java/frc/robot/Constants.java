@@ -27,7 +27,7 @@ public class Constants {
         INTAKING(0, false, false, false),
         L1(21, true, false, false),
         L2(34, true, false, false),
-        L3(63, true, false, false),
+        L3(61, true, false, false),
         L4(101, true, false, false),
         CLIMBING(0, false, true, false);
 
