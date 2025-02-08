@@ -208,23 +208,23 @@ public class Robot extends TimedRobot {
         }
     }
 
-    @Override
-    public void disabledInit() {
-        Constants.robotEnabled = false;
-    }
+    // @Override
+    // public void disabledInit() {
+    //     Constants.robotEnabled = false;
+    // }
 
-    @Override
-    public void disabledPeriodic() {
-        if (saveTrigger.get() == true) {
-            saveTrigger.set(false);
-            m_robotContainer.savePreference(savePref);
-        }
+    // @Override
+    // public void disabledPeriodic() {
+    //     if (saveTrigger.get() == true) {
+    //         saveTrigger.set(false);
+    //         m_robotContainer.savePreference(savePref);
+    //     }
 
-        if (loadTrigger.get() == true) {
-            loadTrigger.set(false);
-            m_robotContainer.loadPreference(savePref);
-        }
-    }
+    //     if (loadTrigger.get() == true) {
+    //         loadTrigger.set(false);
+    //         m_robotContainer.loadPreference(savePref);
+    //     }
+    // }
 
     @Override
     public void disabledExit() {
