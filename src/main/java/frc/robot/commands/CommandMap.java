@@ -6,6 +6,7 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -274,12 +275,10 @@ public class CommandMap {
             /****************************************/
             /*            RESET COMMANDS            */ // IS THIS A REALLY BAD IDEA BECAUSE IT RUNS THEM INSTANTLY????
             /****************************************/
-            // Map.entry(
-            //     "Reset Field Centric",
-            //     drivetrain.runOnce(
-            //         () -> drivetrain.seedFieldCentric()
-            //     )
-            // ),
+            Map.entry(
+                "Reset Field Centric",
+                new InstantCommand(() -> drivetrain.seedFieldCentric())
+            ),
             // Map.entry(
             //     "Reset All",
             //     new ParallelCommandGroup()
