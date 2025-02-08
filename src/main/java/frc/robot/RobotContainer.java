@@ -40,9 +40,9 @@ public class RobotContainer {
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
-    public final Elevator1 m_Elevator1 = new Elevator1(false);
+    public final Elevator1 m_Elevator1 = new Elevator1(true);
 
-    public final Elevator2 m_Elevator2 = new Elevator2(false);
+    public final Elevator2 m_Elevator2 = new Elevator2(true);
 
     public final Climber m_Climber = new Climber(false);
 

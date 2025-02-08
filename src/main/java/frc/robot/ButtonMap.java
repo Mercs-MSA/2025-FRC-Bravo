@@ -46,7 +46,7 @@ public class ButtonMap {
         
         buttonTrigger.and(() -> cachedMode == ButtonMode.PRESS).onTrue(mappedCommand);
         buttonTrigger.and(() -> cachedMode == ButtonMode.HOLD).whileTrue(mappedCommand);
-        buttonTrigger.and(() -> cachedMode == ButtonMode.RELEASE).onFalse(mappedCommand);
+        //buttonTrigger.and(() -> cachedMode == ButtonMode.RELEASE).onFalse(mappedCommand);
     }
 
     public void updateCachedValues() {
