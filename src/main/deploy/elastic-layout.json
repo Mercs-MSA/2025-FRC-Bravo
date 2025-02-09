@@ -967,196 +967,196 @@
             }
           },
           {
-            "title": "Driver Dpad Down Held?",
-            "x": 1280.0,
-            "y": 128.0,
+            "title": "Operator A Button Held?",
+            "x": 256.0,
+            "y": 0.0,
             "width": 256.0,
             "height": 128.0,
             "type": "Toggle Switch",
             "properties": {
-              "topic": "/Control Map Table/Driver Dpad Down Held?",
+              "topic": "/Control Map Table/Operator A Button Held?",
               "period": 0.06,
               "data_type": "boolean"
             }
           },
           {
-            "title": "Driver Dpad Left Held?",
-            "x": 1280.0,
+            "title": "Operator B Button Held?",
+            "x": 256.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator B Button Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator X Button Held?",
+            "x": 256.0,
             "y": 256.0,
             "width": 256.0,
             "height": 128.0,
             "type": "Toggle Switch",
             "properties": {
-              "topic": "/Control Map Table/Driver Dpad Left Held?",
+              "topic": "/Control Map Table/Operator X Button Held?",
               "period": 0.06,
               "data_type": "boolean"
             }
           },
           {
-            "title": "Driver Dpad Up Held?",
-            "x": 1280.0,
-            "y": 0.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver Dpad Up Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver Dpad Right Held?",
-            "x": 1280.0,
-            "y": 384.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver Dpad Right Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver Left Bumper Held?",
-            "x": 768.0,
-            "y": 0.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver Left Bumper Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver A Button Held?",
-            "x": 256.0,
-            "y": 0.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver A Button Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver B Button Held?",
-            "x": 256.0,
-            "y": 128.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver B Button Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver Back Held?",
-            "x": 256.0,
-            "y": 640.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver Back Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver Right Trigger Held?",
-            "x": 768.0,
-            "y": 384.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver Right Trigger Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver Right Bumper Held?",
-            "x": 768.0,
-            "y": 128.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver Right Bumper Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver Start Held?",
+            "title": "Operator Start Held?",
             "x": 256.0,
             "y": 512.0,
             "width": 256.0,
             "height": 128.0,
             "type": "Toggle Switch",
             "properties": {
-              "topic": "/Control Map Table/Driver Start Held?",
+              "topic": "/Control Map Table/Operator Start Held?",
               "period": 0.06,
               "data_type": "boolean"
             }
           },
           {
-            "title": "Driver Left Stick Held?",
+            "title": "Operator Back Held?",
+            "x": 256.0,
+            "y": 640.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Back Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator Dpad Up Held?",
+            "x": 1280.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Dpad Up Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator Left Bumper Held?",
+            "x": 768.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Left Bumper Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator Dpad Left Held?",
+            "x": 1280.0,
+            "y": 256.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Dpad Left Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator Dpad Down Held?",
+            "x": 1280.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Dpad Down Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator Dpad Right Held?",
+            "x": 1280.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Dpad Right Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator Right Bumper Held?",
+            "x": 768.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Right Bumper Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator Left Trigger Held?",
+            "x": 768.0,
+            "y": 256.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Left Trigger Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator Left Stick Held?",
             "x": 768.0,
             "y": 512.0,
             "width": 256.0,
             "height": 128.0,
             "type": "Toggle Switch",
             "properties": {
-              "topic": "/Control Map Table/Driver Left Stick Held?",
+              "topic": "/Control Map Table/Operator Left Stick Held?",
               "period": 0.06,
               "data_type": "boolean"
             }
           },
           {
-            "title": "Driver X Button Held?",
-            "x": 256.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver X Button Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver Left Trigger Held?",
-            "x": 768.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Toggle Switch",
-            "properties": {
-              "topic": "/Control Map Table/Driver Left Trigger Held?",
-              "period": 0.06,
-              "data_type": "boolean"
-            }
-          },
-          {
-            "title": "Driver Right Stick Held?",
+            "title": "Operator Right Stick Held?",
             "x": 768.0,
             "y": 640.0,
             "width": 256.0,
             "height": 128.0,
             "type": "Toggle Switch",
             "properties": {
-              "topic": "/Control Map Table/Driver Right Stick Held?",
+              "topic": "/Control Map Table/Operator Right Stick Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Operator Right Trigger Held?",
+            "x": 768.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Right Trigger Held?",
               "period": 0.06,
               "data_type": "boolean"
             }

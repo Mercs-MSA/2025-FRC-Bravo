@@ -55,8 +55,8 @@ public class Robot extends TimedRobot {
 
     public Robot() {
         m_robotContainer = new RobotContainer();
-        savePref.addOption("Competition", "Competition");
-        savePref.setDefaultOption("Testing", "Testing");
+        savePref.setDefaultOption("Competition", "Competition");
+        savePref.addOption("Testing", "Testing");
         savePref.addOption("A", "A");
         savePref.addOption("B", "B");
         savePref.addOption("C", "C");

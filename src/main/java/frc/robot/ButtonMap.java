@@ -59,9 +59,9 @@ public class ButtonMap {
 
     public void loadPreferenceCommandKey(String saveSlotKey) {
         String combined = Preferences.getString(saveSlotKey + preferenceKey, SmartDashboard.getString(widgetKey, ""));
-        // combined at this point is "Drive Position 1"
+        // combined at this point is "|false"
         System.out.println(combined);
-        if (combined.indexOf("|") > 0) {
+        if (combined.indexOf("|") > -1) {
             String[] decombined = combined.split("\\|");
             SmartDashboard.putString(widgetKey, decombined[0]);
             isButtonHeld.set(Boolean.parseBoolean(decombined[1]));
