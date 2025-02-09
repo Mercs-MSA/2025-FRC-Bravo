@@ -56,6 +56,7 @@
               "robot_length": 0.85,
               "show_other_objects": true,
               "show_trajectories": true,
+              "field_rotation": 0.0,
               "robot_color": 4294198070,
               "trajectory_color": 4294967295
             }
@@ -250,138 +251,6 @@
         "layouts": [],
         "containers": [
           {
-            "title": "Driver Back Mode",
-            "x": 256.0,
-            "y": 640.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Back Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Start Mode",
-            "x": 256.0,
-            "y": 512.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Start Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Right Bumper Mode",
-            "x": 768.0,
-            "y": 128.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Right Bumper Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Left Trigger Mode",
-            "x": 768.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Left Trigger Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Right Trigger Mode",
-            "x": 768.0,
-            "y": 384.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Right Trigger Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Left Stick Mode",
-            "x": 768.0,
-            "y": 512.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Left Stick Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Right Stick Mode",
-            "x": 768.0,
-            "y": 640.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Right Stick Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Dpad Up Mode",
-            "x": 1280.0,
-            "y": 0.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Dpad Up Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Dpad Down Mode",
-            "x": 1280.0,
-            "y": 128.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Dpad Down Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Dpad Left Mode",
-            "x": 1280.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Dpad Left Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Dpad Right Mode",
-            "x": 1280.0,
-            "y": 384.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Dpad Right Mode",
-              "period": 0.06
-            }
-          },
-          {
             "title": "Driver Back",
             "x": 0.0,
             "y": 640.0,
@@ -449,66 +318,6 @@
               "period": 0.06,
               "data_type": "string",
               "show_submit_button": true
-            }
-          },
-          {
-            "title": "Driver A Button Mode",
-            "x": 256.0,
-            "y": 0.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver A Button Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Left Bumper Mode",
-            "x": 768.0,
-            "y": 0.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Left Bumper Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver Y Button Mode",
-            "x": 256.0,
-            "y": 384.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver Y Button Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver X Button Mode",
-            "x": 256.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver X Button Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Driver B Button Mode",
-            "x": 256.0,
-            "y": 128.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Driver B Button Mode",
-              "period": 0.06
             }
           },
           {
@@ -703,6 +512,214 @@
               "period": 0.06,
               "sort_options": false
             }
+          },
+          {
+            "title": "Driver A Button Held?",
+            "x": 256.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver A Button Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver B Button Held?",
+            "x": 256.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver B Button Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Back Held?",
+            "x": 256.0,
+            "y": 640.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Back Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Dpad Down Held?",
+            "x": 1280.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Dpad Down Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Dpad Left Held?",
+            "x": 1280.0,
+            "y": 256.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Dpad Left Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Dpad Right Held?",
+            "x": 1280.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Dpad Right Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Dpad Up Held?",
+            "x": 1280.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Dpad Up Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Left Bumper Held?",
+            "x": 768.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Left Bumper Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Left Stick Held?",
+            "x": 768.0,
+            "y": 512.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Left Stick Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Left Trigger Held?",
+            "x": 768.0,
+            "y": 256.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Left Trigger Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Right Bumper Held?",
+            "x": 768.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Right Bumper Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Right Stick Held?",
+            "x": 768.0,
+            "y": 640.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Right Stick Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Start Held?",
+            "x": 256.0,
+            "y": 512.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Start Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver X Button Held?",
+            "x": 256.0,
+            "y": 256.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver X Button Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Y Button Held?",
+            "x": 256.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Y Button Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Right Trigger Held?",
+            "x": 768.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Right Trigger Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
           }
         ]
       }
@@ -712,198 +729,6 @@
       "grid_layout": {
         "layouts": [],
         "containers": [
-          {
-            "title": "Operator Start Mode",
-            "x": 256.0,
-            "y": 512.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Start Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Back Mode",
-            "x": 256.0,
-            "y": 640.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Back Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator A Button Mode",
-            "x": 256.0,
-            "y": 0.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator A Button Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator B Button Mode",
-            "x": 256.0,
-            "y": 128.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator B Button Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator X Button Mode",
-            "x": 256.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator X Button Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Y Button Mode",
-            "x": 256.0,
-            "y": 384.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Y Button Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Left Bumper Mode",
-            "x": 768.0,
-            "y": 0.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Left Bumper Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Left Stick Mode",
-            "x": 768.0,
-            "y": 512.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Left Stick Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Dpad Right Mode",
-            "x": 1280.0,
-            "y": 384.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Dpad Right Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Dpad Left Mode",
-            "x": 1280.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Dpad Left Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Dpad Down Mode",
-            "x": 1280.0,
-            "y": 128.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Dpad Down Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Dpad Up Mode",
-            "x": 1280.0,
-            "y": 0.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Dpad Up Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Right Stick Mode",
-            "x": 768.0,
-            "y": 640.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Right Stick Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Right Trigger Mode",
-            "x": 768.0,
-            "y": 384.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Right Trigger Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Left Trigger Mode",
-            "x": 768.0,
-            "y": 256.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Left Trigger Mode",
-              "period": 0.06
-            }
-          },
-          {
-            "title": "Operator Right Bumper Mode",
-            "x": 768.0,
-            "y": 128.0,
-            "width": 256.0,
-            "height": 128.0,
-            "type": "Split Button Chooser",
-            "properties": {
-              "topic": "/SmartDashboard/Operator Right Bumper Mode",
-              "period": 0.06
-            }
-          },
           {
             "title": "Operator Dpad Right",
             "x": 1024.0,
@@ -1126,6 +951,214 @@
               "period": 0.06,
               "data_type": "string",
               "show_submit_button": true
+            }
+          },
+          {
+            "title": "Operator Y Button Held?",
+            "x": 256.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Operator Y Button Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Dpad Down Held?",
+            "x": 1280.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Dpad Down Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Dpad Left Held?",
+            "x": 1280.0,
+            "y": 256.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Dpad Left Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Dpad Up Held?",
+            "x": 1280.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Dpad Up Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Dpad Right Held?",
+            "x": 1280.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Dpad Right Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Left Bumper Held?",
+            "x": 768.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Left Bumper Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver A Button Held?",
+            "x": 256.0,
+            "y": 0.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver A Button Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver B Button Held?",
+            "x": 256.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver B Button Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Back Held?",
+            "x": 256.0,
+            "y": 640.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Back Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Right Trigger Held?",
+            "x": 768.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Right Trigger Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Right Bumper Held?",
+            "x": 768.0,
+            "y": 128.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Right Bumper Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Start Held?",
+            "x": 256.0,
+            "y": 512.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Start Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Left Stick Held?",
+            "x": 768.0,
+            "y": 512.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Left Stick Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver X Button Held?",
+            "x": 256.0,
+            "y": 256.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver X Button Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Left Trigger Held?",
+            "x": 768.0,
+            "y": 256.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Left Trigger Held?",
+              "period": 0.06,
+              "data_type": "boolean"
+            }
+          },
+          {
+            "title": "Driver Right Stick Held?",
+            "x": 768.0,
+            "y": 640.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "Toggle Switch",
+            "properties": {
+              "topic": "/Control Map Table/Driver Right Stick Held?",
+              "period": 0.06,
+              "data_type": "boolean"
             }
           }
         ]

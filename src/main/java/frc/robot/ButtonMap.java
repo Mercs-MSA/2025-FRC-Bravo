@@ -2,6 +2,10 @@ package frc.robot;
 
 import java.util.Map;
 
+import edu.wpi.first.networktables.BooleanEntry;
+import edu.wpi.first.networktables.BooleanTopic;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,16 +19,13 @@ public class ButtonMap {
     private String preferenceKey;
     private String widgetKey;
     private String widgetModeKey;
-    private ButtonMode cachedMode;
+    private boolean cachedMode;
     private String cachedCommandValue;
 
-    private enum ButtonMode {
-        PRESS,
-        HOLD,
-        RELEASE
-    };
-
-    private SendableChooser<ButtonMode> buttonAction = new SendableChooser<>();
+    private NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
+    private NetworkTable controlMapTable = networkTableInstance.getTable("Control Map Table");
+    private BooleanTopic isButtonHeldTopic;
+    private BooleanEntry isButtonHeld;
     
     public ButtonMap(Map<String, Command> map, Trigger buttonTrigger, String title, String pKey) {
         mappedCommand = new SelectCommand<>(map, this::getSavedCommandKey);
@@ -32,26 +33,24 @@ public class ButtonMap {
         widgetKey = title;
         widgetModeKey = widgetKey + " Mode";
 
+        isButtonHeldTopic = controlMapTable.getBooleanTopic(widgetKey + " Held?");
+        isButtonHeld = isButtonHeldTopic.getEntry(false);
+    
         map.forEach((key, value) -> {
             commandName = key;
         });
         
         SmartDashboard.putString(widgetKey, commandName);
 
+        isButtonHeldTopic.publish();
         
-        buttonAction.setDefaultOption("Press", ButtonMode.PRESS);
-        buttonAction.addOption("Hold", ButtonMode.HOLD);
-        buttonAction.addOption("Release", ButtonMode.RELEASE);
-        SmartDashboard.putData(widgetModeKey, buttonAction);
-        
-        buttonTrigger.and(() -> cachedMode == ButtonMode.PRESS).onTrue(mappedCommand);
-        buttonTrigger.and(() -> cachedMode == ButtonMode.HOLD).whileTrue(mappedCommand);
-        //buttonTrigger.and(() -> cachedMode == ButtonMode.RELEASE).onFalse(mappedCommand);
+        buttonTrigger.and(() -> cachedMode == false).onTrue(mappedCommand);
+        buttonTrigger.and(() -> cachedMode == true).whileTrue(mappedCommand);
     }
 
     public void updateCachedValues() {
         cachedCommandValue = SmartDashboard.getString(widgetKey, "");
-        cachedMode = buttonAction.getSelected();
+        cachedMode = isButtonHeld.get();
     }
 
     public String getSavedCommandKey() {
@@ -59,11 +58,26 @@ public class ButtonMap {
     }
 
     public void loadPreferenceCommandKey(String saveSlotKey) {
-        String newCommandName = Preferences.getString(saveSlotKey + preferenceKey, SmartDashboard.getString(widgetKey, ""));
-        SmartDashboard.putString(widgetKey, newCommandName);
+        String combined = Preferences.getString(saveSlotKey + preferenceKey, SmartDashboard.getString(widgetKey, ""));
+        // combined at this point is "Drive Position 1"
+        System.out.println(combined);
+        if (combined.indexOf("|") > 0) {
+            String[] decombined = combined.split("\\|");
+            SmartDashboard.putString(widgetKey, decombined[0]);
+            isButtonHeld.set(Boolean.parseBoolean(decombined[1]));
+            System.out.println(decombined);
+        } else {
+            SmartDashboard.putString(widgetKey, combined);
+        }
+        
+
     }
 
     public void savePreferenceCommandKey(String saveSlotKey) {
-        Preferences.setString(saveSlotKey + preferenceKey, SmartDashboard.getString(widgetKey, ""));
+        StringBuilder combined = new StringBuilder();
+        combined.append(SmartDashboard.getString(widgetKey, ""));
+        combined.append("|");
+        combined.append(Boolean.toString(isButtonHeld.get()));
+        Preferences.setString(saveSlotKey + preferenceKey, combined.toString());
     }
 }

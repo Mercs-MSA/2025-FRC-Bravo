@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
@@ -335,6 +336,10 @@ public class CommandMap {
             Map.entry(
                 "Test Print",
                 new PrintCommand("Command one was selected!")
+            ),
+            Map.entry(
+                "Test Spam Print",
+                new RunCommand(() -> System.out.println("Command two was selected!"))
             )
         );
     }
