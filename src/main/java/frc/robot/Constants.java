@@ -193,8 +193,8 @@ public class Constants {
             put("reefH", new CommandToPos.Destination("reefH", new Pose2d(5.806, 4.190, new Rotation2d(3.1459))));
             put("reefI", new CommandToPos.Destination("reefI", new Pose2d(5.283, 5.096, new Rotation2d(-2.094))));
             put("reefJ", new CommandToPos.Destination("reefJ", new Pose2d(5.011, 5.214, new Rotation2d(-2.094))));
-            put("reefK", new CommandToPos.Destination("reefK", new Pose2d(3.981, 5.253, new Rotation2d(-1.047))));
-            put("reefL", new CommandToPos.Destination("reefL", new Pose2d(3.686, 5.059, new Rotation2d(-1.047))));
+            put("reefK", new CommandToPos.Destination("reefK", new Pose2d(3.996, 5.215, new Rotation2d(-1.047))));
+            put("reefL", new CommandToPos.Destination("reefL", new Pose2d(3.633, 4.920, new Rotation2d(-1.047))));
             put("Source", new CommandToPos.Destination("Source", new Pose2d(1.00, 7.2, new Rotation2d(-1.13))));
         }};
 

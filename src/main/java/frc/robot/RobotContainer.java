@@ -196,10 +196,8 @@ public class RobotContainer {
 
 
 
-            driver.leftBumper().onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5));
 
 
-            driver.x().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
 
             driver.back().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Larson));
@@ -207,33 +205,37 @@ public class RobotContainer {
             driver.back().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Fire));
             driver.start().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Rainbow));
 
-            driver.a().whileTrue(
-                new CommandSetDriveToPos("Source").andThen(
-                new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY)).andThen(
-                new ParallelCommandGroup(
-                    new CommandToPos(drivetrain), 
-                    // new CommandElevatorToStage(m)
-                    new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1)
-            )));
+            // driver.a().whileTrue(
+            //     new CommandSetDriveToPos("Source").andThen(
+            //     new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY)).andThen(
+            //     new ParallelCommandGroup(
+            //         new CommandToPos(drivetrain), 
+            //         // new CommandElevatorToStage(m)
+            //         new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1)
+            // )));
 
 
-            // driver.leftTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)).andThen(new ParallelCommandGroup (
-            // driver.leftTrigger(0.8).whileTrue(new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName).andThen(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0))).andThen(new ParallelCommandGroup (
-            //     new CommandToPos(drivetrain),
-            //     new CommandElevatorToStage(),
-            //     new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
-            //     )));
-            // driver.rightTrigger(0.8).whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)).andThen(new ParallelCommandGroup (
-            // driver.rightTrigger(0.8).whileTrue(new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName).andThen(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1))).andThen(new ParallelCommandGroup (
-            //     new CommandToPos(drivetrain),
-            //     new CommandElevatorToStage()
-            //     )));//keep
+            driver.leftBumper().whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)).andThen(new ParallelCommandGroup (
+                new CommandToPos(drivetrain),
+                new CommandElevatorToStage(m_intakeBeamBreak,m_Elevator1,m_Elevator2),
+                new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
+                )));
+            driver.rightBumper().whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)).andThen(new ParallelCommandGroup (
+                new CommandToPos(drivetrain),
+                new CommandElevatorToStage(m_intakeBeamBreak,m_Elevator1,m_Elevator2)
+                )));//keep
 
             driver.leftTrigger(0.8).onFalse(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
 
             driver.rightTrigger(0.8).onFalse(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
 
-            driver.rightBumper().onTrue(new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2));
+            // driver.pov(0).onTrue(new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2));
+
+            driver.a().onTrue(new CommandIntakeOut(m_IntakeFlywheels, m_intakeBeamBreak, 5)); //
+
+            driver.y().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //seedmain
+
+
 
 
             // driver.leftTrigger().whileTrue(new CommandSetDriveToPos("ReefTest").andThen(new ParallelCommandGroup (
@@ -266,8 +268,11 @@ public class RobotContainer {
 
             operator.leftBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 8));
 
+            operator.rightBumper().onTrue(new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2));
 
-            driver.y().onTrue(new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName));
+
+
+            // driver.y().onTrue(new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName));
 
             // SmartDashboard.putData("SeedToMegaTag1_Front", new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName));
             // SmartDashboard.putData("SeedToMegaTag1_Back", new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightBackName));
