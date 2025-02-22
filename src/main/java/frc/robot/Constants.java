@@ -23,8 +23,8 @@ public class Constants {
                                                                                                             // max angular velocity
 
     public enum ScoringStageVal {
-        INTAKEREADY(0, true, false, true),
-        INTAKING(0, false, false, false),
+        INTAKEREADY(0.5, true, false, true),
+        INTAKING(0.5, false, false, false),
         L1(21, true, false, false),
         L2(34, true, false, false),
         L3(61, true, false, false),
@@ -65,22 +65,26 @@ public class Constants {
         {
             return this.canPivot;
         }
+
+        public boolean isDown()
+        {
+            return !(this == ScoringStageVal.L1 || this == ScoringStageVal.L2 || this == ScoringStageVal.L3 || this == ScoringStageVal.L4);
+        }
     }
 
-    public static final class Elevator1Constants{
+   public static final class Elevator1Constants{
         public static final int id = 20;
 
         public static final boolean attached = true;
 
-        public static final double kP = 3; 
+        public static final double kP = .4; 
         public static final double kS = 0; 
         public static final double kV = 0; 
 
 
 
         public static final double voltageOut = 0;
-        public static final double positionUp = 90; //change this
-        public static final double positionDown = 7;
+      
 
         public static final double tol = 0.4;
     }
@@ -88,13 +92,13 @@ public class Constants {
     public static final class Elevator2Constants{
         public static final int id = 36;
 
-        public static final boolean attached = true;
-
-        public static final double kP = 3; 
-        public static final double kS = 0; 
-        public static final double kV = 0; 
 
 
+
+    }
+    
+    public static double slowDownWithElevator(double pos) {
+        return pos * 0.8;
     }
 
     public static final class ClimberConstants{
@@ -162,7 +166,7 @@ public class Constants {
     public static final class IntakeBeambreakConstants {
         public static final boolean breakAttached = true;
         public static final String beamBreakName = "intake_beambreak";
-        public static final int beamBreakChannel = 0;
+        public static final int beamBreakChannel = 8;
 
     }
 

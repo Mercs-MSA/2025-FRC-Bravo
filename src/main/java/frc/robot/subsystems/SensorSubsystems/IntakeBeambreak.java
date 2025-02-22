@@ -35,7 +35,13 @@ public class IntakeBeambreak extends SubsystemBase{
     // private AsynchronousInterrupt asynchronousInterrupt = new AsynchronousInterrupt(m_intakeBeamBreak, callback);
 
     public boolean checkBreak() {
-        return (m_intakeBeamBreak.getMeasurement().distance_mm < 0.05);
+        return (m_intakeBeamBreak.getMeasurement().distance_mm > 70);
+        // return false;
+    }
+
+    public int breakDistance()
+    {
+        return m_intakeBeamBreak.getMeasurement().distance_mm;
     }
 
     @Override
@@ -43,7 +49,8 @@ public class IntakeBeambreak extends SubsystemBase{
         // detectsCoral = m_intakeBeamBreak.get();
         SmartDashboard.putBoolean("Intake Beambreak broken", checkBreak());
 
-        // SmartDashboard.putBoolean("Detects coral", detectsCoral);
+
+        SmartDashboard.putBoolean("Detects coral", detectsCoral);
 
     }
 }

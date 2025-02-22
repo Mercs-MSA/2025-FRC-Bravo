@@ -26,12 +26,12 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 // import frc.robot.commands.*;
-import frc.robot.commands.CANdleCommands.CommandCandleSetAnimation;
 import frc.robot.commands.ClimberCommands.CommandClimbToggle;
 import frc.robot.commands.DriveToPosCommands.CommandLoadDriveToPos;
 import frc.robot.commands.DriveToPosCommands.CommandSetDriveToPos;
 import frc.robot.commands.DriveToPosCommands.CommandToPos;
 import frc.robot.commands.ElevatorCommands.CommandElevatorToStage;
+import frc.robot.subsystems.Mechanisms.Elevator.Elevator;
 import frc.robot.commands.FunnelCommands.CommandFunnelPivotToPos;
 import frc.robot.commands.FunnelCommands.CommandFunnelToggle;
 import frc.robot.commands.IntakeCommands.CommandIntakeCollect;
@@ -40,8 +40,8 @@ import frc.robot.commands.ScoringModeCommands.CommandChangeScoreStage;
 import frc.robot.commands.VisionCommands.SeedToMegaTag;
 import frc.robot.Constants.ScoringStageVal;
 import frc.robot.subsystems.Mechanisms.Climber.Climber;
-import frc.robot.subsystems.Mechanisms.Elevator.Elevator1;
-import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
+// import frc.robot.subsystems.Mechanisms.Elevator.Elevator1;
+// import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
 import frc.robot.subsystems.Mechanisms.Funnel.FunnelPivot;
 import frc.robot.subsystems.Mechanisms.Intake.IntakeFlywheels;
 import frc.robot.subsystems.SensorSubsystems.CANdle_LED;
@@ -68,9 +68,12 @@ public class RobotContainer {
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
-    public final Elevator1 m_Elevator1 = new Elevator1(true);
+    // public final Elevator1 m_Elevator1 = new Elevator1(true);
 
-    public final Elevator2 m_Elevator2 = new Elevator2(true);
+    // public final Elevator2 m_Elevator2 = new Elevator2(true);
+
+    public final Elevator m_Elevator = new Elevator(true);
+
 
     public final Climber m_Climber = new Climber(false);
 
@@ -78,7 +81,7 @@ public class RobotContainer {
 
     public final IntakeBeambreak m_intakeBeamBreak = new IntakeBeambreak();
 
-    public final FunnelPivot m_FunnelPivot = new FunnelPivot(true);
+    public final FunnelPivot m_FunnelPivot = new FunnelPivot(false);
 
     public final CANdle_LED m_leds = new CANdle_LED();
 
@@ -163,8 +166,8 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-driver.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-driver.getLeftX() * MaxSpeed) // Drive left with negative X (left)
+            drive.withVelocityX(-driver.getLeftY() * (MaxSpeed)) // Drive forward with negative Y (forward)
+            .withVelocityY(-driver.getLeftX() * (MaxSpeed)) // Drive left with negative X (left)
                     .withRotationalRate(-driver.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
             )
         );
@@ -200,10 +203,7 @@ public class RobotContainer {
 
 
 
-            driver.back().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Larson));
-            driver.start().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
-            driver.back().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Fire));
-            driver.start().onTrue(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Rainbow));
+  
 
             // driver.a().whileTrue(
             //     new CommandSetDriveToPos("Source").andThen(
@@ -217,17 +217,14 @@ public class RobotContainer {
 
             driver.leftBumper().whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
-                new CommandElevatorToStage(m_intakeBeamBreak,m_Elevator1,m_Elevator2),
-                new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Strobe)
+                new CommandElevatorToStage(m_intakeBeamBreak,m_Elevator)
                 )));
             driver.rightBumper().whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(1)).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
-                new CommandElevatorToStage(m_intakeBeamBreak,m_Elevator1,m_Elevator2)
+                new CommandElevatorToStage(m_intakeBeamBreak,m_Elevator)
                 )));//keep
 
-            driver.leftTrigger(0.8).onFalse(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
 
-            driver.rightTrigger(0.8).onFalse(new CommandCandleSetAnimation(m_leds, CANdle_LED.AnimationTypes.Twinkle));
 
             // driver.pov(0).onTrue(new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2));
 
@@ -258,17 +255,15 @@ public class RobotContainer {
             operator.pov(90).onTrue(new CommandChangeScoreStage(ScoringStageVal.L4));
 
 
-            operator.a().onTrue(new CommandChangeScoreStage(ScoringStageVal.CLIMBING));
-
             operator.b().onTrue(new SequentialCommandGroup(
                 new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY),
-                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2)));
+                new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator)));
 
 
 
-            operator.leftBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 8));
+            operator.leftBumper().onTrue(new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 4));
 
-            operator.rightBumper().onTrue(new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator1, m_Elevator2));
+            operator.rightBumper().onTrue(new CommandElevatorToStage(m_intakeBeamBreak, m_Elevator));
 
 
 
