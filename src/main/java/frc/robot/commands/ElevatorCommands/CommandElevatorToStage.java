@@ -2,30 +2,24 @@ package frc.robot.commands.ElevatorCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.Constants.Elevator1Constants;
-import frc.robot.subsystems.Mechanisms.Elevator.Elevator1;
-import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
+import frc.robot.subsystems.Mechanisms.Elevator.Elevator;
 import frc.robot.subsystems.SensorSubsystems.IntakeBeambreak;
 
 public class CommandElevatorToStage extends Command {
-    private final Elevator1 m_Elevator1;
-    private final Elevator2 m_Elevator2;
+    private final Elevator m_Elevator;
 
     private double pos;
 
     private IntakeBeambreak m_Beambreak;
 
-    public CommandElevatorToStage(IntakeBeambreak beambreak, Elevator1 m_Elevator1, Elevator2 m_Elevator2) {
+    public CommandElevatorToStage(IntakeBeambreak beambreak, Elevator m_Elevator) {
 
 
         // if (Constants.ScoringConstants.ScoringStage.canElev())
         // {
         // addRequirements(beambreak);
-
-        this.m_Elevator1 = m_Elevator1;
-        this.m_Elevator2 = m_Elevator2;
-        this.m_Beambreak = beambreak;
-
+            this.m_Elevator = m_Elevator;
+            this.m_Beambreak = beambreak;
         // }
     }
 
@@ -35,12 +29,11 @@ public class CommandElevatorToStage extends Command {
 
         if (Constants.ScoringConstants.ScoringStage.canElev()){
 
-            if(m_Beambreak.checkBreak() || Constants.ScoringConstants.ScoringStage == Constants.ScoringStageVal.INTAKEREADY) {
+            if(!m_Beambreak.checkBreak() || Constants.ScoringConstants.ScoringStage == Constants.ScoringStageVal.INTAKEREADY) {
             this.pos = Constants.ScoringConstants.ScoringStage.getElevatorRotations();
 
             System.out.println(pos);
-            m_Elevator1.motorToPosMM(pos);
-            m_Elevator2.motorToPosMM(pos);
+            m_Elevator.elevatorToPos(pos);
 
             }
         }

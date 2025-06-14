@@ -23,8 +23,8 @@ public class Constants {
                                                                                                             // max angular velocity
 
     public enum ScoringStageVal {
-        INTAKEREADY(0, true, false, true),
-        INTAKING(0, false, false, false),
+        INTAKEREADY(0.5, true, false, true),
+        INTAKING(0.5, false, false, false),
         L1(21, true, false, false),
         L2(34, true, false, false),
         L3(61, true, false, false),
@@ -65,22 +65,26 @@ public class Constants {
         {
             return this.canPivot;
         }
+
+        public boolean isDown()
+        {
+            return !(this == ScoringStageVal.L1 || this == ScoringStageVal.L2 || this == ScoringStageVal.L3 || this == ScoringStageVal.L4);
+        }
     }
 
-    public static final class Elevator1Constants{
+   public static final class Elevator1Constants{
         public static final int id = 20;
 
         public static final boolean attached = true;
 
-        public static final double kP = 3; 
+        public static final double kP = .4; 
         public static final double kS = 0; 
         public static final double kV = 0; 
 
 
 
         public static final double voltageOut = 0;
-        public static final double positionUp = 90; //change this
-        public static final double positionDown = 7;
+      
 
         public static final double tol = 0.4;
     }
@@ -88,13 +92,13 @@ public class Constants {
     public static final class Elevator2Constants{
         public static final int id = 36;
 
-        public static final boolean attached = true;
-
-        public static final double kP = 3; 
-        public static final double kS = 0; 
-        public static final double kV = 0; 
 
 
+
+    }
+    
+    public static double slowDownWithElevator(double pos) {
+        return pos * 0.8;
     }
 
     public static final class ClimberConstants{
@@ -162,7 +166,7 @@ public class Constants {
     public static final class IntakeBeambreakConstants {
         public static final boolean breakAttached = true;
         public static final String beamBreakName = "intake_beambreak";
-        public static final int beamBreakChannel = 0;
+        public static final int beamBreakChannel = 8;
 
     }
 
@@ -183,8 +187,8 @@ public class Constants {
         public static final double linearMetersMaxVel = 2.0;
         public static final double linearMetersMaxAccel = 5.0;
         public static final HashMap<String, CommandToPos.Destination> positions = new HashMap<String, CommandToPos.Destination>() {{
-            put("reefA", new CommandToPos.Destination("reefA", new Pose2d(3.2, 4.1, new Rotation2d(0))));
-            put("reefB", new CommandToPos.Destination("reefB", new Pose2d(3.2, 3.8139, new Rotation2d(0))));//
+            put("reefA", new CommandToPos.Destination("reefA", new Pose2d(3.197, 4.096, new Rotation2d(0))));
+            put("reefB", new CommandToPos.Destination("reefB", new Pose2d(3.21, 3.793, new Rotation2d(0))));//
             put("reefC", new CommandToPos.Destination("reefC", new Pose2d(3.679, 2.958, new Rotation2d(1.047))));
             put("reefD", new CommandToPos.Destination("reefD", new Pose2d(3.961, 2.801, new Rotation2d(1.047))));
             put("reefE", new CommandToPos.Destination("reefE", new Pose2d(5.00, 2.789, new Rotation2d(2.0944))));
@@ -193,8 +197,8 @@ public class Constants {
             put("reefH", new CommandToPos.Destination("reefH", new Pose2d(5.806, 4.190, new Rotation2d(3.1459))));
             put("reefI", new CommandToPos.Destination("reefI", new Pose2d(5.283, 5.096, new Rotation2d(-2.094))));
             put("reefJ", new CommandToPos.Destination("reefJ", new Pose2d(5.011, 5.214, new Rotation2d(-2.094))));
-            put("reefK", new CommandToPos.Destination("reefK", new Pose2d(3.981, 5.253, new Rotation2d(-1.047))));
-            put("reefL", new CommandToPos.Destination("reefL", new Pose2d(3.686, 5.059, new Rotation2d(-1.047))));
+            put("reefK", new CommandToPos.Destination("reefK", new Pose2d(3.996, 5.215, new Rotation2d(-1.047))));
+            put("reefL", new CommandToPos.Destination("reefL", new Pose2d(3.633, 4.920, new Rotation2d(-1.047))));
             put("Source", new CommandToPos.Destination("Source", new Pose2d(1.00, 7.2, new Rotation2d(-1.13))));
         }};
 

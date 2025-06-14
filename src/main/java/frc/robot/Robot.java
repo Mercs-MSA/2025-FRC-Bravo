@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.ctre.phoenix6.Utils;
 
+import au.grapplerobotics.CanBridge;
 import edu.wpi.first.net.WebServer;
 import edu.wpi.first.networktables.BooleanArrayEntry;
 import edu.wpi.first.networktables.BooleanArrayTopic;
@@ -54,6 +55,7 @@ public class Robot extends TimedRobot {
     private BooleanEntry loadTrigger = loadTriggerTopic.getEntry(false);
 
     public Robot() {
+        CanBridge.runTCP();
         m_robotContainer = new RobotContainer();
         savePref.setDefaultOption("Competition", "Competition");
         savePref.addOption("Testing", "Testing");
@@ -79,7 +81,7 @@ public class Robot extends TimedRobot {
         // Constants.ScoringConstants.ScoringStage.getElevatorRotations());
 
         SmartDashboard.putString("Scoring Stage", Constants.ScoringConstants.ScoringStage.toString());
-
+        SmartDashboard.putNumber("Laser can", m_robotContainer.m_intakeBeamBreak.breakDistance());
         // System.out.println(validIDs);
         // this.printWatchdogEpochs();
 
@@ -209,10 +211,10 @@ public class Robot extends TimedRobot {
         }
     }
 
-    @Override
-    public void disabledInit() {
-        Constants.robotEnabled = false;
-    }
+    // @Override
+    // public void disabledInit() {
+    //     Constants.robotEnabled = false;
+    // }
 
     @Override
     public void disabledPeriodic() {
@@ -226,6 +228,7 @@ public class Robot extends TimedRobot {
             m_robotContainer.loadPreference(savePref.getSelected());
         }
     }
+
 
     @Override
     public void disabledExit() {

@@ -36,6 +36,6 @@ public class CommandIntakeOut extends Command {
     public boolean isFinished() {
         // This is where you put a statment that will determine wether a boolean is true or false
         // This is checked after an execute loop and if the return comes out true the execute loop will stop and end will happen
-        return !m_breambreak.checkBreak(); // Will check beambreak until it returns true (meaning it got broke)
+        return m_breambreak.checkBreak(); // Will check beambreak until it returns true (meaning it got broke)
     }
 }

@@ -32,8 +32,7 @@ import frc.robot.subsystems.SensorSubsystems.CANdle_LED;
 import frc.robot.subsystems.Swerve.CommandSwerveDrivetrain;
 import frc.robot.subsystems.SensorSubsystems.IntakeBeambreak;
 import frc.robot.subsystems.Mechanisms.Intake.IntakeFlywheels;
-import frc.robot.subsystems.Mechanisms.Elevator.Elevator1;
-import frc.robot.subsystems.Mechanisms.Elevator.Elevator2;
+import frc.robot.subsystems.Mechanisms.Elevator.Elevator;
 import frc.robot.subsystems.Mechanisms.Funnel.FunnelPivot;
 import frc.robot.subsystems.Mechanisms.Climber.Climber;
 
@@ -43,8 +42,7 @@ public class CommandMap {
     private IntakeBeambreak beamBreak;
     private CANdle_LED leds;
     private CommandXboxController driver;
-    private Elevator1 elevator1;
-    private Elevator2 elevator2;
+    private Elevator elevator;
     private FunnelPivot funnelPivot;
     private Climber climber;
 
@@ -54,8 +52,7 @@ public class CommandMap {
         IntakeBeambreak beamBreak,
         CANdle_LED leds,
         CommandXboxController driver,
-        Elevator1 elevator1,
-        Elevator2 elevator2,
+        Elevator elevator,
         FunnelPivot funnelPivot,
         Climber climber
     ) {
@@ -64,8 +61,7 @@ public class CommandMap {
         this.beamBreak = beamBreak;
         this.leds = leds;
         this.driver = driver;
-        this.elevator1 = elevator1;
-        this.elevator2 = elevator2;
+        this.elevator = elevator;
         this.funnelPivot = funnelPivot;
         this.climber = climber;
     }
@@ -193,7 +189,7 @@ public class CommandMap {
             ),
             Map.entry(
                 "Elevator To Stage",
-                new CommandElevatorToStage(beamBreak, elevator1, elevator2)
+                new CommandElevatorToStage(beamBreak, elevator)
             ),
 
 
