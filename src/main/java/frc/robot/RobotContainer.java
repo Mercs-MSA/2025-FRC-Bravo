@@ -92,13 +92,12 @@ public class RobotContainer {
 
        Map<String, Command> autonomousCommands = new HashMap<String, Command>() {
         {
-
             // put("Enter Command Name", new Command(m_));
 
-            put("PathWithDriveToPos", new SequentialCommandGroup(
-                new CommandSetDriveToPos("ReefTest"),
-                new CommandToPos(drivetrain)
-            ));
+            // put("PathWithDriveToPos", new SequentialCommandGroup(
+            //     new CommandSetDriveToPos("ReefTest"),
+            //     new CommandToPos(drivetrain)
+            // ));
 
 
             put("Intake Collect", 
@@ -143,13 +142,9 @@ public class RobotContainer {
                 new CommandFunnelPivotToPos(Constants.FunnelPivotConstants.posUp)
             ));
 
+            // put("Reset All", new ParallelCommandGroup(
 
-
-
-            put("Reset All", new ParallelCommandGroup(
-
-            ));
-
+            // ));
         }
 
     };
@@ -166,27 +161,27 @@ public class RobotContainer {
     private void configureBindings() {
         // Note that X is defined as forward according to WPILib convention,
         // and Y is defined as to the left according to WPILib convention.
-        drivetrain.setDefaultCommand(
-            // Drivetrain will execute this command periodically
-            drivetrain.applyRequest(() ->
-            drive.withDeadband(MaxSpeed * ((0.1/ ((m_Elevator.GetPosition()) + 1)))).withVelocityX(-driver.getLeftY() * (MaxSpeed - Constants.slowDownWithElevator(m_Elevator.GetPosition() / 20))) // Drive forward with negative Y (forward)
-            .withVelocityY(-driver.getLeftX() * (MaxSpeed - Constants.slowDownWithElevator(m_Elevator.GetPosition() / 20))) // Drive left with negative X (left)
-            .withRotationalRate(-driver.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
-            )
-        );
+        // drivetrain.setDefaultCommand(
+        //     // Drivetrain will execute this command periodically
+        //     drivetrain.applyRequest(() ->
+        //     drive.withDeadband(MaxSpeed * ((0.1/ ((m_Elevator.GetPosition()) + 1)))).withVelocityX(-driver.getLeftY() * (MaxSpeed - Constants.slowDownWithElevator(m_Elevator.GetPosition() / 20))) // Drive forward with negative Y (forward)
+        //     .withVelocityY(-driver.getLeftX() * (MaxSpeed - Constants.slowDownWithElevator(m_Elevator.GetPosition() / 20))) // Drive left with negative X (left)
+        //     .withRotationalRate(-driver.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+        //     )
+        // );
 
-        driver.a().whileTrue(drivetrain.applyRequest(() -> brake));
-        driver.b().whileTrue(drivetrain.applyRequest(() ->
-            point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX()))
-        ));
+        // driver.a().whileTrue(drivetrain.applyRequest(() -> brake));
+        // driver.b().whileTrue(drivetrain.applyRequest(() ->
+        //     point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX()))
+        // ));
 
-        // Run SysId routines when holding back/start and X/Y.
-        // Note that each routine should be run exactly once in a single log.
-        driver.back().and(driver.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
-        driver.back().and(driver.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));   
+        // // Run SysId routines when holding back/start and X/Y.
+        // // Note that each routine should be run exactly once in a single log.
+        // driver.back().and(driver.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
+        // driver.back().and(driver.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));   
 
-        driver.start().and(driver.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
-        driver.start().and(driver.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
+        // driver.start().and(driver.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
+        // driver.start().and(driver.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         drivetrain.registerTelemetry(logger::telemeterize);
 
@@ -203,20 +198,10 @@ public class RobotContainer {
         operatorMap = new ControllerMap(commandMap, operator, "Operator");
     }
     
-        /**
+    /**
         public void driverControls() {
-
             // driver.x().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionUp));
             // driver.y().onTrue(new CommandElevatorToPos(Constants.Elevator1Constants.positionDown));
-
-
-
-
-
-
-
-  
-
             // driver.a().whileTrue(
             //     new CommandSetDriveToPos("Source").andThen(
             //     new CommandChangeScoreStage(ScoringStageVal.INTAKEREADY)).andThen(
@@ -225,7 +210,6 @@ public class RobotContainer {
             //         // new CommandElevatorToStage(m)
             //         new CommandIntakeCollect(m_IntakeFlywheels, m_intakeBeamBreak, 1)
             // )));
-
 
             driver.leftBumper().whileTrue(new CommandLoadDriveToPos(() -> Constants.DriveToPosRuntime.autoTargets.get(0)).andThen(new ParallelCommandGroup (
                 new CommandToPos(drivetrain),
@@ -263,7 +247,7 @@ public class RobotContainer {
             // SmartDashboard.putData("SeedToMegaTag1_Front", new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightFrontName));
             // SmartDashboard.putData("SeedToMegaTag1_Back", new SeedToMegaTag(drivetrain, Constants.VisionConstants.limelightBackName));
         }
-        */
+    */
 
     public Command getAutonomousCommand() {
         // return Commands.print("No autonomous command configured");
